@@ -11,7 +11,7 @@ target 'Chores for me' do
   pod 'Designable'
   pod 'SideMenu'
   pod 'ADCountryPicker'
-  pod 'GoogleMaps'
+  pod 'GoogleMaps', '~> 3.7.0'
   pod 'Alamofire', '~> 4.0'
   pod 'Toast-Swift'
   pod 'SDWebImage'
@@ -29,10 +29,7 @@ target 'Chores for me' do
   pod 'Cosmos'
   pod 'Stripe'
   pod 'GoogleSignIn', '~> 5.0.2'
-  
- 
- 
-  
- 
+  pod 'GooglePlaces', '5.1.0'
+  pod 'GooglePlacePicker', '= 3.1.0’
 
 end

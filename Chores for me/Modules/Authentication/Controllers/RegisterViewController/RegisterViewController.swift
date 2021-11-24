@@ -410,7 +410,7 @@ extension RegisterViewController {
         self.showActivity()
         let Url = String(format: "http://3.18.59.239:3000/api/v1/signup")
         guard let serviceUrl = URL(string: Url) else { return }
-        let parameterDictionary =  ["email":emailTextField.text ?? "","image": imageResponse ?? "","name":nameTextField.text ?? "","password": passwordTextField.text ?? "","phone": "\(UserStoreSingleton.shared.DialCode ?? "")\(mobileNoTextFeild.text ?? "")" ,"signupType":"0","otp":"","location_address":""] as [String: Any]
+        let parameterDictionary =  ["email":emailTextField.text ?? "","image": imageResponse ?? "","first_name":nameTextField.text ?? "","last_name":lastNameTextField.text ?? "","password": passwordTextField.text ?? "","phone": "\(UserStoreSingleton.shared.DialCode ?? "")\(mobileNoTextFeild.text ?? "")" ,"signupType":"0","otp":"","location_address":""] as [String: Any]
         print(parameterDictionary)
         UserStoreSingleton.shared.name = nameTextField.text
         var request = URLRequest(url: serviceUrl)

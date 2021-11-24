@@ -96,7 +96,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "dd E"
+        dateFormatterPrint.dateFormat = "dd EEEE"
         for item in dateArray {
             let dd =  dateFormatterGet.string(from: item )
             let date = dateFormatterGet.date(from: dd)
@@ -315,7 +315,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == firstCollectionView {
-            return CGSize(width: 70, height: 50)
+            return CGSize(width: 100, height: 50)
         }
         else if collectionView == dateTimecollectionView{
             return  CGSize(width: 90, height: 50)

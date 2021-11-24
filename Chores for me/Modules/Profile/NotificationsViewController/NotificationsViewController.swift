@@ -85,6 +85,7 @@ class NotificationsViewController: BaseViewController {
                     }
                 }
             } catch {
+                self.showActivity()
                 print(error)
             }
 
@@ -116,6 +117,7 @@ extension NotificationsViewController: UITableViewDataSource,UITableViewDelegate
             cell.ratingAndCheckReasonButton.isHidden = false
             cell.payButton.isHidden = true
             cell.ratingAndCheckReasonButton.setTitle("Check Reason", for: .normal)
+            cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
 
         else if notificationArray[indexPath.row].type?.lowercased() == "complete" {
@@ -123,18 +125,22 @@ extension NotificationsViewController: UITableViewDataSource,UITableViewDelegate
             cell.payButton.isHidden = false
             cell.ratingAndCheckReasonButton.setTitle("Rate Now", for: .normal)
             cell.ratingAndCheckReasonButton.tag = indexPath.row
+            cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
         
         else if notificationArray[indexPath.row].payment_status?.lowercased() == "Not Done" {
             cell.payButton.isHidden = false
+            cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
         else if notificationArray[indexPath.row].payment_status?.lowercased() == "Done" {
             cell.payButton.isHidden = true
+            cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
 
         else {
             cell.ratingAndCheckReasonButton.isHidden = true
             cell.payButton.isHidden = true
+            cell.timeLabel.text = notificationArray[indexPath.row].totalTime
             
         }
 

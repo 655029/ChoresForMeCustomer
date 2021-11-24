@@ -6,6 +6,8 @@
 //
 
 import UIKit
+//import GooglePlaces
+import GoogleMaps
 
 class ChooseYourCityViewController: ServiceBaseViewController {
 
@@ -32,13 +34,13 @@ class ChooseYourCityViewController: ServiceBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        stepLabel.text = "1/6"
+      //  stepLabel.text = "1/6"
+     //   makeButton()
         locationTextField.delegate = self
         navigationItem.title = AppString.CHOOSE_YOUR_CITY
         subscribeToShowKeyboardNotifications()
         initialBotoomDistance = nextButtonBottomCostraint.constant
-//        navigationController?.darkNavigationBar()
+    //  navigationController?.darkNavigationBar()
     }
 
     // MARK: - Layout
@@ -46,9 +48,34 @@ class ChooseYourCityViewController: ServiceBaseViewController {
     // MARK: - User Interaction
 
     @IBAction func selctOnMapButtonAction(_ sender: Any) {
-       // navigate(.chooseLocationOnMap)
+       navigate(.chooseLocationOnMap)
     }
+    // Add a button to the view.
+//      func makeButton() {
+//        let btnLaunchAc = UIButton(frame: CGRect(x: 5, y: 150, width: 300, height: 35))
+//        btnLaunchAc.backgroundColor = .blue
+//        btnLaunchAc.setTitle("Launch autocomplete", for: .normal)
+//        btnLaunchAc.addTarget(self, action: #selector(autocompleteClicked), for: .touchUpInside)
+//        self.view.addSubview(btnLaunchAc)
+//      }
 
+//    @objc func autocompleteClicked(_ sender: UIButton) {
+//
+//        autocompleteController.delegate = self
+//
+//        // Specify the place data types to return.
+//        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+//          UInt(GMSPlaceField.placeID.rawValue))!
+//        autocompleteController.placeFields = fields
+//
+//        // Specify a filter.
+//        let filter = GMSAutocompleteFilter()
+//        filter.type = .address
+//        autocompleteController.autocompleteFilter = filter
+//
+//        // Display the autocomplete view controller.
+//        present(autocompleteController, animated: true, completion: nil)
+//      }
     @IBAction func nextButoonAction(_ sender: Any) {
         navigate(.chooseService)
     }
@@ -102,3 +129,34 @@ extension ChooseYourCityViewController: UITextFieldDelegate {
         return true
     }
 }
+
+//extension ChooseYourCityViewController: GMSAutocompleteViewControllerDelegate {
+//
+//  // Handle the user's selection.
+//  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+//    print("Place name: \(place.name)")
+//    print("Place ID: \(place.placeID)")
+//    print("Place attributions: \(place.attributions)")
+//    dismiss(animated: true, completion: nil)
+//  }
+//
+//  func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+//    // TODO: handle the error.
+//    print("Error: ", error.localizedDescription)
+//  }
+//
+//  // User canceled the operation.
+//  func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+//    dismiss(animated: true, completion: nil)
+//  }
+//
+//  // Turn the network activity indicator on and off again.
+//  func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+//    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//  }
+//
+//  func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+//    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//  }
+//
+//}

@@ -19,6 +19,8 @@ class EditButtonClickedViewController: UIViewController, UIImagePickerController
     @IBOutlet weak private var editButton: UIButton!
     @IBOutlet weak private var nameTextFeild: UITextField!
     @IBOutlet weak private var emailTextFeild: UITextField!
+
+    @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak private var numberTextFeild: UITextField!
     @IBOutlet weak private var passwordTextFeild: UITextField!
 
@@ -207,7 +209,7 @@ class EditButtonClickedViewController: UIViewController, UIImagePickerController
         }
         let Url = String(format: "http://3.18.59.239:3000/api/v1/update-profile")
         guard let serviceUrl = URL(string: Url) else { return }
-        let parameterDictionary =  ["name":nameTextFeild.text ?? "","email":emailTextFeild.text ?? "", "image": imageurl ?? ""] as [String : Any]
+        let parameterDictionary =  ["first_name":nameTextFeild.text ?? "","last_name":lastNameTextField.text ?? "","email":emailTextFeild.text ?? "", "image": imageurl ?? ""] as [String : Any]
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
         request.setValue(UserStoreSingleton.shared.Token ?? "" , forHTTPHeaderField: "authorization")

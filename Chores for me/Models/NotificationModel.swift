@@ -29,6 +29,7 @@ struct NotificationData : Codable {
     let type : String?
     let cancel_reason : String?
     let payment_status : String?
+    let totalTime : String?
 
 
     enum CodingKeys: String, CodingKey {
@@ -40,6 +41,7 @@ struct NotificationData : Codable {
         case type = "type"
         case cancel_reason = "cancel_reason"
         case payment_status = "payment_status"
+        case totalTime = "totalTime"
     }
 
 }

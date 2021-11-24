@@ -34,6 +34,7 @@ class ProfileTapedViewController: UIViewController, UICollectionViewDataSource, 
     @IBOutlet weak private var providerExprience: UILabel!
     @IBOutlet weak private var providerLocation: UILabel!
     @IBOutlet weak private var providerDescription: UILabel!
+    
     @IBOutlet weak private var servicesCollectionView: UICollectionView!
     @IBOutlet weak private var hireButton: UIButton!
     @IBOutlet weak private var sunDayButton: UIButton!

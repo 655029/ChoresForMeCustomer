@@ -116,14 +116,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D18C176D-101C-4932-BDA4-46A06B9D427B - 2605d73965c37f15"
+                  uuid = "D18C176D-101C-4932-BDA4-46A06B9D427B - cb7de6f8dcefa64f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Chores_for_me.HomeViewController.(callingDeleteJobApi in _0854652793DB2D2020867239197A9BDB)() -&gt; ()"
                   moduleName = "Chores for me"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/Office%20Projects/arzooChoresCode/Chores%20for%20meRavi%20%20/Chores%20for%20me/Modules/Home/HomeViewController/HomeViewController.swift"
+                  urlString = "file:///Users/home/geethan/ChoresformeCustomer-iOS/Chores%20for%20me/Modules/Home/HomeViewController/HomeViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "227"
@@ -131,14 +131,14 @@
                   offsetFromSymbolStart = "1428">
                </Location>
                <Location
-                  uuid = "D18C176D-101C-4932-BDA4-46A06B9D427B - 33c6be62baefbc4c"
+                  uuid = "D18C176D-101C-4932-BDA4-46A06B9D427B - debe8fa303c36492"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Chores_for_me.HomeViewController.(callingDeleteJobApi in _0854652793DB2D2020867239197A9BDB)() -&gt; ()"
                   moduleName = "Chores for me"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Applications/Office%20Projects/arzooChoresCode/Chores%20for%20meRavi%20%20/Chores%20for%20me/Modules/Home/HomeViewController/HomeViewController.swift"
+                  urlString = "file:///Users/home/geethan/ChoresformeCustomer-iOS/Chores%20for%20me/Modules/Home/HomeViewController/HomeViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "229"
@@ -178,6 +178,54 @@
             endingLineNumber = "203"
             landmarkName = "HomeViewController"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "01AA9E37-8314-4E89-87EE-64B9E1110A76"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chores for me/Modules/Profile/NotificationsViewController/NotificationsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "callingGetAllNotificationAPI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "617F7630-33B8-4BBC-869E-3DF0922314F7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chores for me/Modules/Profile/UploadProfilePictureViewController/UploadProfilePictureViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
+            landmarkName = "callingCreateJobAPI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84CAAF93-30B3-4108-94F8-19F091A2A018"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chores for me/Modules/Profile/UploadProfilePictureViewController/UploadProfilePictureViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "449"
+            endingLineNumber = "449"
+            landmarkName = "callingCreateJobAPI()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
