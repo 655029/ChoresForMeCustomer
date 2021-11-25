@@ -37,7 +37,8 @@ class BookingsTableViewCell: UITableViewCell {
     @IBOutlet weak var editButton: UIButton!
      @IBOutlet weak var buttonStack: UIStackView!
     
-
+    @IBOutlet weak var mintLabel: UILabel!
+    
     // MARK: - Properties
     var servicesArray: [SelectedServiceNameOrImage] = []
     var arrSubCatgeory = [JobsSubcategoryId]()

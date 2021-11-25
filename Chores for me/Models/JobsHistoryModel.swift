@@ -58,6 +58,7 @@ struct JobHistoryData : Codable {
     var providerDetails : ProviderDetails?
     let jobStatus : String?
     let createdAt : String?
+    let booking_date : String?
 
     enum CodingKeys: String, CodingKey {
 
@@ -78,6 +79,7 @@ struct JobHistoryData : Codable {
         case providerDetails = "providerDetails"
         case jobStatus = "jobStatus"
         case createdAt = "createdAt"
+        case booking_date = "booking_date"
     }
 
 }

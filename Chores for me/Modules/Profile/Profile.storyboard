@@ -1208,16 +1208,16 @@ Outdoor Home Worker</string>
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMr-Sy-BWv" customClass="DesignableView" customModule="Designable">
-                                <rect key="frame" x="24" y="279" width="366" height="338"/>
+                                <rect key="frame" x="24" y="284.5" width="366" height="327"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What do you think ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Krx-Iz-ID5">
-                                        <rect key="frame" x="82" y="24" width="202.5" height="28"/>
+                                        <rect key="frame" x="93.5" y="24" width="179.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="20"/>
                                         <color key="textColor" name="AppSecondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovf-2Y-q0g" customClass="FloatRatingView" customModule="Chores_for_me" customModuleProvider="target">
-                                        <rect key="frame" x="63" y="60" width="240" height="25"/>
+                                        <rect key="frame" x="63" y="55.5" width="240" height="25"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="zpu-92-LUz"/>
@@ -1237,13 +1237,13 @@ Outdoor Home Worker</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give your best words" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNX-sw-EnW">
-                                        <rect key="frame" x="8" y="93" width="350" height="21"/>
+                                        <rect key="frame" x="8" y="88.5" width="350" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jyF-uk-m7A">
-                                        <rect key="frame" x="12" y="122" width="342" height="128"/>
+                                        <rect key="frame" x="12" y="114" width="342" height="128"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="6mB-pe-McB"/>
@@ -1253,7 +1253,7 @@ Outdoor Home Worker</string>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2j-7O-qKC" customClass="DesignableButton" customModule="Designable">
-                                        <rect key="frame" x="12" y="274" width="342" height="48"/>
+                                        <rect key="frame" x="12" y="266" width="342" height="45"/>
                                         <color key="backgroundColor" name="AppSecondaryBackgroundColor"/>
                                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="13.5" maxX="20" maxY="13.5"/>
@@ -1267,7 +1267,7 @@ Outdoor Home Worker</string>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="biP-tl-aAC">
-                                        <rect key="frame" x="317" y="22" width="37" height="32"/>
+                                        <rect key="frame" x="317" y="20" width="37" height="32"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <state key="normal" title="SKIP">
                                             <color key="titleColor" systemColor="systemRedColor"/>
@@ -2682,6 +2682,9 @@ Outdoor Home Worker</string>
         <designable name="2Ow-1f-s3n">
             <size key="intrinsicContentSize" width="78" height="45"/>
         </designable>
+        <designable name="5TK-bS-3Hb">
+            <size key="intrinsicContentSize" width="95" height="17"/>
+        </designable>
         <designable name="67p-oC-5Dk">
             <size key="intrinsicContentSize" width="75" height="27"/>
         </designable>
@@ -2698,7 +2701,7 @@ Outdoor Home Worker</string>
             <size key="intrinsicContentSize" width="30" height="30"/>
         </designable>
         <designable name="I2j-7O-qKC">
-            <size key="intrinsicContentSize" width="95" height="48"/>
+            <size key="intrinsicContentSize" width="88" height="45"/>
         </designable>
         <designable name="JK3-rW-BCV">
             <size key="intrinsicContentSize" width="34" height="30"/>
@@ -2726,6 +2729,9 @@ Outdoor Home Worker</string>
         </designable>
         <designable name="eo9-D5-0aj">
             <size key="intrinsicContentSize" width="30" height="22"/>
+        </designable>
+        <designable name="iEh-0e-1vP">
+            <size key="intrinsicContentSize" width="95" height="17"/>
         </designable>
         <designable name="rFr-SK-XuB">
             <size key="intrinsicContentSize" width="145" height="30"/>

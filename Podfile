@@ -30,6 +30,8 @@ target 'Chores for me' do
   pod 'Stripe'
   pod 'GoogleSignIn', '~> 5.0.2'
   pod 'GooglePlaces', '5.1.0'
-  pod 'GooglePlacePicker', '= 3.1.0’
+  pod 'GooglePlacePicker', '= 3.1.0'
+  
+
 
 end

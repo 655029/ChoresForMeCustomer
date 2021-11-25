@@ -328,6 +328,7 @@ Country  India</string>
                 <outlet property="editButton" destination="nLO-Qn-rT3" id="I4O-Nx-zad"/>
                 <outlet property="hireButton" destination="lgm-UZ-NMe" id="2i9-zt-SsB"/>
                 <outlet property="locationName" destination="Jhx-tP-Luz" id="ETX-49-qUk"/>
+                <outlet property="mintLabel" destination="8IC-SP-6qz" id="Vr3-Vi-vMe"/>
                 <outlet property="ratingStarView" destination="ofg-Bg-45N" id="Hfr-uz-PUu"/>
                 <outlet property="selectedDate" destination="GEL-gR-XAs" id="AgW-0x-fcv"/>
                 <outlet property="selectedDay" destination="iFa-6i-35n" id="qfT-1v-TNM"/>

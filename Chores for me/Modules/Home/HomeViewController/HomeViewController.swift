@@ -334,7 +334,7 @@ extension HomeViewController: UITableViewDataSource {
         cell.locationName.text = getcreatedjob[indexPath.row].location
         cell.copyIcon.tag = indexPath.row
         cell.selectedPrice.text = "$\(getcreatedjob[indexPath.row].price ?? "")"
-        let dateTime = getcreatedjob[indexPath.row].createdAt
+        let dateTime = getcreatedjob[indexPath.row].booking_date
         let date = String(dateTime?.dropLast(14) ?? "")
         cell.createdDateLabel.text = date
         let datenDay = getcreatedjob[indexPath.row].day
@@ -342,6 +342,7 @@ extension HomeViewController: UITableViewDataSource {
         let result4 = String(dateDay?.dropFirst(2) ?? "")
         cell.selectedDay.text = result4
         cell.selectedDate.text = getcreatedjob[indexPath.row].time
+   //     cell.mintLabel.text = getcreatedjob[indexPath.row].total_time
         latitude = getcreatedjob[indexPath.row].lat
         longitude = getcreatedjob[indexPath.row].lng
         cell.hireButton.tag = indexPath.row
@@ -365,8 +366,8 @@ extension HomeViewController: UITableViewDataSource {
         cell.hireButton.addTarget(self, action: #selector(hireButtonAction(_:)), for: .touchUpInside)
         cell.copyIcon.addTarget(self, action: #selector(didTappedCopyIcon(_:)), for: .touchUpInside)
         cell.deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(_:)), for: .touchUpInside)
-
-        cell.collectionView.reloadData()
+        cell.editButton.addTarget(self, action: #selector(didTappedEditButton(_:)), for: .touchUpInside)
+      cell.collectionView.reloadData()
         
         return cell
         
@@ -410,8 +411,7 @@ extension HomeViewController: UITableViewDataSource {
             self.getcreatedjob.remove(at: sender.tag).jobId
               //  self.tableView.deleteRows(at: [indexPath], with: .automatic)
             self.callingDeleteJobApi()
-
-        })
+      })
 
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
             print("Cancel button tapped")
@@ -423,6 +423,10 @@ extension HomeViewController: UITableViewDataSource {
     }
 
     @objc func didTappedEditButton(_ sender: UIButton) {
+        let jobEdit = getcreatedjob[sender.tag].jobId
+        print(jobEdit ?? "")
+        comeFrom = "EditPost"
+        selectJob_id = getcreatedjob[sender.tag].jobId
         navigate(.uploadProfilePicture)
     }
 

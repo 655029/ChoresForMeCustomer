@@ -14,6 +14,9 @@ struct SelectedData {
     let name: String
 }
 
+var selectJob_id: Int?
+var comeFrom: String?
+
 class UploadProfilePictureViewController: ServiceBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,  UIImagePickerControllerDelegate, UINavigationControllerDelegate,LocationDelegate, UITextViewDelegate
 {
     func childViewControllerResponse(location: String) {
@@ -53,6 +56,8 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     var useDateArray: [String] = []
     var emptyArray: [String] = []
     var dateArray = [Date]()
+    var dateVal: String?
+    var timeVal: String?
     var dayValue : Int = 0 {
         didSet{
             dateArray.append(Calendar.current.date(byAdding: .day, value: dayValue, to: Date()) ?? Date())
@@ -68,6 +73,14 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         ChooseLocationFromMapViewController.delegate = self
+        if comeFrom == "EditPost" {
+            firstCollectionView.isUserInteractionEnabled = false
+            dateTimecollectionView.isUserInteractionEnabled = false
+
+            getBookingDeatils()
+        }else{
+
+        }
   //      self.navigationController?.navigationBar.barTintColor = UIColor.blue
    //     navigationController?.navigationBar.isTranslucent = false
 //        UINavigationBar.appearance().tintColor = .systemBlue
@@ -114,6 +127,12 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.tintColor = UIColor.white
+      //  locationLandmarkAddressTextFeild.text = ""
+        priceTextFeild.text = ""
+        descriptionTextView.text = ""
+        dateVal = "0"
+        timeVal = "0"
+
 //        UINavigationBar.appearance().tintColor = .systemBlue
 //        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.systemBlue]
     }
@@ -343,55 +362,60 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     }
 
     @IBAction func postButton(_ sender: UIButton) {
-        let imageSystem =  UIImage(named: "gallery icon")
-        let value = Int(priceTextFeild.text ?? "0")
+        if comeFrom == "EditPost" {
+            updateJobApi()
+        }else{
+            let imageSystem =  UIImage(named: "gallery icon")
+            let value = Int(priceTextFeild.text ?? "0")
 
 
-        if selectImage.image?.pngData() == imageSystem?.pngData() {
-            openAlert(title: "Alert", message: "Please Select Photo", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
-                print("Okay")
-            }])
-        }
-        else if locationLandmarkAddressTextFeild.text == "" {
-            openAlert(title: "Alert", message: "Please Select location", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
-                print("Okay")
-            }])
-        }
-        else if priceTextFeild.text == "" {
-            openAlert(title: "Alert", message: "Please Enter Price", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
-                print("Okay")
-            }])
+            if selectImage.image?.pngData() == imageSystem?.pngData() {
+                openAlert(title: "Alert", message: "Please Select Photo", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+                    print("Okay")
+                }])
+            }
+            else if locationLandmarkAddressTextFeild.text == "" {
+                openAlert(title: "Alert", message: "Please Select location", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+                    print("Okay")
+                }])
+            }
+            else if priceTextFeild.text == "" {
+                openAlert(title: "Alert", message: "Please Enter Price", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+                    print("Okay")
+                }])
+            }
+
+            else if value!  < 10 {
+                openAlert(title: "Alert", message: "Please Enter Price More than $10", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+                    print("Okay")
+                }])
+            }
+
+            else if descriptionTextView.text.count < 1 {
+                openAlert(title: "Alert", message: "Please Enter description", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+                    print("Okay")
+                }])
+            }
+
+
+
+            else if selectedDate == nil {
+                openAlert(title: "Alert", message: "Please select Date", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+                    print("Okay")
+                }])
+            }
+
+            else if selectedTime == nil {
+                openAlert(title: "Alert", message: "Please select Time", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+                    print("Okay")
+                }])
+            }
+
+            else {
+                self.callingCreateJobAPI()
+            }
         }
 
-        else if value!  < 10 {
-            openAlert(title: "Alert", message: "Please Enter Price More than $10", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
-                print("Okay")
-            }])
-        }
-
-        else if descriptionTextView.text.count < 1 {
-            openAlert(title: "Alert", message: "Please Enter description", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
-                print("Okay")
-            }])
-        }
-
-
-        
-        else if selectedDate == nil {
-            openAlert(title: "Alert", message: "Please select Date", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
-                print("Okay")
-            }])
-        }
-
-        else if selectedTime == nil {
-            openAlert(title: "Alert", message: "Please select Time", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
-                print("Okay")
-            }])
-        }
-
-        else {
-            self.callingCreateJobAPI()
-        }
     }
 
 
@@ -479,6 +503,80 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         }.resume()
     }
 
+    func getBookingDeatils() {
+        self.showActivity()
+        var request = URLRequest(url: URL(string: "http://3.18.59.239:3000/api/v1/get-jobDetails/\(selectJob_id ?? 0)")!,timeoutInterval: Double.infinity)
+        request.addValue("\(UserStoreSingleton.shared.Token ?? "")", forHTTPHeaderField:"Authorization")
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            do {
+                let json =  try JSONDecoder().decode(getJobdetails.self, from: data ?? Data())
+                debugPrint(json)
+                DispatchQueue.main.async {
+                    self.hideActivity()
+                    self.locationLandmarkAddressTextFeild.text = json.data?.location
+                    self.priceTextFeild.text = json.data?.price
+                    self.descriptionTextView.text = json.data?.description
+                    self.dateVal = json.data?.day
+                    self.timeVal = json.data?.time
+                   }
+            } catch {
+                self.hideActivity()
+
+                print(error)
+            }
+         }
+        task.resume()
+    }
+   
+
+    func updateJobApi() {
+        self.showActivity()
+        guard let gitUrl = URL(string:"http://3.18.59.239:3000/api/v1/update-job-location") else { return }
+        print(gitUrl)
+        let request = NSMutableURLRequest(url: gitUrl)
+      //  let year = Calendar.current.component(.year, from: Date())
+       // let selDate = setDate(date: dateArray[selectedDateIndex])
+     //   let dateWithoutNextSlashN = String(selectedDate!.filter { !"\r\n\n\t\r".contains($0) })
+        let parameterDictionary = ["categoryId":UserStoreSingleton.shared.categoryId ?? "", "categoryName":UserStoreSingleton.shared.categoryName ?? "" , "subcategoryId":SideMenuSubServicesTableViewController.subcategoryList, "image":UserStoreSingleton.shared.profileImage ?? "", "price":priceTextFeild.text ?? "", "description":descriptionTextView.text ?? "", "location":UserStoreSingleton.shared.Address ?? "","lat":UserStoreSingleton.shared.currentLat ?? "" , "lng":UserStoreSingleton.shared.currentLong ?? "", "job_id":selectJob_id ?? 0, "day":dayValue,"time":timeVal] as [String: Any]
+
+     //   let parameterDictionary2 =  ["booking_date":selDate!, "categoryId": UserStoreSingleton.shared.categoryId ?? "" ,"UserId" : UserStoreSingleton.shared.userID ?? "" ,"categoryName": UserStoreSingleton.shared.categoryName ?? "" ,"day": dateWithoutNextSlashN ,"time": selectedTime ?? "","subcategoryId": SideMenuSubServicesTableViewController.subcategoryList,"image": UserStoreSingleton.shared.profileImage ?? "","location": UserStoreSingleton.shared.Address ?? "","lat": UserStoreSingleton.shared.currentLat ?? "","lng":UserStoreSingleton.shared.currentLong ?? "" ,"price": priceTextFeild.text ?? "","jobStatus": "open","description": descriptionTextView.text ?? "" ] as [String: Any]
+
+        print(parameterDictionary)
+        let session = URLSession.shared
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField:"Content-Type")
+        request.addValue("\(UserStoreSingleton.shared.Token ?? "")", forHTTPHeaderField:"Authorization")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: [])
+        session.dataTask(with: request as URLRequest) { (data, response, error) in
+            print("response---- \(response) , data\(data)")
+            guard let data = data else { return }
+            do {
+                let gitData = try JSONDecoder().decode(updateJobWork.self, from: data)
+                print("response data:", gitData)
+                DispatchQueue.main.async {
+                    self.hideActivity()
+                    let responseMeassge = gitData.status
+                    if responseMeassge == 200 {
+                        self.navigationController?.navigationBar.tintColor = UIColor.white
+                      //  UINavigationBar.appearance().tintColor = .systemBlue
+                    //    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.systemBlue]
+                        self.showMessage(gitData.message ?? "")
+                      //  UserStoreSingleton.shared.jobId = gitData.jobId
+                        self.firstCollectionView.isUserInteractionEnabled = true
+                        self.dateTimecollectionView.isUserInteractionEnabled = true
+
+                        self.navigate(.providerList)
+                    }
+                    else {
+                        self.showMessage(gitData.message ?? "")
+                    }
+                }
+            } catch let err {
+                print("Err", err)
+            }
+        }.resume()
+    }
     
     //MARK: - Calling Upload Image API
     func uploadImage(paramName: String, fileName: String, image: UIImage) {
@@ -579,6 +677,11 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         return img
     }
 }
+
+
+
+
+
 
 
 

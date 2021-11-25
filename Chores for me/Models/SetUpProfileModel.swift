@@ -41,6 +41,8 @@ struct ProfileData : Codable {
     let avgRatings : Int?
     let deviceType : String?
     let createdAt : String?
+    let first_name : String?
+    let last_name : String?
 
     enum CodingKeys: String, CodingKey {
         case userId = "UserId"
@@ -63,7 +65,8 @@ struct ProfileData : Codable {
         case avgRatings = "AvgRatings"
         case deviceType = "deviceType"
         case createdAt = "createdAt"
-
+        case last_name = "last_name"
+        case first_name = "first_name"
     }
 }
 

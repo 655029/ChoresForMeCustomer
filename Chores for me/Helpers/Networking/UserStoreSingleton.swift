@@ -83,6 +83,13 @@ class UserStoreSingleton: NSObject{
             UserDefaults.standard.setValue(newValue, forKey: "name")
         }
     }
+    var lastname : String?{
+        get{
+            return (UserDefaults().object(forKey: "lastname") as? String)
+        }set{
+            UserDefaults.standard.setValue(newValue, forKey: "lastname")
+        }
+    }
     var userID : Int?{
         get{
             return (UserDefaults().object(forKey: "userID") as? Int)

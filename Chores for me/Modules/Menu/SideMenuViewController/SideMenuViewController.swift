@@ -179,7 +179,8 @@ extension SideMenuViewController: UITableViewDataSource {
                 DispatchQueue.main.async {
                     self.hideActivity()
                     self.nameLabel.text = json.data?.name
-                    UserStoreSingleton.shared.name = json.data?.name
+                    UserStoreSingleton.shared.name = json.data?.first_name
+                    UserStoreSingleton.shared.lastname = json.data?.last_name
                     self.gmailLabel.text = json.data?.email
                     _ = json.data?.image
                     self.starRating.rating = Double(json.data?.avgRatings ?? 0)

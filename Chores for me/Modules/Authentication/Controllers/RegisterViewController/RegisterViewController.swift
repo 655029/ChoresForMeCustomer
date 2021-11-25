@@ -413,6 +413,7 @@ extension RegisterViewController {
         let parameterDictionary =  ["email":emailTextField.text ?? "","image": imageResponse ?? "","first_name":nameTextField.text ?? "","last_name":lastNameTextField.text ?? "","password": passwordTextField.text ?? "","phone": "\(UserStoreSingleton.shared.DialCode ?? "")\(mobileNoTextFeild.text ?? "")" ,"signupType":"0","otp":"","location_address":""] as [String: Any]
         print(parameterDictionary)
         UserStoreSingleton.shared.name = nameTextField.text
+        UserStoreSingleton.shared.lastname = lastNameTextField.text
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")

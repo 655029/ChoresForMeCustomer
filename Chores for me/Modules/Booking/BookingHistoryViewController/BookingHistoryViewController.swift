@@ -189,7 +189,7 @@ extension BookingHistoryViewController: UITableViewDataSource {
         cell.selectedDate.text = bookingHistoryResponseData[indexPath.row].time
         cell.selectedPrice.text = bookingHistoryResponseData[indexPath.row].price
         cell.starRating.rating = bookingHistoryResponseData[indexPath.row].providerDetails?.rating ?? 0
-        let dateTime = bookingHistoryResponseData[indexPath.row].createdAt
+        let dateTime = bookingHistoryResponseData[indexPath.row].booking_date
         let date = String(dateTime?.dropLast(14) ?? "")
         cell.dateCreatedAt.text = date
         cell.userName.text = bookingHistoryResponseData[indexPath.row].providerDetails?.name

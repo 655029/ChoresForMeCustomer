@@ -40,7 +40,7 @@ class EditButtonClickedViewController: UIViewController, UIImagePickerController
         
         tabBarController?.tabBar.isHidden = true
 
-        let textFeilds = [nameTextFeild,emailTextFeild,numberTextFeild,passwordTextFeild]
+        let textFeilds = [nameTextFeild,lastNameTextField,emailTextFeild,numberTextFeild,passwordTextFeild]
         for item in textFeilds {
             item?.layer.borderWidth = 0.5
             item?.layer.cornerRadius = 10.0
@@ -50,6 +50,7 @@ class EditButtonClickedViewController: UIViewController, UIImagePickerController
             emailTextFeild.text = UserStoreSingleton.shared.email
             numberTextFeild.text = UserStoreSingleton.shared.phoneNumer
             nameTextFeild.text = UserStoreSingleton.shared.name
+            lastNameTextField.text = UserStoreSingleton.shared.lastname
             EditButtonClickedViewController.editName = nameTextFeild.text
             UserStoreSingleton.shared.name = nameTextFeild.text
 
@@ -230,6 +231,7 @@ class EditButtonClickedViewController: UIViewController, UIImagePickerController
                         let responseMeassage = gitData.status
                         if responseMeassage == 200 {
                             UserStoreSingleton.shared.name = self.nameTextFeild.text
+                            UserStoreSingleton.shared.lastname = self.lastNameTextField.text
                             self.navigate(.HomePage)
                             self.showMessage(gitData.message ?? "")
                         }
