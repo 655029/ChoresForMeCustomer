@@ -28,8 +28,8 @@
                                     <constraint firstAttribute="width" constant="40" id="V1l-kW-Yvr"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3c8-eW-Jlu">
-                                <rect key="frame" x="45" y="22.5" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="3c8-eW-Jlu">
+                                <rect key="frame" x="45" y="22.5" width="131" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="AppInputTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -37,6 +37,7 @@
                         </subviews>
                         <color key="backgroundColor" name="AppPrimaryLabelColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="3c8-eW-Jlu" secondAttribute="trailing" constant="4" id="LMr-0Q-qIy"/>
                             <constraint firstItem="swW-U3-uor" firstAttribute="centerY" secondItem="fZt-l6-j1A" secondAttribute="centerY" id="a8h-MY-fKn"/>
                             <constraint firstItem="swW-U3-uor" firstAttribute="leading" secondItem="fZt-l6-j1A" secondAttribute="leading" id="fmg-Ob-2PD"/>
                             <constraint firstItem="3c8-eW-Jlu" firstAttribute="leading" secondItem="swW-U3-uor" secondAttribute="trailing" constant="5" id="jz8-hB-R5r"/>

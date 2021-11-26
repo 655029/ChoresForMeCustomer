@@ -22,6 +22,7 @@ enum Navigation: Navigatable {
     case chooseAddCustomService(service: Service)
     case addCustomCategory
     case uploadProfilePicture
+    case updateJob
     case uploadIDProof
     case jobStatus(jobData: JobHistoryData)
     case cancelJobRequest
@@ -78,6 +79,8 @@ struct AppNavigation: AppNavigatable {
                 return Storyboard.Service.viewController(for: CustomCategoryViewController.self)
             case.uploadProfilePicture:
                 return Storyboard.Profile.viewController(for: UploadProfilePictureViewController.self)
+            case.updateJob:
+                return Storyboard.Profile.viewController(for: UpdateJobViewController.self)
             case .uploadIDProof:
                 return Storyboard.Profile.viewController(for: UploadIDProofViewController.self)
             case .jobStatus:

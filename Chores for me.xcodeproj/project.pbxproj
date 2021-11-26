@@ -168,6 +168,7 @@
 		F4E3A12826E8919A0002C4FD /* LogoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3A12726E8919A0002C4FD /* LogoutModel.swift */; };
 		F4E3AA04262D36490029BEAD /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E3AA03262D36490029BEAD /* Profile.storyboard */; };
 		F4E3AA09262D36770029BEAD /* UploadProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3AA08262D36770029BEAD /* UploadProfilePictureViewController.swift */; };
+		F4E44CCD2750EB8E00F6520E /* UpdateJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E44CCC2750EB8E00F6520E /* UpdateJobViewController.swift */; };
 		F4E62889262E8DC700FF7700 /* UploadIDProofViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E62888262E8DC700FF7700 /* UploadIDProofViewController.swift */; };
 		F4E628F4262E958700FF7700 /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E628F3262E958700FF7700 /* VerticalButton.swift */; };
 		F4F38B222727E37C0013A651 /* UpdatetedGetUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F38B212727E37C0013A651 /* UpdatetedGetUserProfile.swift */; };
@@ -345,6 +346,7 @@
 		F4E3A12726E8919A0002C4FD /* LogoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutModel.swift; sourceTree = "<group>"; };
 		F4E3AA03262D36490029BEAD /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		F4E3AA08262D36770029BEAD /* UploadProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfilePictureViewController.swift; sourceTree = "<group>"; };
+		F4E44CCC2750EB8E00F6520E /* UpdateJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateJobViewController.swift; sourceTree = "<group>"; };
 		F4E62888262E8DC700FF7700 /* UploadIDProofViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadIDProofViewController.swift; sourceTree = "<group>"; };
 		F4E628F3262E958700FF7700 /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
 		F4F38B212727E37C0013A651 /* UpdatetedGetUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatetedGetUserProfile.swift; sourceTree = "<group>"; };
@@ -1117,6 +1119,7 @@
 				F476E61126A0117A003E1EB8 /* DateandTimeCollectionViewCell.swift */,
 				F4986FF226B28969000E8EE1 /* SecondCollectionViewCell.xib */,
 				F476E61226A0117B003E1EB8 /* DateandTimeCollectionViewCell.xib */,
+				F4E44CCC2750EB8E00F6520E /* UpdateJobViewController.swift */,
 			);
 			path = UploadProfilePictureViewController;
 			sourceTree = "<group>";
@@ -1355,6 +1358,7 @@
 				F476E61326A0117B003E1EB8 /* DateandTimeCollectionViewCell.swift in Sources */,
 				F4CEE70126274E61003C913D /* Storyboard.swift in Sources */,
 				F4CEE70626274EEA003C913D /* SplashViewController.swift in Sources */,
+				F4E44CCD2750EB8E00F6520E /* UpdateJobViewController.swift in Sources */,
 				F444CF5F26D51E8600A97251 /* VerifyotpModel.swift in Sources */,
 				F41A84F626DE165D00937D60 /* CategoryList.swift in Sources */,
 				F4FBC02826D915310091E692 /* SetUpProfileModel.swift in Sources */,

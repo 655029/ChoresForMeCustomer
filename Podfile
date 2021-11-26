@@ -29,9 +29,8 @@ target 'Chores for me' do
   pod 'Cosmos'
   pod 'Stripe'
   pod 'GoogleSignIn', '~> 5.0.2'
-  pod 'GooglePlaces', '5.1.0'
-  pod 'GooglePlacePicker', '= 3.1.0'
+  pod 'GooglePlaces', '~> 3.7.0'
+  pod 'GooglePlacePicker', '~> 3.7.0'
   
-
 
 end

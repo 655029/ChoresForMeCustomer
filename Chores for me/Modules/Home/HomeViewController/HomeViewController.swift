@@ -425,9 +425,9 @@ extension HomeViewController: UITableViewDataSource {
     @objc func didTappedEditButton(_ sender: UIButton) {
         let jobEdit = getcreatedjob[sender.tag].jobId
         print(jobEdit ?? "")
-        comeFrom = "EditPost"
+      //  comeFrom = "EditPost"
         selectJob_id = getcreatedjob[sender.tag].jobId
-        navigate(.uploadProfilePicture)
+        navigate(.updateJob)
     }
 
     //MARK: - TableViewDelegate Methods

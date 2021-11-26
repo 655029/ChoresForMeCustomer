@@ -1,8 +1,8 @@
 //
-//  UploadProfilePictureViewController.swift
+//  UpdateJobViewController.swift
 //  Chores for me
 //
-//  Created by Bright Roots 2019 on 19/04/21.
+//  Created by Bright Roots 2019 on 26/11/21.
 //
 
 import UIKit
@@ -10,14 +10,14 @@ import Alamofire
 import NVActivityIndicatorView
 import Toast_Swift
 
-struct SelectedData {
+var selectJob_id: Int?
+struct SelectedData1 {
     let image: String
     let name: String
 }
 
+class UpdateJobViewController: ServiceBaseViewController,UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,  UIImagePickerControllerDelegate, UINavigationControllerDelegate,LocationDelegate, UITextViewDelegate {
 
-class UploadProfilePictureViewController: ServiceBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,  UIImagePickerControllerDelegate, UINavigationControllerDelegate,LocationDelegate, UITextViewDelegate
-{
     func childViewControllerResponse(location: String) {
         print(location)
         locationLandmarkAddressTextFeild.text = location
@@ -48,7 +48,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     var selectedTime: String?
     var arrayOfSelectedImages:[String] = []
     var arrayOfSelectedName:[String] = []
-    var arrayOfSelectedServices:[SelectedData] = []
+    var arrayOfSelectedServices:[SelectedData1] = []
     var filterArrayOfSelctedServicesName:[String] = []
     var labelName = String()
     var arrayForDateTimeCollectionView:[String] = []
@@ -72,16 +72,15 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         ChooseLocationFromMapViewController.delegate = self
+//        if comeFrom == "EditPost" {
+//            firstCollectionView.isUserInteractionEnabled = false
+//            dateTimecollectionView.isUserInteractionEnabled = false
+//
+            getBookingDeatils()
+//        }else{
+//
+//        }
 
-        descriptionTextView.text = "Placeholder"
-        descriptionTextView.textColor = UIColor.black
-  //      self.navigationController?.navigationBar.barTintColor = UIColor.blue
-   //     navigationController?.navigationBar.isTranslucent = false
-//        UINavigationBar.appearance().tintColor = .systemBlue
-        
-//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.systemBlue]
-     //   navigationController?.navigationBar.barStyle = .blackOpaque
-        
         if SideMenuSubServicesTableViewController.selectedServicesTitle?.isEmpty == false {
             topLable.text = SideMenuSubServicesTableViewController.selectedServicesTitle
         }
@@ -126,15 +125,12 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         descriptionTextView.text = ""
         dateVal = "0"
         timeVal = "0"
-
-//        UINavigationBar.appearance().tintColor = .systemBlue
-//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.systemBlue]
     }
 
 
     // MARK: - TextView Delegate Methods
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if descriptionTextView.textColor == UIColor.black {
+        if descriptionTextView.textColor == UIColor.lightGray {
             descriptionTextView.text = nil
             descriptionTextView.textColor = UIColor.black
         }
@@ -252,10 +248,6 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
 
     func openGallary()
     {
-//        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
-//        imagePicker.allowsEditing = true
-//        self.present(imagePicker, animated: true, completion: nil)
-
         guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
             print("can't open photo library")
             return
@@ -314,8 +306,6 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
 
         else {
             let cell3 = topCollectionViewForSelectedServices.dequeueReusableCell(withReuseIdentifier: "SelectedCollectionViewCell", for: indexPath) as! SelectedCollectionViewCell
-            //            cell3.populateUI(SelectedData(image: arrayOfSelectedServices[indexPath.row].image, name: arrayOfSelectedServices[indexPath.row].name))
-            //            cell3.selectedCategoryImage.image = UIImage(named: arrayOfSelectedImages[indexPath.row])
             cell3.selecetdCategoryName.text = filterArrayOfSelctedServicesName[indexPath.row]
             if filterArrayOfSelctedServicesName.isEmpty == true  {
                 cell3.selecetdCategoryName.text = arrayOfSelectedName[indexPath.row]
@@ -404,11 +394,9 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
             }
 
             else {
-                self.callingCreateJobAPI()
+                self.updateJobApi()
             }
-
-    }
-
+        }
 
     //MARK: - UICollectionView Delegate Methods
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -424,7 +412,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                 let data = collectionView.cellForItem(at: indexPath!) as? DateandTimeCollectionViewCell
                 let bh = data?.label.text
                 selectedDate = bh
-                
+
             }
 
         }
@@ -478,8 +466,6 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                     let responseMeassge = gitData.status
                     if responseMeassge == 200 {
                         self.navigationController?.navigationBar.tintColor = UIColor.white
-                      //  UINavigationBar.appearance().tintColor = .systemBlue
-                    //    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.systemBlue]
                         self.showMessage(gitData.message ?? "")
                         UserStoreSingleton.shared.jobId = gitData.jobId
                         self.navigate(.providerList)
@@ -494,8 +480,73 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         }.resume()
     }
 
+    func getBookingDeatils() {
+        self.showActivity()
+        var request = URLRequest(url: URL(string: "http://3.18.59.239:3000/api/v1/get-jobDetails/\(selectJob_id ?? 0)")!,timeoutInterval: Double.infinity)
+        request.addValue("\(UserStoreSingleton.shared.Token ?? "")", forHTTPHeaderField:"Authorization")
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            do {
+                let json =  try JSONDecoder().decode(getJobdetails.self, from: data ?? Data())
+                debugPrint(json)
+                DispatchQueue.main.async {
+                    self.hideActivity()
+                    self.locationLandmarkAddressTextFeild.text = json.data?.location
+                    self.priceTextFeild.text = json.data?.price
+                    self.descriptionTextView.text = json.data?.description
+                    self.dateVal = json.data?.day
+                    self.timeVal = json.data?.time
+                   }
+            } catch {
+                self.hideActivity()
 
-    
+                print(error)
+            }
+         }
+        task.resume()
+    }
+
+
+    func updateJobApi() {
+        self.showActivity()
+        guard let gitUrl = URL(string:"http://3.18.59.239:3000/api/v1/update-job-location") else { return }
+        print(gitUrl)
+        let request = NSMutableURLRequest(url: gitUrl)
+        let parameterDictionary = ["categoryId":UserStoreSingleton.shared.categoryId ?? "", "categoryName":UserStoreSingleton.shared.categoryName ?? "" , "subcategoryId":SideMenuSubServicesTableViewController.subcategoryList, "image":UserStoreSingleton.shared.profileImage ?? "", "price":priceTextFeild.text ?? "", "description":descriptionTextView.text ?? "", "location":UserStoreSingleton.shared.Address ?? "","lat":UserStoreSingleton.shared.currentLat ?? "" , "lng":UserStoreSingleton.shared.currentLong ?? "", "job_id":selectJob_id ?? 0, "day":dayValue,"time":timeVal] as [String: Any]
+
+        print(parameterDictionary)
+        let session = URLSession.shared
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField:"Content-Type")
+        request.addValue("\(UserStoreSingleton.shared.Token ?? "")", forHTTPHeaderField:"Authorization")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: [])
+        session.dataTask(with: request as URLRequest) { (data, response, error) in
+            print("response---- \(response) , data\(data)")
+            guard let data = data else { return }
+            do {
+                let gitData = try JSONDecoder().decode(updateJobWork.self, from: data)
+                print("response data:", gitData)
+                DispatchQueue.main.async {
+                    self.hideActivity()
+                    let responseMeassge = gitData.status
+                    if responseMeassge == 200 {
+                        self.navigationController?.navigationBar.tintColor = UIColor.white
+                        self.showMessage(gitData.message ?? "")
+                        self.firstCollectionView.isUserInteractionEnabled = true
+                        self.dateTimecollectionView.isUserInteractionEnabled = true
+
+                        self.navigate(.providerList)
+                    }
+                    else {
+                        self.showMessage(gitData.message ?? "")
+                    }
+                }
+            } catch let err {
+                print("Err", err)
+            }
+        }.resume()
+    }
+
     //MARK: - Calling Upload Image API
     func uploadImage(paramName: String, fileName: String, image: UIImage) {
         let url = URL(string: "http://3.18.59.239:3000/api/v1/upload")
@@ -535,7 +586,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
             }
         }).resume()
     }
-    
+
     func setDate(date: Date) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
