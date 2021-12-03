@@ -53,18 +53,18 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
         navigationController?.navigationItem.title = "Payment mode"
         navigationController?.navigationBar.tintColor = .white
         tabBarController?.tabBar.isHidden = false
-        self.cardno.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
-        self.monthExpiryTectField.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
+      //  self.cardno.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
+      //  self.monthExpiryTectField.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
         }
 
     @objc func didChangeText(textField:UITextField) {
         
-        let formattedCreditCardNumber = cardno.text?.replacingOccurrences(of: "(\\d{4})(\\d{4})(\\d{4})(\\d+)", with: "$1 $2 $3 $4", options: .regularExpression, range: nil)
-        print(formattedCreditCardNumber ?? "")
-        cardno.text = formattedCreditCardNumber
-        cardno.text = self.modifyCreditCardString(creditCardString: formattedCreditCardNumber ?? "")
-        
-        let value = Int(monthExpiryTectField.text ?? "0")
+//        let formattedCreditCardNumber = cardno.text?.replacingOccurrences(of: "(\\d{4})(\\d{4})(\\d{4})(\\d+)", with: "$1 $2 $3 $4", options: .regularExpression, range: nil)
+//        print(formattedCreditCardNumber ?? "")
+//        cardno.text = formattedCreditCardNumber
+//        cardno.text = self.modifyCreditCardString(creditCardString: formattedCreditCardNumber ?? "")
+//
+//        let value = Int(monthExpiryTectField.text ?? "0")
      }
     
     func modifyCreditCardString(creditCardString : String) -> String {
@@ -91,6 +91,8 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
 
     //MARK:- Get token
     private func getToken(){
+       // showActivity()
+        alertView()
         let cardParams = STPCardParams()
         guard let cardNumber = paymentTextField.cardNumber else {
             showMessage("Please enter card number")
@@ -113,45 +115,17 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
             }
             let tokenID = token.tokenId
             print("test Token-----\(tokenID)")
-            self.saveCardDetailsApi()
+           // self.saveCardDetailsApi()
             self.stripeToken = tokenID
             self.stripeChargesApi()
         }
    }
 
     
-    func getCardNumbers() {
-        //card parameters
-        let stripeCardParams = STPCardParams()
-        
-        stripeCardParams.number = cardno.text
-       
-        let expiryParameters = expiryDateTextFeild.text?.components(separatedBy: "/")
-        stripeCardParams.expMonth = UInt(expiryParameters?.first ?? "0") ?? 0
-     //   stripeCardParams.expYear = UInt(expiryParameters?.last ?? "0") ?? 0
-       
-        let expiryParameter = monthExpiryTectField.text?.components(separatedBy: "")
-        stripeCardParams.expYear = UInt(expiryParameter?.first ?? "0") ?? 0
-        stripeCardParams.cvc = CVVTextFeild.text
-        
-        //converting into token
-        let config = STPPaymentConfiguration.shared
-        let stpApiClient = STPAPIClient.init(configuration: config)
-        STPAPIClient.shared.createToken(withCard: stripeCardParams) { token, error in
-            guard let token = token else {
-                // Handle the error
-                return
-            }
-            let tokenID = token.tokenId
-            print("test Token-----\(tokenID)")
-            self.saveCardDetailsApi()
-            self.stripeToken = tokenID
-            self.stripeChargesApi()
-        }
-    }
-//
+
     func stripeChargesApi() {
-        self.showActivity()
+       // self.showActivity()
+        alertView()
         let parameters : [String: Any] =  ["amount": UserStoreSingleton.shared.totalPrice ?? 0,
                                            "source":stripeToken ?? "",
                                            "currency":"eur"]
@@ -165,7 +139,7 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
         request.httpBody = postData
         let dataTask = URLSession.shared.dataTask(with: request) {
                 data,response,error in
-            self.hideActivity()
+
                 guard let data = data else {
                    return
                 }
@@ -173,8 +147,10 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
                     let data = try JSONDecoder().decode(StripeChargesModel.self, from: data)
                     DispatchQueue.main.async { [self] in
                         print(data)
+                        dismiss(animated: true, completion: nil)
                         let getSuccess = data.status
                         print(getSuccess as Any)
+                        self.hideActivity()
                         if data.paid ==  true{
                             self.TransactionStatus = "Success"
                             self.paymentStatus = data.id
@@ -183,11 +159,14 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
                         }else{
                             self.TransactionStatus = "Fail"
                             self.hideActivity()
+                            dismiss(animated: true, completion: nil)
                         }
                     }
                 } catch let error {
+                    self.showMessage(error.localizedDescription)
                     debugPrint(error.localizedDescription)
-                    self.hideActivity()
+                  //  self.hideActivity()
+                    self.dismiss(animated: true, completion: nil)
                 }
 
             }
@@ -195,7 +174,8 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
     }
 
     func savePaymentApi() {
-        self.showActivity()
+       // self.showActivity()
+        alertView()
         let params = ["job_id": myJobDetails.jobId ?? 0 ,
                       "user_id": myJobDetails.userId ?? 0,
                       "amount": UserStoreSingleton.shared.totalPrice ?? "",
@@ -220,6 +200,7 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
                  if let data = data {
                      do {
                          let json =  try JSONDecoder().decode(savePaymentModel.self, from: data)
+                        self.dismiss(animated: true, completion: nil)
                          DispatchQueue.main.async {
                             self.hideActivity()
                             let storyboard = UIStoryboard(name: "Booking", bundle: nil)
@@ -227,13 +208,12 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
                             secondVc.modalPresentationStyle = .overCurrentContext
 
                             self.navigationController?.present(secondVc, animated: true, completion: nil)
-//                            self.navigate(.Rating)
                            
                          }
                      }catch{
                         print("\(error.localizedDescription)")
-                        self.hideActivity()
-
+                        //self.hideActivity()
+                        self.dismiss(animated: true, completion: nil)
                      }
                  }
              }.resume()
@@ -303,30 +283,19 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
              }.resume()
     }
 
-    private func getCardDetailsAPI() {
-        var request = URLRequest(url: URL(string: "http://3.18.59.239:3000/api/v1/get-card-details")!,timeoutInterval: Double.infinity)
-        request.addValue("\(UserStoreSingleton.shared.Token ?? "")", forHTTPHeaderField:"Authorization")
-        request.httpMethod = "GET"
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            do {
-                let json =  try JSONDecoder().decode(GetCardDetailsModel.self, from: data ?? Data())
-                debugPrint(json)
-                print(GetCardDetailsModel.self)
-                DispatchQueue.main.async { [self] in
-                    print(json)
-                    if let myData = json.data {
-                      
-                    }
-                }
-            } catch {
-                print(error)
-            }
 
-        }
+    func alertView(){
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
 
-        task.resume()
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
     }
-    
+
     open func takeScreenshot(_ shouldSave: Bool = true) -> UIImage? {
             var screenshotImage :UIImage?
             let layer = UIApplication.shared.keyWindow!.layer
@@ -394,7 +363,7 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
         tabBarController?.tabBar.isHidden = true
         continueButton.layer.cornerRadius = 10.0
         self.callingJobDetailsAPI()
-    //    CheckTimeFunc()
+        CheckTimeFunc()
 
     }
 

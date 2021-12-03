@@ -169,7 +169,7 @@ class RatingAlertViewController: UIViewController {
     
     private func callingJobDetailsAPI() {
         let jobId = UserStoreSingleton.shared.jobId
-        var request = URLRequest(url: URL(string: "http://3.18.59.239:3000/api/v1/get-jobDetails/\(jobId ?? 218)")!,timeoutInterval: Double.infinity)
+        var request = URLRequest(url: URL(string: "http://3.18.59.239:3000/api/v1/get-jobDetails/\(jobId ?? 0)")!,timeoutInterval: Double.infinity)
         request.addValue("\(UserStoreSingleton.shared.Token ?? "")", forHTTPHeaderField:"Authorization")
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in

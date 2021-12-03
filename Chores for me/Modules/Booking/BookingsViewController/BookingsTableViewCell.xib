@@ -70,7 +70,7 @@ Country  India</string>
                                 <color key="textColor" name="AppSecondaryLabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40min" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IC-SP-6qz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40min" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IC-SP-6qz">
                                 <rect key="frame" x="502.5" y="6" width="27.5" height="12"/>
                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="10"/>
                                 <color key="textColor" name="AppSecondaryLabelColor"/>
@@ -83,7 +83,7 @@ Country  India</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user.profile.icon" translatesAutoresizingMaskIntoConstraints="NO" id="LaF-vX-ThN" customClass="DesignableImageView" customModule="Designable">
-                                <rect key="frame" x="351" y="134" width="50" height="50"/>
+                                <rect key="frame" x="359" y="134" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="kj9-jd-jm3"/>
                                     <constraint firstAttribute="height" constant="50" id="qRR-iI-Xom"/>
@@ -191,7 +191,7 @@ Country  India</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVh-Wk-OcF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="yVh-Wk-OcF">
                                 <rect key="frame" x="107" y="159.5" width="29.5" height="14"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
                                 <nil key="textColor"/>
@@ -276,7 +276,7 @@ Country  India</string>
                             <constraint firstAttribute="trailing" secondItem="Gfm-mX-tdK" secondAttribute="trailing" constant="12" id="abc-Is-1nF"/>
                             <constraint firstAttribute="trailing" secondItem="ofg-Bg-45N" secondAttribute="trailing" constant="12" id="b69-Wf-Sky"/>
                             <constraint firstItem="eWf-2I-7is" firstAttribute="leading" secondItem="zxn-wd-5rG" secondAttribute="leading" id="e1t-FL-X2R"/>
-                            <constraint firstItem="lgm-UZ-NMe" firstAttribute="leading" secondItem="LaF-vX-ThN" secondAttribute="trailing" constant="20" id="e7S-lT-giR"/>
+                            <constraint firstItem="lgm-UZ-NMe" firstAttribute="leading" secondItem="LaF-vX-ThN" secondAttribute="trailing" constant="12" id="e7S-lT-giR"/>
                             <constraint firstItem="Jhx-tP-Luz" firstAttribute="top" secondItem="Gfm-mX-tdK" secondAttribute="bottom" constant="4" id="fvN-J5-Hf7"/>
                             <constraint firstAttribute="trailing" secondItem="lgm-UZ-NMe" secondAttribute="trailing" constant="17" id="hTu-by-bVe"/>
                             <constraint firstAttribute="trailing" secondItem="8IC-SP-6qz" secondAttribute="trailing" constant="8" id="iqi-E5-eoJ"/>

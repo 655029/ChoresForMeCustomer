@@ -192,7 +192,7 @@ extension BookingHistoryViewController: UITableViewDataSource {
         let dateTime = bookingHistoryResponseData[indexPath.row].booking_date
         let date = String(dateTime?.dropLast(14) ?? "")
         cell.dateCreatedAt.text = date
-        cell.userName.text = bookingHistoryResponseData[indexPath.row].providerDetails?.name
+        cell.userName.text = bookingHistoryResponseData[indexPath.row].providerDetails?.first_name
         let arr = bookingHistoryResponseData[indexPath.row].subcategoryId
         cell.arrSubCatgeory = arr ?? []
         cell.copyIconButton.tag = indexPath.row

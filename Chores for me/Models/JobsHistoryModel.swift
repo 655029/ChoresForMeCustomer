@@ -38,8 +38,6 @@ struct saveData : Codable {
 
 }
 
-
-
 struct JobHistoryData : Codable {
     let jobId : Int?
     let userId : String?
@@ -59,11 +57,17 @@ struct JobHistoryData : Codable {
     let jobStatus : String?
     let createdAt : String?
     let booking_date : String?
+    let first_name : String?
+    let last_name: String?
+    let total_time: String?
 
     enum CodingKeys: String, CodingKey {
 
         case jobId = "jobId"
         case userId = "UserId"
+        case first_name = "first_name"
+        case last_name = "last_name"
+        case total_time = "total_time"
         case categoryId = "categoryId"
         case categoryName = "categoryName"
         case subcategoryId = "subcategoryId"
@@ -86,7 +90,7 @@ struct JobHistoryData : Codable {
 
 struct ProviderDetails : Codable {
     let userId : Int?
-    let name : String?
+    let first_name : String?
     let phone : String?
     let image : String?
     let email : String?
@@ -96,15 +100,13 @@ struct ProviderDetails : Codable {
     enum CodingKeys: String, CodingKey {
 
         case userId = "UserId"
-        case name = "name"
+        case first_name = "first_name"
         case phone = "phone"
         case image = "image"
         case email = "email"
         case rating = "rating"
         case work_exp = "work_exp"
-
     }
-
 }
 
 struct JobsSubcategoryId : Codable {

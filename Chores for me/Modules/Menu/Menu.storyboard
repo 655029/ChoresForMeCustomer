@@ -66,7 +66,7 @@
                                 <color key="textColor" name="AppPrimaryLabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fAO-dl-cPu" customClass="CosmosView" customModule="Cosmos">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAO-dl-cPu" customClass="CosmosView" customModule="Cosmos">
                                 <rect key="frame" x="124.5" y="299" width="165" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="AppSkyBlueColor"/>
@@ -214,7 +214,7 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder=" Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P90-D2-gxP">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P90-D2-gxP">
                                                                 <rect key="frame" x="0.0" y="65" width="374" height="40"/>
                                                                 <color key="backgroundColor" name="AppPrimaryLabelColor"/>
                                                                 <constraints>
@@ -330,6 +330,9 @@
         </designable>
         <designable name="ScX-oO-YBe">
             <size key="intrinsicContentSize" width="60" height="60"/>
+        </designable>
+        <designable name="fAO-dl-cPu">
+            <size key="intrinsicContentSize" width="165" height="25"/>
         </designable>
     </designables>
     <resources>

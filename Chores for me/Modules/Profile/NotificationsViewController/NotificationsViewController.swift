@@ -115,25 +115,22 @@ extension NotificationsViewController: UITableViewDataSource,UITableViewDelegate
         cell.ratingAndCheckReasonButton.tag = indexPath.row
         if notificationArray[indexPath.row].type?.lowercased() == "cancel-by-provider" {
             cell.ratingAndCheckReasonButton.isHidden = false
-            cell.payButton.isHidden = true
             cell.ratingAndCheckReasonButton.setTitle("Check Reason", for: .normal)
             cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
-
         else if notificationArray[indexPath.row].type?.lowercased() == "complete" {
             cell.ratingAndCheckReasonButton.isHidden = false
-            cell.payButton.isHidden = false
             cell.ratingAndCheckReasonButton.setTitle("Rate Now", for: .normal)
             cell.ratingAndCheckReasonButton.tag = indexPath.row
             cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
         
-        else if notificationArray[indexPath.row].payment_status?.lowercased() == "Not Done" {
+        else if notificationArray[indexPath.row].payment_status?.lowercased() == "not done" {
             cell.payButton.isHidden = false
             cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
-        else if notificationArray[indexPath.row].payment_status?.lowercased() == "Done" {
-            cell.payButton.isHidden = true
+        else if notificationArray[indexPath.row].payment_status?.lowercased() == "done" {
+                cell.payButton.isHidden = true
             cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
 

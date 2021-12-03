@@ -438,7 +438,7 @@ extension RegisterViewController {
                         if responseMessage == 200 {
                             UserStoreSingleton.shared.phoneNumer = self.mobileNoTextFeild.text
                             self.sendOtp()
-                            self.navigate(.twosetpVerification)
+
                         }else{
                             self.hideActivity()
                             self.showMessage(json.message ?? "")
@@ -474,7 +474,7 @@ extension RegisterViewController {
                         hideActivity()
                         showMessage(gitData.message ?? "")
                         UserStoreSingleton.shared.OtpCode = gitData.data?.oTP
-
+                        self.navigate(.twosetpVerification)
 //                            verificationTextField.text = getOtp
                     }
                 } catch let err {

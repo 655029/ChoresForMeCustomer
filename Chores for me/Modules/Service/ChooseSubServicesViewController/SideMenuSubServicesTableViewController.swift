@@ -9,6 +9,7 @@ import UIKit
 import SwiftyJSON
 import Toast_Swift
 import NVActivityIndicatorView
+import SDWebImage
 
 protocol SideMenuDissmiss: class {
     func didTapNextButton(controller: SideMenuSubServicesTableViewController)
@@ -22,6 +23,8 @@ class SideMenuSubServicesTableViewController: UITableViewController {
     static var firstCategoryId: Int?
     static var subcategoryList = NSMutableArray()
     static var selectedServiesArray: [String] = []
+    static var selectedServiesImagesArray: [UIImage] = []
+
     var storeArray = NSArray()
     var service: Service!
     var nameArray: [String] = []
@@ -48,6 +51,7 @@ class SideMenuSubServicesTableViewController: UITableViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        SideMenuSubServicesTableViewController.selectedServiesImagesArray.removeAll()
         categoryId = UserStoreSingleton.shared.categoryId
         NotificationCenter.default.addObserver(self, selector: #selector(openSideMenu(n:)), name: Notification.Name("openSideMenuOption"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getcategoryId(n:)), name: NSNotification.Name(rawValue: "categoryid"), object: nil)
@@ -65,6 +69,7 @@ class SideMenuSubServicesTableViewController: UITableViewController {
     @objc func openSideMenu(n: Notification) {
         print("Opened")
         SideMenuSubServicesTableViewController.selectedServiesArray.removeAll()
+      SideMenuSubServicesTableViewController.selectedServiesImagesArray.removeAll()
         SideMenuSubServicesTableViewController.subcategoryList.removeAllObjects()
         if categoryId == 4 || SideMenuSubServicesTableViewController.firstCategoryId == 4{
             navigationItem.title = "Create Custom Job"
@@ -89,8 +94,8 @@ class SideMenuSubServicesTableViewController: UITableViewController {
         else {
             self.hideNavigationButton()
         }
-
         SideMenuSubServicesTableViewController.selectedServiesArray.removeAll()
+        SideMenuSubServicesTableViewController.selectedServiesImagesArray.removeAll()
         SideMenuSubServicesTableViewController.subcategoryList.removeAllObjects()
         self.callingSubServicesAPI()
 
@@ -119,6 +124,7 @@ class SideMenuSubServicesTableViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(openSideMenu(n:)), name: Notification.Name("openSideMenuOption"), object: nil)
 
         SideMenuSubServicesTableViewController.selectedServiesArray.removeAll()
+        SideMenuSubServicesTableViewController.selectedServiesImagesArray.removeAll()
         SideMenuSubServicesTableViewController.subcategoryList.removeAllObjects()
 //        navigationController?.navigationBar.barTintColor = UIColor(red: 255, green: 255, blue: 255, transparency: 100.0)
         navigationController?.navigationBar.barTintColor = AppColor.AppTertiaryBackgroundColor
@@ -134,7 +140,7 @@ class SideMenuSubServicesTableViewController: UITableViewController {
         else {
             self.hideNavigationButton()
         }
-     //   CheckTimeFunc()
+        CheckTimeFunc()
 
     }
 
@@ -164,6 +170,10 @@ class SideMenuSubServicesTableViewController: UITableViewController {
         cell.nameLable.text = arrayData[indexPath.row].subcategoryName
         cell.selectionDeselectionButton.tag = indexPath.row
         cell.selectionDeselectionButton.addTarget(self, action: #selector(selectDeselectbutton(_:)), for: .touchUpInside)
+        let url = URL(string: arrayData[indexPath.row].subcategoryImage ?? "")
+        cell.serviceImage.sd_imageIndicator = SDWebImageActivityIndicator.gray//"Lawn Mowing"
+        cell.serviceImage.sd_setImage(with: url, placeholderImage: UIImage(named: "Lawn Mowing"))
+
 
         return cell
     }
@@ -187,31 +197,38 @@ class SideMenuSubServicesTableViewController: UITableViewController {
             let data = tableView.cellForRow(at: indexPath!) as? ChooseSubServicesTableViewCell
             let subcategoryId = arrayData[indexPath!.row].subcategoryId
             let subcategoryName = arrayData[indexPath!.row].subcategoryName
+            let subcategoryImage = arrayData[indexPath!.row].subcategoryImage
             let dic = NSMutableDictionary()
             dic.setValue(String(subcategoryId!), forKey: "id")
             dic.setValue(subcategoryName, forKey: "name")
-//            SideMenuSubServicesTableViewController.subcategoryList.add(dic)
+            dic.setValue(subcategoryImage, forKey: "image")
+            SideMenuSubServicesTableViewController.subcategoryList.add(dic)
             if SideMenuSubServicesTableViewController.subcategoryList.contains(dic) {
                 let indexPathForSubcategory = SideMenuSubServicesTableViewController.subcategoryList.index(of: dic)
                 SideMenuSubServicesTableViewController.subcategoryList.removeObject(at: indexPathForSubcategory)
             }
-
             else {
                 SideMenuSubServicesTableViewController.subcategoryList.add(dic)
             }
             let bh = data?.nameLable.text ?? ""
+            let image = data?.serviceImage.image
             if SideMenuSubServicesTableViewController.selectedServiesArray.contains(bh) {
                 let indexPathOfSelectedData = SideMenuSubServicesTableViewController.selectedServiesArray.firstIndex(of: bh)
                 SideMenuSubServicesTableViewController.selectedServiesArray.remove(at: indexPathOfSelectedData!)
+
             }
+//            if SideMenuSubServicesTableViewController.selectedServiesImagesArray.contains(image!) {
+//                let indexPathOfSelectedData = SideMenuSubServicesTableViewController.selectedServiesArray.firstIndex(of: bh)
+////                SideMenuSubServicesTableViewController.selectedServiesImagesArray.remove(at: indexPathOfSelectedData!)
+//
+//            }
             else {
                 SideMenuSubServicesTableViewController.selectedServiesArray.append(bh)
-            }
+               SideMenuSubServicesTableViewController.selectedServiesImagesArray.append(image!)
+          }
 
         }
-
-
-    }
+  }
 
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -276,9 +293,13 @@ class SideMenuSubServicesTableViewController: UITableViewController {
         if SideMenuSubServicesTableViewController.selectedServiesArray.contains(cell.nameLable.text!) {
             let indexPathOfSelectedData = SideMenuSubServicesTableViewController.selectedServiesArray.firstIndex(of: cell.nameLable.text!)
             SideMenuSubServicesTableViewController.selectedServiesArray.remove(at: indexPathOfSelectedData!)
+            SideMenuSubServicesTableViewController.selectedServiesImagesArray.remove(at: indexPathOfSelectedData!)
+
         }
         else {
             SideMenuSubServicesTableViewController.selectedServiesArray.append(cell.nameLable.text!)
+            SideMenuSubServicesTableViewController.selectedServiesImagesArray.append(cell.serviceImage.image!)
+
         }
 
     }
@@ -305,14 +326,12 @@ class SideMenuSubServicesTableViewController: UITableViewController {
             navigationItem.title = getSelectedService
             SideMenuSubServicesTableViewController.selectedServicesTitle = getSelectedService
         }
-
-
-
-    }
+  }
 
 
     private func applyDesigns() {
         SideMenuSubServicesTableViewController.selectedServiesArray.removeAll()
+
         view.backgroundColor = UIColor(hexString: "#2B3038")
         tableView.backgroundColor = UIColor(hexString: "#2B3038")
         tabBarController?.tabBar.isHidden = true
@@ -328,7 +347,7 @@ class SideMenuSubServicesTableViewController: UITableViewController {
         view.isUserInteractionEnabled = true
         tableView.isUserInteractionEnabled = true
         navigationController?.view.addSubview(nextButton)
-//        tableView.addSubview(nextButton)
+//      tableView.addSubview(nextButton)
         nextButton.centerXAnchor.constraint(equalTo: (navigationController?.view.centerXAnchor)!).isActive = true
         nextButton.bottomAnchor.constraint(equalTo: navigationController!.view.bottomAnchor, constant: -20).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -375,8 +394,7 @@ class SideMenuSubServicesTableViewController: UITableViewController {
 
             }
         }.resume()
-
-}
+   }
 
     func showMessage(_ withMessage : String) {
         var style = ToastStyle()

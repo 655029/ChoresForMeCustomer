@@ -12,6 +12,8 @@ import SwiftyJSON
 struct ProviderListModel {
     var userId : Int?
     var name : String?
+    var first_name : String?
+    var last_name : String?
     var email : String?
     var phone : String?
     var otp : String?
@@ -44,6 +46,8 @@ struct ProviderListModel {
     init(json:JSON) {
         userId = json["UserId"].intValue
         name = json["name"].stringValue
+        first_name = json["first_name"].stringValue
+        last_name = json["last_name"].stringValue
         email = json["email"].stringValue
         phone = json["phone"].stringValue
         otp = json["otp"].stringValue

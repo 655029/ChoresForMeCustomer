@@ -110,7 +110,7 @@ class ProviderListViewController: BaseViewController, UITableViewDelegate, UITab
 
         cell.productImage.sd_setImage(with: providerImageUrl, placeholderImage:UIImage(contentsOfFile:"outdoor_home_service.png"))
         cell.productNameLabel.text = arrayData[indexPath.row].subcategoryName
-        cell.productNameLabel.text = arrayData[indexPath.row].name
+        cell.productNameLabel.text = arrayData[indexPath.row].first_name
         cell.productLocationLabel.text = arrayData[indexPath.row].location_address
         cell.starRating.rating = arrayData[indexPath.row].rating ?? 2.5
         cell.layer.cornerRadius = 4.0

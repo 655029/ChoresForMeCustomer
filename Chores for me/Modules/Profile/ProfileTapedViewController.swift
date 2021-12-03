@@ -71,7 +71,7 @@ class ProfileTapedViewController: UIViewController, UICollectionViewDataSource, 
             self.providerImage.sd_setImage(with: photoUrl, placeholderImage: UIImage(contentsOfFile: "upload profile picture.png"))
         }
 
-        providerName.text = dicData.name
+        providerName.text = dicData.first_name
         providerExprience.text = dicData.work_exp
         providerLocation.text = dicData.location_address
         providerDescription.text = dicData.exp_desciption

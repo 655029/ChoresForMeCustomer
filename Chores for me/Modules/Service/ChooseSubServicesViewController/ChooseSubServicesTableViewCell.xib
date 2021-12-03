@@ -76,6 +76,7 @@
                 <outlet property="blurView" destination="wU7-wc-3p2" id="Eot-bR-IY3"/>
                 <outlet property="nameLable" destination="PMR-xp-TcE" id="yDk-oA-H5J"/>
                 <outlet property="selectionDeselectionButton" destination="phu-2T-5dc" id="85E-oT-vgi"/>
+                <outlet property="serviceImage" destination="2Bt-32-mou" id="aFq-GA-UY2"/>
             </connections>
             <point key="canvasLocation" x="-95.652173913043484" y="0.6696428571428571"/>
         </tableViewCell>

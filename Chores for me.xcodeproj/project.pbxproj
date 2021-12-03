@@ -171,6 +171,7 @@
 		F4E44CCD2750EB8E00F6520E /* UpdateJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E44CCC2750EB8E00F6520E /* UpdateJobViewController.swift */; };
 		F4E62889262E8DC700FF7700 /* UploadIDProofViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E62888262E8DC700FF7700 /* UploadIDProofViewController.swift */; };
 		F4E628F4262E958700FF7700 /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E628F3262E958700FF7700 /* VerticalButton.swift */; };
+		F4EAE9972758FF5C0095B20F /* CheckTIme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EAE9962758FF5C0095B20F /* CheckTIme.swift */; };
 		F4F38B222727E37C0013A651 /* UpdatetedGetUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F38B212727E37C0013A651 /* UpdatetedGetUserProfile.swift */; };
 		F4F9E429262EC3B20099A4F1 /* NewBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F9E428262EC3B20099A4F1 /* NewBookingViewController.swift */; };
 		F4F9E42D262ED6BE0099A4F1 /* BookingRequestServiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F9E42B262ED6BD0099A4F1 /* BookingRequestServiceCollectionViewCell.swift */; };
@@ -349,6 +350,7 @@
 		F4E44CCC2750EB8E00F6520E /* UpdateJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateJobViewController.swift; sourceTree = "<group>"; };
 		F4E62888262E8DC700FF7700 /* UploadIDProofViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadIDProofViewController.swift; sourceTree = "<group>"; };
 		F4E628F3262E958700FF7700 /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
+		F4EAE9962758FF5C0095B20F /* CheckTIme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTIme.swift; sourceTree = "<group>"; };
 		F4F38B212727E37C0013A651 /* UpdatetedGetUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatetedGetUserProfile.swift; sourceTree = "<group>"; };
 		F4F9E428262EC3B20099A4F1 /* NewBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBookingViewController.swift; sourceTree = "<group>"; };
 		F4F9E42B262ED6BD0099A4F1 /* BookingRequestServiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingRequestServiceCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -657,9 +659,17 @@
 		F444CF6226D5220100A97251 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				F46797732758FEAC00C42618 /* CheckTime */,
 				F444CF6326D5226E00A97251 /* UserStoreSingleton.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		F46797732758FEAC00C42618 /* CheckTime */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CheckTime;
 			sourceTree = "<group>";
 		};
 		F46F16B926275433002D351C /* Controllers */ = {
@@ -882,6 +892,7 @@
 		F4CEE6C826274CAB003C913D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				F4EAE9952758FF3B0095B20F /* CheckTime */,
 				F48DBDA626F8AEA500A1EA1E /* PushNotificationManager.swift */,
 				F42B14BB26D60A06006D46AE /* OpenAlert */,
 				F444CF6226D5220100A97251 /* Networking */,
@@ -1130,6 +1141,14 @@
 				F4E62888262E8DC700FF7700 /* UploadIDProofViewController.swift */,
 			);
 			path = UploadIDProofViewController;
+			sourceTree = "<group>";
+		};
+		F4EAE9952758FF3B0095B20F /* CheckTime */ = {
+			isa = PBXGroup;
+			children = (
+				F4EAE9962758FF5C0095B20F /* CheckTIme.swift */,
+			);
+			path = CheckTime;
 			sourceTree = "<group>";
 		};
 		F4F9E430262ED6CB0099A4F1 /* BookingRequestServiceCollectionViewCell */ = {
@@ -1399,6 +1418,7 @@
 				F48DBDA726F8AEA500A1EA1E /* PushNotificationManager.swift in Sources */,
 				F4A7C0E126A58B340066EBB9 /* PaymentModeCollectionViewCell.swift in Sources */,
 				F4842D9326EA2E8B004B177B /* ResetPasswordModel.swift in Sources */,
+				F4EAE9972758FF5C0095B20F /* CheckTIme.swift in Sources */,
 				047E19872632A07D00E78487 /* FloatRatingView.swift in Sources */,
 				F4CEE6EB26274CAC003C913D /* RootRouter.swift in Sources */,
 				8356A9F827496AD200C33AB9 /* PaymentListTableViewCell.swift in Sources */,

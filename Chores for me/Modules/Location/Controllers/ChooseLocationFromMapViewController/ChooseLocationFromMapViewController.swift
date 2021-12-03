@@ -78,7 +78,7 @@ class ChooseLocationFromMapViewController: BaseViewController, GMSMapViewDelegat
 
     override func viewWillAppear(_ animated: Bool) {
         mapView.animate(to: GMSCameraPosition(latitude: UserStoreSingleton.shared.currentLat ?? 0, longitude: UserStoreSingleton.shared.currentLong ?? 0, zoom: 15))
-//        CheckTimeFunc()
+        CheckTimeFunc()
 
     }
 

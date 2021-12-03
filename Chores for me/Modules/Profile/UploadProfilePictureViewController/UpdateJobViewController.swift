@@ -90,7 +90,7 @@ class UpdateJobViewController: ServiceBaseViewController,UICollectionViewDelegat
         topLable.font = .boldSystemFont(ofSize: 22)
         descriptionTextView.delegate = self
         descriptionTextView.text = "Add Description"
-        descriptionTextView.textColor = UIColor.lightGray
+        descriptionTextView.textColor = UIColor.black
         self.navigationController?.navigationBar.tintColor = UIColor.yellow
         if let flowlayout = topCollectionViewForSelectedServices.collectionViewLayout as? UICollectionViewFlowLayout {
             flowlayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -347,16 +347,16 @@ class UpdateJobViewController: ServiceBaseViewController,UICollectionViewDelegat
 
     @IBAction func postButton(_ sender: UIButton) {
 
-            let imageSystem =  UIImage(named: "gallery icon")
+//            let imageSystem =  UIImage(named: "gallery icon")
             let value = Int(priceTextFeild.text ?? "0")
-
-
-            if selectImage.image?.pngData() == imageSystem?.pngData() {
-                openAlert(title: "Alert", message: "Please Select Photo", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
-                    print("Okay")
-                }])
-            }
-            else if locationLandmarkAddressTextFeild.text == "" {
+//
+//
+//            if selectImage.image?.pngData() == imageSystem?.pngData() {
+//                openAlert(title: "Alert", message: "Please Select Photo", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+//                    print("Okay")
+//                }])
+//            }
+           if locationLandmarkAddressTextFeild.text == "" {
                 openAlert(title: "Alert", message: "Please Select location", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
                     print("Okay")
                 }])
@@ -380,18 +380,18 @@ class UpdateJobViewController: ServiceBaseViewController,UICollectionViewDelegat
             }
 
 
-
-            else if selectedDate == nil {
-                openAlert(title: "Alert", message: "Please select Date", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
-                    print("Okay")
-                }])
-            }
-
-            else if selectedTime == nil {
-                openAlert(title: "Alert", message: "Please select Time", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
-                    print("Okay")
-                }])
-            }
+//
+//            else if selectedDate == nil {
+//                openAlert(title: "Alert", message: "Please select Date", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+//                    print("Okay")
+//                }])
+//            }
+//
+//            else if selectedTime == nil {
+//                openAlert(title: "Alert", message: "Please select Time", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+//                    print("Okay")
+//                }])
+//            }
 
             else {
                 self.updateJobApi()
@@ -512,7 +512,7 @@ class UpdateJobViewController: ServiceBaseViewController,UICollectionViewDelegat
         guard let gitUrl = URL(string:"http://3.18.59.239:3000/api/v1/update-job-location") else { return }
         print(gitUrl)
         let request = NSMutableURLRequest(url: gitUrl)
-        let parameterDictionary = ["categoryId":UserStoreSingleton.shared.categoryId ?? "", "categoryName":UserStoreSingleton.shared.categoryName ?? "" , "subcategoryId":SideMenuSubServicesTableViewController.subcategoryList, "image":UserStoreSingleton.shared.profileImage ?? "", "price":priceTextFeild.text ?? "", "description":descriptionTextView.text ?? "", "location":UserStoreSingleton.shared.Address ?? "","lat":UserStoreSingleton.shared.currentLat ?? "" , "lng":UserStoreSingleton.shared.currentLong ?? "", "job_id":selectJob_id ?? 0, "day":dayValue,"time":timeVal] as [String: Any]
+        let parameterDictionary = ["categoryId":UserStoreSingleton.shared.categoryId ?? "", "categoryName":UserStoreSingleton.shared.categoryName ?? "" , "price":priceTextFeild.text ?? "", "description":descriptionTextView.text ?? "", "location":UserStoreSingleton.shared.Address ?? "","lat":UserStoreSingleton.shared.currentLat ?? "" , "lng":UserStoreSingleton.shared.currentLong ?? "", "job_id":selectJob_id ?? 0] as [String: Any]
 
         print(parameterDictionary)
         let session = URLSession.shared

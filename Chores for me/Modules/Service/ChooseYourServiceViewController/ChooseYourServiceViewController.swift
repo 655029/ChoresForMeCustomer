@@ -93,7 +93,7 @@ class ChooseYourServiceViewController: ServiceBaseViewController, ViewController
 //        SideMenuSubServicesTableViewController.categoryId = nil
         callingCategoryListAPI()
         tabBarController?.tabBar.isHidden = false
-      //  CheckTimeFunc()
+        CheckTimeFunc()
     }
     override func viewDidDisappear(_ animated: Bool) {
         print("alejfghoquefbpiqefjbqeri;fjbeqrifbqer;fer")

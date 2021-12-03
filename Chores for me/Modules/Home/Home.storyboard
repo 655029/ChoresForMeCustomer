@@ -71,7 +71,7 @@
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" name="AppSecondaryBackgroundColor"/>
+                                <color key="backgroundColor" name="AppPrimaryBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="2Ca-e8-hKk" firstAttribute="leading" secondItem="rBD-ca-Di5" secondAttribute="leading" id="4eJ-Zv-sdH"/>
                                     <constraint firstItem="TyS-xZ-gm0" firstAttribute="top" secondItem="KXs-r4-Lqa" secondAttribute="bottom" constant="20" id="6ku-9B-G88"/>

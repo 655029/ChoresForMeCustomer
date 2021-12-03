@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import NVActivityIndicatorView
 import Toast_Swift
+import SDWebImage
 
 struct SelectedData {
     let image: String
@@ -46,7 +47,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     var selectedTimeIndex: Int?
     var selectedDate: String?
     var selectedTime: String?
-    var arrayOfSelectedImages:[String] = []
+    var arrayOfSelectedImages:[UIImage] = []
     var arrayOfSelectedName:[String] = []
     var arrayOfSelectedServices:[SelectedData] = []
     var filterArrayOfSelctedServicesName:[String] = []
@@ -57,6 +58,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     var dateArray = [Date]()
     var dateVal: String?
     var timeVal: String?
+    var workImg: String?
     var dayValue : Int = 0 {
         didSet{
             dateArray.append(Calendar.current.date(byAdding: .day, value: dayValue, to: Date()) ?? Date())
@@ -91,7 +93,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         topLable.font = .boldSystemFont(ofSize: 22)
         descriptionTextView.delegate = self
         descriptionTextView.text = "Add Description"
-        descriptionTextView.textColor = UIColor.lightGray
+        descriptionTextView.textColor = UIColor.black
         self.navigationController?.navigationBar.tintColor = UIColor.yellow
         if let flowlayout = topCollectionViewForSelectedServices.collectionViewLayout as? UICollectionViewFlowLayout {
             flowlayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -122,10 +124,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.tintColor = UIColor.white
       //  locationLandmarkAddressTextFeild.text = ""
-        priceTextFeild.text = ""
-        descriptionTextView.text = ""
-        dateVal = "0"
-        timeVal = "0"
+
 
 //        UINavigationBar.appearance().tintColor = .systemBlue
 //        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.systemBlue]
@@ -227,8 +226,10 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
            }
 
         arrayOfSelectedName = SideMenuSubServicesTableViewController.selectedServiesArray
+        arrayOfSelectedImages = SideMenuSubServicesTableViewController.selectedServiesImagesArray
         if SideMenuSubServicesTableViewController.selectedServiesArray.isEmpty == true {
             arrayOfSelectedName = CustomCategoryViewController.selectedServiesArray
+
         }
         filterArrayOfSelctedServicesName = arrayOfSelectedName.removingDuplicates()
     }
@@ -314,12 +315,21 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
 
         else {
             let cell3 = topCollectionViewForSelectedServices.dequeueReusableCell(withReuseIdentifier: "SelectedCollectionViewCell", for: indexPath) as! SelectedCollectionViewCell
-            //            cell3.populateUI(SelectedData(image: arrayOfSelectedServices[indexPath.row].image, name: arrayOfSelectedServices[indexPath.row].name))
-            //            cell3.selectedCategoryImage.image = UIImage(named: arrayOfSelectedImages[indexPath.row])
+
+//                cell3.populateUI(SelectedData(image: arrayOfSelectedServices[indexPath.row].image, name: arrayOfSelectedServices[indexPath.row].name))
+           // cell3.selectedCategoryImage.image = UIImage(named: arrayOfSelectedImages[indexPath.row])
+//            let url = URL(string: arrayOfSelectedImages[indexPath.row])
+            cell3.selectedCategoryImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+//            cell3.selectedCategoryImage.sd_setImage(with: url, placeholderImage: UIImage(named: "Lawn Mowing"))
+            cell3.selectedCategoryImage.image = arrayOfSelectedImages[indexPath.row]
             cell3.selecetdCategoryName.text = filterArrayOfSelctedServicesName[indexPath.row]
             if filterArrayOfSelctedServicesName.isEmpty == true  {
                 cell3.selecetdCategoryName.text = arrayOfSelectedName[indexPath.row]
-            }
+//                let url = URL(string: "https://choresforme.s3.us-east-2.amazonaws.com/catImage_1627454717214.pn")
+            //    let url = URL(string: "" )
+               // cell3.selectedCategoryImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            //    cell3.selectedCategoryImage.sd_setImage(with: url, placeholderImage: UIImage(named: "Lawn Mowing"))
+           }
 
             return cell3
         }
@@ -377,8 +387,8 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                 }])
             }
 
-            else if value!  < 10 {
-                openAlert(title: "Alert", message: "Please Enter Price More than $10", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+            else if value!  < 50 {
+                openAlert(title: "Alert", message: "Please Enter Price More than $50", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
                     print("Okay")
                 }])
             }
@@ -459,7 +469,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         let year = Calendar.current.component(.year, from: Date())
         let selDate = setDate(date: dateArray[selectedDateIndex])
         let dateWithoutNextSlashN = String(selectedDate!.filter { !"\r\n\n\t\r".contains($0) })
-        let parameterDictionary =  ["booking_date":selDate!, "categoryId": UserStoreSingleton.shared.categoryId ?? "" ,"UserId" : UserStoreSingleton.shared.userID ?? "" ,"categoryName": UserStoreSingleton.shared.categoryName ?? "" ,"day": dateWithoutNextSlashN ,"time": selectedTime ?? "","subcategoryId": SideMenuSubServicesTableViewController.subcategoryList,"image": UserStoreSingleton.shared.profileImage ?? "","location": UserStoreSingleton.shared.Address ?? "","lat": UserStoreSingleton.shared.currentLat ?? "","lng":UserStoreSingleton.shared.currentLong ?? "" ,"price": priceTextFeild.text ?? "","jobStatus": "open","description": descriptionTextView.text ?? "" ] as [String: Any]
+        let parameterDictionary =  ["booking_date":selDate!, "categoryId": UserStoreSingleton.shared.categoryId ?? "" ,"UserId" : UserStoreSingleton.shared.userID ?? "" ,"categoryName": UserStoreSingleton.shared.categoryName ?? "" ,"day": dateWithoutNextSlashN ,"time": selectedTime ?? "","subcategoryId": SideMenuSubServicesTableViewController.subcategoryList,"image": workImg ?? "","location": UserStoreSingleton.shared.Address ?? "","lat": UserStoreSingleton.shared.currentLat ?? "","lng":UserStoreSingleton.shared.currentLong ?? "" ,"price": priceTextFeild.text ?? "","jobStatus": "open","description": descriptionTextView.text ?? "" ] as [String: Any]
 
         print(parameterDictionary)
         let session = URLSession.shared
@@ -528,7 +538,10 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                 let jsonData = try? JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
                 if let json = jsonData as? [String: Any] {
                     if let imageData = json["data"] {
-                        UserStoreSingleton.shared.profileImage = imageData as! String
+                      //  print(imageData)
+                    //    UserStoreSingleton.shared.profileImage = imageData as! String
+                        self.workImg = imageData as? String
+                        print(self.workImg)
 
                     }
                 }

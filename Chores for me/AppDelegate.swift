@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy private var router = RootRouter()
     lazy private var deeplinkHandler = DeeplinkHandler()
     lazy private var notificationsHandler = NotificationsHandler()
+    lazy private var checkTime = CheckTimeViewController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -34,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Thread.sleep(forTimeInterval: 2.0)
         notificationsHandler.configure()
         Router.default.setupAppNavigation(appNavigation: AppNavigation())
-
+        checkTime.CheckTimeFunc()
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.disabledToolbarClasses.append(ChooseYourCityViewController.self)
 //        setRoot2()
@@ -42,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         STPAPIClient.shared.publishableKey = "pk_test_51JjwCIFfJpDd1neCmXZhVhPcf1134OL4GgSP3i8Kixg15WQ32cwXQJsQzj1rOxfq2sfNF1R7lfiHaRK49iFuZKAv00PzrVPDfX"
         
         FirebaseApp.configure()
-        
         GIDSignIn.sharedInstance()?.clientID = "204112636650-p3f1o8op0ed79dsurlvicnljt7itqkdc.apps.googleusercontent.com"
         ApplicationDelegate.shared.application(application,didFinishLaunchingWithOptions: launchOptions)
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -57,7 +57,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UITabBar.appearance().standardAppearance = tabBarAppearance
 
             if #available(iOS 15.0, *) {
-              //  UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+              // UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+                UITabBar.appearance().standardAppearance = tabBarAppearance
             }
         }
         return true
@@ -182,7 +183,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             let strJobId  = userInfo[AnyHashable("jobId")]
             let jobId = Int(strJobId as? String ?? "0")
 
-//            navigationController.jobId = jobId
             UserStoreSingleton.shared.jobId = jobId
             navigationController.modalPresentationStyle = .overFullScreen
             navigationController.modalPresentationStyle = .overCurrentContext
@@ -206,15 +206,17 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if notificationType == "complete" {
             let storyboard = UIStoryboard(name: "Booking", bundle: nil)
             let navigationController = UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController"))
-            let jobId = userInfo[AnyHashable("jobId")]
-            print("jobId------ \(jobId as Any)")
-            UserStoreSingleton.shared.jobId = (jobId as! Int)
-            navigationController.modalPresentationStyle = .fullScreen
+//            let navigationController = storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController") as! ConfirmAlertViewController
 
+            let strJobId  = userInfo[AnyHashable("jobId")]
+            let jobId = Int(strJobId as? String ?? "0")
+
+            UserStoreSingleton.shared.jobId = jobId
+            navigationController.modalPresentationStyle = .overFullScreen
             navigationController.modalPresentationStyle = .overCurrentContext
-            
             window?.rootViewController?.present(navigationController, animated: true, completion: nil)
         }
+
         else if notificationType == "accept" {
             let storyboard = UIStoryboard(name: "Profile", bundle: nil)
             let navigationController = UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "ConfirmationViewController"))

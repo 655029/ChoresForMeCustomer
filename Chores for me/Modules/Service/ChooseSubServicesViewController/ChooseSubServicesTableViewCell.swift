@@ -18,6 +18,9 @@ class ChooseSubServicesTableViewCell: UITableViewCell {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var selectionDeselectionButton: UIButton!
     @IBOutlet weak var nameLable: UILabel!
+    @IBOutlet weak var serviceImage: UIImageView!
+
+
 
 
     // MARK: - Variable

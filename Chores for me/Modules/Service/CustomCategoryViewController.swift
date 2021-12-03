@@ -31,7 +31,7 @@ class CustomCategoryViewController: BaseViewController, UIImagePickerControllerD
     }
 
     override func viewWillAppear(_ animated: Bool) {
-     //   CheckTimeFunc()
+        CheckTimeFunc()
     }
 
 

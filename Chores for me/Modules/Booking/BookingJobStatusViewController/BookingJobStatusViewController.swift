@@ -99,11 +99,9 @@ class BookingJobStatusViewController: BaseViewController {
             arrayOfJobProgress.append("Cancelled")
         }
 
-
-
         let imageUrl = URL(string: dicData.providerDetails?.image ?? "")
         profileImageView.sd_setImage(with: imageUrl, placeholderImage:UIImage(contentsOfFile:"user.profile.icon.png"))
-        nameLabel.text = dicData.providerDetails?.name
+        nameLabel.text = dicData.providerDetails?.first_name
         locationLabel.text = dicData.location
         discriptionLabel.text = dicData.description
         subcategoryId = dicData.subcategoryId ?? [JobsSubcategoryId]()
@@ -111,7 +109,7 @@ class BookingJobStatusViewController: BaseViewController {
         lbl_ServiceName.text = dicData.categoryName
         lbl_ServiceDay.text = dicData.day
         lbl_ServiceAmmount.text = dicData.price
-        let date = getDate(date: dicData.createdAt!)
+        let date = getDate(date: dicData.booking_date!)
         lbl_DateTime.text = dicData.time! + " : " + date!
 
         let imageUrlService = URL(string: dicData.image ?? "")
@@ -145,7 +143,7 @@ class BookingJobStatusViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         self.callingGetUserDetailsAPI()
-      //  CheckTimeFunc()
+        CheckTimeFunc()
     }
 
     override func viewDidAppear(_ animated: Bool) {

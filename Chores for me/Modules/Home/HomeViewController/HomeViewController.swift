@@ -18,7 +18,7 @@ struct AllServices {
 class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
     
     
-    // MARK: - Outlets
+    // MARK: - Outlets Arzooooo
     @IBOutlet weak var currentLocationButton: DesignableButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noJobImageVIew: UIImageView!
@@ -66,13 +66,17 @@ class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+       // DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             self.navigationItem.title = "Hello \(UserStoreSingleton.shared.name ?? "") "
-        }
+      //  }
+        self.getcreatedjob = []
+        getcreatedjob.removeAll()
+        tableView.reloadData()
         navigationItem.title = "Hello \(UserStoreSingleton.shared.name ?? "") "
         navigationController?.navigationItem.hidesBackButton = true
         self.navigationItem.setHidesBackButton(true, animated: false)
         self.callingGetUserCreatedJobsApi()
+
         self.callingGetUserProfile()
         tabBarController?.tabBar.isHidden = false
     }
@@ -150,6 +154,7 @@ class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
                         self.tableView.isHidden = true
                         self.noJobImageVIew.isHidden = false
                         self.noJobLabel.isHidden = false
+                        self.tableView.reloadData()
                     } else{
                         if let myData = json.data {
                             self.tableView.backgroundView = nil
@@ -166,17 +171,15 @@ class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
                     
                 }
             } catch {
-                //                self.hideActivity()
+                        self.hideActivity()
                 //                self.showMessage("error")
                 print(error)
             }
-            
         }
         
         task.resume()
     }
 
-    
 
     func callingGetUserProfile() {
         self.showActivity()
@@ -189,7 +192,7 @@ class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
                 let json =  try JSONDecoder().decode(SetUpProfile.self, from: data ?? Data())
                 debugPrint(json)
                 DispatchQueue.main.async {
-                    UserStoreSingleton.shared.name = json.data?.name
+                    UserStoreSingleton.shared.name = json.data?.first_name
                     UserStoreSingleton.shared.userID = json.data?.userId
                     UserStoreSingleton.shared.profileImage = json.data?.image
                 }
@@ -205,7 +208,7 @@ class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
         let Url = String(format: "http://3.18.59.239:3000/api/v1/delete-job")
         guard let serviceUrl = URL(string: Url) else { return }
 
-        let parameterDictionary =  ["jobId": jobId ?? ""] as [String: Any]
+        let parameterDictionary =  ["job_id": jobId ?? ""] as [String: Any]
 
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
@@ -311,7 +314,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.selectedDate.isHidden = true
             cell.selectedPrice.isHidden = true
         }
-        else if (getcreatedjob[indexPath.row].providerDetails != nil) || getcreatedjob[indexPath.row].providerDetails?.userId != 0{
+        else if (getcreatedjob[indexPath.row].providerDetails != nil) || getcreatedjob[indexPath.row].providerDetails?.userId != 0 {
             cell.hireButton.isHidden = true
             cell.deleteButton.isHidden = true
             cell.editButton.isHidden = true
@@ -328,7 +331,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.selectedPrice.isHidden = false
         }
         let url = URL(string: getcreatedjob[indexPath.row].image ?? "")
-        cell.categoryImage.sd_imageIndicator = SDWebImageActivityIndicator.gray//"Lawn Mowing"
+        cell.categoryImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.categoryImage.sd_setImage(with: url, placeholderImage: UIImage(named: "Lawn Mowing"))
         cell.categoryname.text = getcreatedjob[indexPath.row].categoryName
         cell.locationName.text = getcreatedjob[indexPath.row].location
@@ -342,7 +345,7 @@ extension HomeViewController: UITableViewDataSource {
         let result4 = String(dateDay?.dropFirst(2) ?? "")
         cell.selectedDay.text = result4
         cell.selectedDate.text = getcreatedjob[indexPath.row].time
-   //     cell.mintLabel.text = getcreatedjob[indexPath.row].total_time
+        cell.mintLabel.text = getcreatedjob[indexPath.row].total_time
         latitude = getcreatedjob[indexPath.row].lat
         longitude = getcreatedjob[indexPath.row].lng
         cell.hireButton.tag = indexPath.row
@@ -355,9 +358,9 @@ extension HomeViewController: UITableViewDataSource {
                 
             }
         }
-        cell.userName.text = getcreatedjob[indexPath.row].providerDetails?.name
+        cell.userName.text = getcreatedjob[indexPath.row].providerDetails?.first_name
         cell.userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        let userImageUrl = URL(string: getcreatedjob[indexPath.row].providerDetails?.image ?? "")
+        let userImageUrl = URL(string: getcreatedjob[indexPath.row].image ?? "")
      
         cell.userImage.sd_setImage(with: userImageUrl, placeholderImage: UIImage(named: "upload profile picture"))
         //sd_setImage(with: userImageUrl, placeholderImage:UIImage(contentsOfFile:"upload profile picture"))
@@ -367,7 +370,7 @@ extension HomeViewController: UITableViewDataSource {
         cell.copyIcon.addTarget(self, action: #selector(didTappedCopyIcon(_:)), for: .touchUpInside)
         cell.deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(_:)), for: .touchUpInside)
         cell.editButton.addTarget(self, action: #selector(didTappedEditButton(_:)), for: .touchUpInside)
-      cell.collectionView.reloadData()
+        cell.collectionView.reloadData()
         
         return cell
         

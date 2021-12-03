@@ -42,7 +42,7 @@
                                 <blurEffect style="regular"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PvN-oM-J9Q" customClass="DesignableView" customModule="Designable">
-                                <rect key="frame" x="20" y="236.5" width="374" height="423"/>
+                                <rect key="frame" x="20" y="245" width="374" height="406"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_booking_request" translatesAutoresizingMaskIntoConstraints="NO" id="89u-mO-xav">
                                         <rect key="frame" x="131" y="16" width="112" height="112.5"/>
@@ -51,13 +51,13 @@
                                         </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="outdoor_home_service" translatesAutoresizingMaskIntoConstraints="NO" id="flG-WI-05t">
-                                        <rect key="frame" x="12" y="180.5" width="56" height="56"/>
+                                        <rect key="frame" x="12" y="176" width="56" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="flG-WI-05t" secondAttribute="height" id="LAB-XN-cib"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q79-wz-7KB">
-                                        <rect key="frame" x="321" y="8" width="41" height="31"/>
+                                        <rect key="frame" x="322" y="8" width="40" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="afR-sa-6Pa"/>
                                         </constraints>
@@ -70,25 +70,25 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBM-Bc-R23">
-                                        <rect key="frame" x="12" y="136.5" width="350" height="28"/>
+                                        <rect key="frame" x="12" y="136.5" width="350" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="20"/>
                                         <color key="textColor" name="AppSecondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Outdoor Home Service" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ahq-k3-glv">
-                                        <rect key="frame" x="76" y="180.5" width="286" height="21"/>
+                                        <rect key="frame" x="76" y="176" width="286" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="15"/>
                                         <color key="textColor" name="AppSecondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rohit Kaushal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDd-Ar-jXM">
-                                        <rect key="frame" x="255" y="302" width="107" height="21"/>
+                                        <rect key="frame" x="268.5" y="288" width="93.5" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="15"/>
                                         <color key="textColor" name="AppSecondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyA-dp-eKD">
-                                        <rect key="frame" x="76" y="205.5" width="290" height="36.5"/>
+                                        <rect key="frame" x="76" y="197.5" width="290" height="30.5"/>
                                         <string key="text">Street:  46, Nicholson Road, Chandni Chowk
 City:   Delhi
 State/province/area:    Delhi
@@ -101,7 +101,7 @@ Country  India</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TDO-IH-pb0">
-                                        <rect key="frame" x="76" y="250" width="290" height="32"/>
+                                        <rect key="frame" x="76" y="236" width="290" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="CnX-6c-TcZ"/>
@@ -115,7 +115,7 @@ Country  India</string>
                                         <cells/>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBv-dF-mvK">
-                                        <rect key="frame" x="12" y="302" width="101.5" height="31"/>
+                                        <rect key="frame" x="12" y="288" width="93.5" height="26"/>
                                         <string key="text">Monday  $50-$100
 12/Feb/2021</string>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="11"/>
@@ -123,7 +123,7 @@ Country  India</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user.profile.icon" translatesAutoresizingMaskIntoConstraints="NO" id="NbK-So-NcG" customClass="DesignableImageView" customModule="Designable">
-                                        <rect key="frame" x="207" y="302" width="40" height="40"/>
+                                        <rect key="frame" x="220.5" y="288" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="EmA-fr-KTT"/>
                                             <constraint firstAttribute="width" secondItem="NbK-So-NcG" secondAttribute="height" multiplier="1:1" id="N0y-dD-FNQ"/>
@@ -135,10 +135,10 @@ Country  India</string>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="M1v-vb-S7L">
-                                        <rect key="frame" x="71" y="362" width="232" height="37"/>
+                                        <rect key="frame" x="71.5" y="348" width="231" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6eL-U6-az1" customClass="DesignableButton" customModule="Designable">
-                                                <rect key="frame" x="0.0" y="0.0" width="107" height="37"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="106" height="34"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
                                                 <inset key="contentEdgeInsets" minX="16" minY="8" maxX="16" maxY="8"/>
                                                 <state key="normal" title="VIIEW JOB">
@@ -157,7 +157,7 @@ Country  India</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rix-zc-2e3" customClass="DesignableButton" customModule="Designable">
-                                                <rect key="frame" x="131" y="0.0" width="101" height="37"/>
+                                                <rect key="frame" x="130" y="0.0" width="101" height="34"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
                                                 <inset key="contentEdgeInsets" minX="16" minY="8" maxX="16" maxY="8"/>
                                                 <state key="normal" title="CONFIRM">
@@ -175,7 +175,7 @@ Country  India</string>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="vgx-rb-s32">
-                                        <rect key="frame" x="254" y="323" width="112" height="20"/>
+                                        <rect key="frame" x="254" y="305.5" width="112" height="20"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZL-FC-wcb">
                                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -278,7 +278,7 @@ Country  India</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKX-nz-HE0">
                                 <rect key="frame" x="0.0" y="44" width="414" height="770"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Provider" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFB-Mx-mm4">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Worker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFB-Mx-mm4">
                                         <rect key="frame" x="24" y="24" width="366" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="15"/>
                                         <color key="textColor" name="AppPrimaryLabelColor"/>
@@ -495,26 +495,26 @@ Country  India</string>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmL-FW-vMV">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="PmL-FW-vMV">
                                                 <rect key="frame" x="33" y="115.5" width="47.5" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$50-$100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aof-nl-hQY">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$50-$100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="Aof-nl-hQY">
                                                 <rect key="frame" x="107" y="116" width="51.5" height="14"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02:00 : 12/Feb/2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyZ-Kc-fJb">
-                                                <rect key="frame" x="240" y="115.5" width="118" height="15.5"/>
-                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="13"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02:00 : 12/Feb/2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="yyZ-Kc-fJb">
+                                                <rect key="frame" x="231" y="115" width="127" height="16.5"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="m8I-kG-RTb">
-                                                <rect key="frame" x="216.5" y="114" width="18" height="18"/>
+                                                <rect key="frame" x="207.5" y="114" width="18" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="5EF-dG-xEy"/>
                                                     <constraint firstAttribute="width" constant="18" id="ce3-Gn-e9x"/>
@@ -543,15 +543,16 @@ Country  India</string>
                                             <constraint firstItem="zjr-Sa-nVg" firstAttribute="leading" secondItem="PmL-FW-vMV" secondAttribute="trailing" constant="7.5" id="ERz-98-y5C"/>
                                             <constraint firstItem="N5D-eF-oaF" firstAttribute="leading" secondItem="bKS-Mf-Cd7" secondAttribute="trailing" constant="8" id="Els-xq-dM8"/>
                                             <constraint firstItem="Aof-nl-hQY" firstAttribute="top" secondItem="we5-mA-Ix6" secondAttribute="bottom" constant="16" id="FuQ-9v-W4I"/>
+                                            <constraint firstItem="m8I-kG-RTb" firstAttribute="leading" secondItem="Aof-nl-hQY" secondAttribute="trailing" constant="18" id="GAZ-TG-NtY"/>
                                             <constraint firstItem="bKS-Mf-Cd7" firstAttribute="top" secondItem="mh8-F5-9QJ" secondAttribute="top" constant="8" id="JBu-vJ-DvR"/>
                                             <constraint firstItem="bKS-Mf-Cd7" firstAttribute="leading" secondItem="mh8-F5-9QJ" secondAttribute="leading" constant="8" id="KB5-g3-9JA"/>
                                             <constraint firstItem="Hte-pe-98k" firstAttribute="centerY" secondItem="PmL-FW-vMV" secondAttribute="centerY" id="L7l-Cd-SDm"/>
-                                            <constraint firstItem="yyZ-Kc-fJb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Aof-nl-hQY" secondAttribute="trailing" constant="12" id="PVp-sB-dIk"/>
                                             <constraint firstItem="MAP-Wl-B4R" firstAttribute="top" secondItem="N5D-eF-oaF" secondAttribute="bottom" constant="4" id="YFE-Ma-gR7"/>
                                             <constraint firstAttribute="trailing" secondItem="yyZ-Kc-fJb" secondAttribute="trailing" constant="8" id="b0f-Is-OFL"/>
                                             <constraint firstAttribute="bottom" secondItem="PmL-FW-vMV" secondAttribute="bottom" constant="8" id="bnY-LA-wUf"/>
                                             <constraint firstItem="N5D-eF-oaF" firstAttribute="top" secondItem="mh8-F5-9QJ" secondAttribute="top" constant="8" id="eSW-yB-FEg"/>
                                             <constraint firstItem="m8I-kG-RTb" firstAttribute="centerY" secondItem="yyZ-Kc-fJb" secondAttribute="centerY" id="f9L-qc-s2n"/>
+                                            <constraint firstItem="m8I-kG-RTb" firstAttribute="leading" secondItem="Aof-nl-hQY" secondAttribute="trailing" constant="49" id="gWc-Iw-h0T"/>
                                             <constraint firstItem="zjr-Sa-nVg" firstAttribute="centerY" secondItem="PmL-FW-vMV" secondAttribute="centerY" id="kKb-up-CE3"/>
                                             <constraint firstItem="we5-mA-Ix6" firstAttribute="top" secondItem="MAP-Wl-B4R" secondAttribute="bottom" constant="8" id="lE8-BG-6gI"/>
                                             <constraint firstItem="Aof-nl-hQY" firstAttribute="leading" secondItem="zjr-Sa-nVg" secondAttribute="trailing" constant="-1" id="oVd-qP-u4H"/>
@@ -823,7 +824,7 @@ Country  India</string>
                                 <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1o-kY-yEz" customClass="DesignableButton" customModule="Designable">
-                                        <rect key="frame" x="8" y="16" width="162" height="24"/>
+                                        <rect key="frame" x="8" y="16" width="143" height="24"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="17"/>
                                         <state key="normal" title="Current Location" image="location.mark"/>
                                     </button>
@@ -868,7 +869,7 @@ Country  India</string>
                                 <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfs-hr-8Y4" customClass="DesignableButton" customModule="Designable">
-                                        <rect key="frame" x="8" y="16" width="162" height="24"/>
+                                        <rect key="frame" x="8" y="16" width="143" height="24"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="17"/>
                                         <state key="normal" title="Current Location" image="location.mark"/>
                                     </button>
@@ -893,7 +894,7 @@ Country  India</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Jobs Yet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZ9-23-clT">
                                         <rect key="frame" x="156" y="464" width="102" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" name="AppPrimaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nZc-rV-npD">
@@ -905,7 +906,7 @@ Country  India</string>
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" name="AppSecondaryBackgroundColor"/>
+                                <color key="backgroundColor" name="AppPrimaryBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="WZ9-23-clT" firstAttribute="centerX" secondItem="hOu-sC-CaI" secondAttribute="centerX" id="21Y-1H-CqB"/>
                                     <constraint firstItem="hOu-sC-CaI" firstAttribute="centerY" secondItem="0gH-Ws-B6J" secondAttribute="centerY" id="DLJ-sc-m0K"/>
@@ -1035,16 +1036,16 @@ Country  India</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gh7-pm-Bod" customClass="DesignableView" customModule="Designable">
-                                <rect key="frame" x="30" y="275.5" width="354" height="355"/>
+                                <rect key="frame" x="30" y="281" width="354" height="344"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What do you think ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KfI-ed-zzA">
-                                        <rect key="frame" x="76" y="24" width="202.5" height="28"/>
+                                        <rect key="frame" x="87.5" y="24" width="179.5" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="20"/>
                                         <color key="textColor" name="AppSecondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view clipsSubviews="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="kPr-CO-bkJ" customClass="CosmosView" customModule="Cosmos">
-                                        <rect key="frame" x="72" y="60" width="210" height="35"/>
+                                        <rect key="frame" x="72" y="55.5" width="210" height="35"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="210" id="PVL-ix-5Q3"/>
@@ -1088,13 +1089,13 @@ Country  India</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give your best words" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1Y-fO-cYV">
-                                        <rect key="frame" x="8" y="110" width="338" height="21"/>
+                                        <rect key="frame" x="8" y="105.5" width="338" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WwX-ql-1xq">
-                                        <rect key="frame" x="12" y="139" width="330" height="128"/>
+                                        <rect key="frame" x="12" y="131" width="330" height="128"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="HSN-Zy-UaW"/>
@@ -1104,7 +1105,7 @@ Country  India</string>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51m-kf-xmZ" customClass="DesignableButton" customModule="Designable">
-                                        <rect key="frame" x="12" y="291" width="330" height="48"/>
+                                        <rect key="frame" x="12" y="283" width="330" height="45"/>
                                         <color key="backgroundColor" name="AppSecondaryBackgroundColor"/>
                                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="15"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="13.5" maxX="20" maxY="13.5"/>
@@ -1121,7 +1122,7 @@ Country  India</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Urg-yT-IBl">
-                                        <rect key="frame" x="306" y="20" width="44" height="36"/>
+                                        <rect key="frame" x="306" y="18" width="44" height="36"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                         <state key="normal" title="SKIP">
                                             <color key="titleColor" systemColor="systemRedColor"/>
@@ -1178,16 +1179,16 @@ Country  India</string>
     </scenes>
     <designables>
         <designable name="51m-kf-xmZ">
-            <size key="intrinsicContentSize" width="95" height="48"/>
+            <size key="intrinsicContentSize" width="88" height="45"/>
         </designable>
         <designable name="6eL-U6-az1">
-            <size key="intrinsicContentSize" width="107" height="37"/>
+            <size key="intrinsicContentSize" width="106" height="34"/>
         </designable>
         <designable name="F1o-kY-yEz">
-            <size key="intrinsicContentSize" width="162" height="24"/>
+            <size key="intrinsicContentSize" width="143" height="24"/>
         </designable>
         <designable name="LX2-ob-gai">
-            <size key="intrinsicContentSize" width="96" height="48"/>
+            <size key="intrinsicContentSize" width="97" height="45"/>
         </designable>
         <designable name="NbK-So-NcG">
             <size key="intrinsicContentSize" width="60" height="60"/>
@@ -1196,13 +1197,13 @@ Country  India</string>
             <size key="intrinsicContentSize" width="30" height="30"/>
         </designable>
         <designable name="Rix-zc-2e3">
-            <size key="intrinsicContentSize" width="101" height="37"/>
+            <size key="intrinsicContentSize" width="101" height="34"/>
         </designable>
         <designable name="bKS-Mf-Cd7">
             <size key="intrinsicContentSize" width="75" height="75"/>
         </designable>
         <designable name="pfs-hr-8Y4">
-            <size key="intrinsicContentSize" width="162" height="24"/>
+            <size key="intrinsicContentSize" width="143" height="24"/>
         </designable>
     </designables>
     <resources>

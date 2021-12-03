@@ -189,7 +189,7 @@ class TwoStepVerificationViewController: ServiceBaseViewController {
                     let json =  try JSONDecoder().decode(SetUpProfile.self, from: data ?? Data())
                     debugPrint(json)
                     DispatchQueue.main.async {
-                        UserStoreSingleton.shared.name = json.data?.name
+                        UserStoreSingleton.shared.name = json.data?.first_name
                         UserStoreSingleton.shared.userID = json.data?.userId
                         UserStoreSingleton.shared.profileImage = json.data?.image
                     }
