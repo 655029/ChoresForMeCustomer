@@ -75,8 +75,6 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         super.viewDidLoad()
         ChooseLocationFromMapViewController.delegate = self
 
-        descriptionTextView.text = "Placeholder"
-        descriptionTextView.textColor = UIColor.black
   //      self.navigationController?.navigationBar.barTintColor = UIColor.blue
    //     navigationController?.navigationBar.isTranslucent = false
 //        UINavigationBar.appearance().tintColor = .systemBlue
@@ -93,7 +91,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         topLable.font = .boldSystemFont(ofSize: 22)
         descriptionTextView.delegate = self
         descriptionTextView.text = "Add Description"
-        descriptionTextView.textColor = UIColor.black
+        descriptionTextView.textColor = UIColor.lightGray
         self.navigationController?.navigationBar.tintColor = UIColor.yellow
         if let flowlayout = topCollectionViewForSelectedServices.collectionViewLayout as? UICollectionViewFlowLayout {
             flowlayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -133,7 +131,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
 
     // MARK: - TextView Delegate Methods
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if descriptionTextView.textColor == UIColor.black {
+        if descriptionTextView.textColor == UIColor.lightGray {
             descriptionTextView.text = nil
             descriptionTextView.textColor = UIColor.black
         }
@@ -142,7 +140,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     func textViewDidEndEditing(_ textView: UITextView) {
         if descriptionTextView.text.isEmpty {
             descriptionTextView.text = "Add Description"
-            descriptionTextView.textColor = UIColor.lightGray
+            descriptionTextView.textColor = UIColor.black
         }
     }
 
@@ -387,8 +385,8 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                 }])
             }
 
-            else if value!  < 50 {
-                openAlert(title: "Alert", message: "Please Enter Price More than $50", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
+            else if value!  < 5 {
+                openAlert(title: "Alert", message: "Please Enter Price More than $5", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
                     print("Okay")
                 }])
             }
@@ -398,9 +396,6 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                     print("Okay")
                 }])
             }
-
-
-
             else if selectedDate == nil {
                 openAlert(title: "Alert", message: "Please select Date", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
                     print("Okay")
@@ -416,8 +411,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
             else {
                 self.callingCreateJobAPI()
             }
-
-    }
+        }
 
 
     //MARK: - UICollectionView Delegate Methods

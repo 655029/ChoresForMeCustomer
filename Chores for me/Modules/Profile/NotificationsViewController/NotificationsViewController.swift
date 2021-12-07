@@ -113,26 +113,43 @@ extension NotificationsViewController: UITableViewDataSource,UITableViewDelegate
             fatalError()
         }
         cell.ratingAndCheckReasonButton.tag = indexPath.row
-        if notificationArray[indexPath.row].type?.lowercased() == "cancel-by-provider" {
+        if notificationArray[indexPath.row].type == "cancel-by-provider" {
             cell.ratingAndCheckReasonButton.isHidden = false
+            cell.payButton.isHidden = true
             cell.ratingAndCheckReasonButton.setTitle("Check Reason", for: .normal)
             cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
-        else if notificationArray[indexPath.row].type?.lowercased() == "complete" {
+        else if notificationArray[indexPath.row].type == "complete" {
+            cell.payButton.isHidden = true
             cell.ratingAndCheckReasonButton.isHidden = false
             cell.ratingAndCheckReasonButton.setTitle("Rate Now", for: .normal)
             cell.ratingAndCheckReasonButton.tag = indexPath.row
             cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
-        
-        else if notificationArray[indexPath.row].payment_status?.lowercased() == "not done" {
+        else if notificationArray[indexPath.row].type == "accept" {
+            cell.payButton.isHidden = true
+            cell.ratingAndCheckReasonButton.isHidden = true
+            cell.timeLabel.text = notificationArray[indexPath.row].totalTime
+        }
+        else if notificationArray[indexPath.row].payment_status == "Not Done" || notificationArray[indexPath.row].type == "complete"{
             cell.payButton.isHidden = false
             cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
-        else if notificationArray[indexPath.row].payment_status?.lowercased() == "done" {
-                cell.payButton.isHidden = true
+//        else if notificationArray[indexPath.row].type == "inprogress" {
+//            cell.payButton.isHidden = true
+//            cell.ratingAndCheckReasonButton.isHidden = true
+//            cell.timeLabel.text = notificationArray[indexPath.row].totalTime
+//        }
+        else if notificationArray[indexPath.row].payment_status == "Done" {
+            cell.payButton.isHidden = true
+            //cell.ratingAndCheckReasonButton.isHidden = true
             cell.timeLabel.text = notificationArray[indexPath.row].totalTime
         }
+
+//        else if notificationArray[indexPath.row].payment_status == "done" {
+//            cell.payButton.isHidden = true
+//            cell.timeLabel.text = notificationArray[indexPath.row].totalTime
+//        }
 
         else {
             cell.ratingAndCheckReasonButton.isHidden = true

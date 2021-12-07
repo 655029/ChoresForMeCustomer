@@ -110,7 +110,6 @@ class LogoutViewController: UIViewController {
         UserStoreSingleton.shared.Token = LogoutViewController.tokenForPresentedLogout
         print("UserStoreSingleton.shared.Token ?? \(UserStoreSingleton.shared.Token ?? "")")
                 let headers: HTTPHeaders = ["Authorization": UserStoreSingleton.shared.Token ?? ""]
-
                 Alamofire.request(url, method: .get,encoding: JSONEncoding.default, headers: headers)
                     .responseJSON { response in
                         switch response.result{

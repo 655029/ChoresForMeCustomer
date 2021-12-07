@@ -20,6 +20,10 @@ class Property {
     }
 }
 
+protocol DissmissCheckoutViewController: class {
+    func didTappedContinueButton(controller: CheckOutViewController)
+}
+
 
 class CheckOutViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -31,6 +35,7 @@ class CheckOutViewController: UIViewController, UICollectionViewDelegateFlowLayo
     var myJobDetails: JobDetailsdata!
     var someArr = [SubcategoryIdJobdetails]()
     var jobid: Int?
+    var delegate: DissmissConfirmAlertViewontroller?
 
 
     //MARK: - Interface Builder Outlets
@@ -158,13 +163,13 @@ class CheckOutViewController: UIViewController, UICollectionViewDelegateFlowLayo
         let paymentModeVc = storyboard.instantiateViewController(withIdentifier: "PaymentModeViewController") as! PaymentModeViewController
         paymentModeVc.jobid = jobid
         navigationController?.pushViewController(paymentModeVc, animated: true)
-//        navigate(.paymentMode)
     }
 
 
     //MARK: - Additional Helpers
     private func callingJobDetailsAPI() {
         someArr.removeAll()
+        jobid = UserStoreSingleton.shared.jobId
         var request = URLRequest(url: URL(string: "http://3.18.59.239:3000/api/v1/get-jobDetails/\(jobid ?? 0)")!,timeoutInterval: Double.infinity)
         request.addValue("\(UserStoreSingleton.shared.Token ?? "")", forHTTPHeaderField:"Authorization")
         request.httpMethod = "GET"

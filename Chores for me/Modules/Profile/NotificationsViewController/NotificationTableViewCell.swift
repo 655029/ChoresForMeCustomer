@@ -20,8 +20,8 @@ class NotificationTableViewCell: UITableViewCell {
     //MARK: - Awake From Nib
     override func awakeFromNib() {
         super.awakeFromNib()
-//        payButton.isHidden = true
-//        ratingAndCheckReasonButton.isHidden = true
+       payButton.isHidden = true
+        ratingAndCheckReasonButton.isHidden = true
     }
 
 }

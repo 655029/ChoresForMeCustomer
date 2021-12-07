@@ -184,8 +184,8 @@ extension BookingHistoryViewController: UITableViewDataSource {
 //        let afterEqualsTo = String(selectedDay!.suffix(from: index!))
         selectedDay = selectedDay!.replacingOccurrences(of: "\n", with: "", options: NSString.CompareOptions.literal, range: nil)
 
-        let dayWithOutDate = String((selectedDay?.dropFirst(3))!)
-        cell.selectedDay.text = dayWithOutDate
+       // let dayWithOutDate = String((selectedDay?.dropFirst(3))!)
+        cell.selectedDay.text = bookingHistoryResponseData[indexPath.row].day
         cell.selectedDate.text = bookingHistoryResponseData[indexPath.row].time
         cell.selectedPrice.text = bookingHistoryResponseData[indexPath.row].price
         cell.starRating.rating = bookingHistoryResponseData[indexPath.row].providerDetails?.rating ?? 0

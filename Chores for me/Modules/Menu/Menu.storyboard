@@ -66,7 +66,7 @@
                                 <color key="textColor" name="AppPrimaryLabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAO-dl-cPu" customClass="CosmosView" customModule="Cosmos">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fAO-dl-cPu" customClass="CosmosView" customModule="Cosmos">
                                 <rect key="frame" x="124.5" y="299" width="165" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="AppSkyBlueColor"/>
@@ -330,9 +330,6 @@
         </designable>
         <designable name="ScX-oO-YBe">
             <size key="intrinsicContentSize" width="60" height="60"/>
-        </designable>
-        <designable name="fAO-dl-cPu">
-            <size key="intrinsicContentSize" width="165" height="25"/>
         </designable>
     </designables>
     <resources>

@@ -1199,8 +1199,17 @@ Country  India</string>
         <designable name="Rix-zc-2e3">
             <size key="intrinsicContentSize" width="101" height="34"/>
         </designable>
+        <designable name="YMv-Zo-lyh">
+            <size key="intrinsicContentSize" width="30" height="34"/>
+        </designable>
         <designable name="bKS-Mf-Cd7">
             <size key="intrinsicContentSize" width="75" height="75"/>
+        </designable>
+        <designable name="kHd-kb-Su1">
+            <size key="intrinsicContentSize" width="79" height="15"/>
+        </designable>
+        <designable name="kPr-CO-bkJ">
+            <size key="intrinsicContentSize" width="200" height="32"/>
         </designable>
         <designable name="pfs-hr-8Y4">
             <size key="intrinsicContentSize" width="143" height="24"/>

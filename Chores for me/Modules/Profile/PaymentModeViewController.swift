@@ -13,6 +13,10 @@ struct Images {
     var imageName: String
 }
 
+protocol DissmissConfirmAlertViewontroller: class {
+    func didTapConttinueButton(controller: PaymentModeViewController)
+}
+
 class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDelegate,UITextFieldDelegate {
 
 
@@ -21,15 +25,14 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
     @IBOutlet weak private var cardHolderNameTextFeild: UITextField!
     @IBOutlet weak private var cardNumberTextFeild: UITextField!
     @IBOutlet weak private var expiryDateTextFeild: UITextField!
-    
     @IBOutlet weak var monthExpiryTectField: UITextField!
     @IBOutlet weak private var CVVTextFeild: UITextField!
     @IBOutlet weak private var continueButton: UIButton!
     @IBOutlet weak private var backBarButton: UIButton!
     @IBOutlet weak private var backButton: UIButton!
     @IBOutlet weak var cardno: UITextField!
-    
     @IBOutlet weak var cardViews: STPPaymentCardTextField!
+    
 
     //MARK: -Properties
     private var imageData: [Images] = []
@@ -39,6 +42,7 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
     var TransactionStatus: String?
     var jobid: Int?
     var myJobDetails: JobDetailsdata!
+    var delegate: DissmissConfirmAlertViewontroller?
 
 
     //MARK: - View Life Cycle
@@ -46,27 +50,13 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
         paymentTextField.postalCodeEntryEnabled = false
-     
-        //        let nib = UINib(nibName: "PaymentModeCollectionViewCell", bundle: nil)
-        //        collectionView.register(nib, forCellWithReuseIdentifier: "PaymentModeCollectionViewCell")
         imageData.append(Images.init(imageName: "card"))
         navigationController?.navigationItem.title = "Payment mode"
         navigationController?.navigationBar.tintColor = .white
         tabBarController?.tabBar.isHidden = false
-      //  self.cardno.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
-      //  self.monthExpiryTectField.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
         }
 
-    @objc func didChangeText(textField:UITextField) {
-        
-//        let formattedCreditCardNumber = cardno.text?.replacingOccurrences(of: "(\\d{4})(\\d{4})(\\d{4})(\\d+)", with: "$1 $2 $3 $4", options: .regularExpression, range: nil)
-//        print(formattedCreditCardNumber ?? "")
-//        cardno.text = formattedCreditCardNumber
-//        cardno.text = self.modifyCreditCardString(creditCardString: formattedCreditCardNumber ?? "")
-//
-//        let value = Int(monthExpiryTectField.text ?? "0")
-     }
-    
+
     func modifyCreditCardString(creditCardString : String) -> String {
          let trimmedString = creditCardString.components(separatedBy: .whitespaces).joined()
 
@@ -83,6 +73,7 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
          }
          return modifiedCreditCardString
      }
+
     override func viewDidLayoutSubviews() {
         paymentTextField.frame = CGRect(x: 0, y: 0, width: self.cardViews.frame.width, height: self.cardViews.frame.height)
         paymentTextField.delegate = self
@@ -91,8 +82,7 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
 
     //MARK:- Get token
     private func getToken(){
-       // showActivity()
-        alertView()
+        showActivity()
         let cardParams = STPCardParams()
         guard let cardNumber = paymentTextField.cardNumber else {
             showMessage("Please enter card number")
@@ -124,9 +114,11 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
     
 
     func stripeChargesApi() {
-       // self.showActivity()
-        alertView()
-        let parameters : [String: Any] =  ["amount": UserStoreSingleton.shared.totalPrice ?? 0,
+        self.showActivity()
+        let convertAmount = Int(UserStoreSingleton.shared.totalPrice ?? "")!
+        let amountPay = convertAmount * 100
+        UserStoreSingleton.shared.totalPrice = String(amountPay)
+        let parameters : [String: Any] =  ["amount": amountPay,
                                            "source":stripeToken ?? "",
                                            "currency":"eur"]
 
@@ -147,7 +139,6 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
                     let data = try JSONDecoder().decode(StripeChargesModel.self, from: data)
                     DispatchQueue.main.async { [self] in
                         print(data)
-                        dismiss(animated: true, completion: nil)
                         let getSuccess = data.status
                         print(getSuccess as Any)
                         self.hideActivity()
@@ -159,14 +150,12 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
                         }else{
                             self.TransactionStatus = "Fail"
                             self.hideActivity()
-                            dismiss(animated: true, completion: nil)
                         }
                     }
                 } catch let error {
                     self.showMessage(error.localizedDescription)
                     debugPrint(error.localizedDescription)
-                  //  self.hideActivity()
-                    self.dismiss(animated: true, completion: nil)
+                    self.hideActivity()
                 }
 
             }
@@ -174,11 +163,10 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
     }
 
     func savePaymentApi() {
-       // self.showActivity()
-        alertView()
+        self.showActivity()
         let params = ["job_id": myJobDetails.jobId ?? 0 ,
                       "user_id": myJobDetails.userId ?? 0,
-                      "amount": UserStoreSingleton.shared.totalPrice ?? "",
+                      "amount":UserStoreSingleton.shared.totalPrice ?? "",
                       "transaction_id": paymentStatus ?? "",
                       "status":TransactionStatus ?? ""] as [String : Any]
 
@@ -200,20 +188,18 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
                  if let data = data {
                      do {
                          let json =  try JSONDecoder().decode(savePaymentModel.self, from: data)
-                        self.dismiss(animated: true, completion: nil)
                          DispatchQueue.main.async {
                             self.hideActivity()
                             let storyboard = UIStoryboard(name: "Booking", bundle: nil)
                             let secondVc = storyboard.instantiateViewController(withIdentifier: "RatingAlertViewController") as! RatingAlertViewController
-                            secondVc.modalPresentationStyle = .overCurrentContext
-
-                            self.navigationController?.present(secondVc, animated: true, completion: nil)
-                           
+                            secondVc.modalPresentationStyle = .fullScreen
+                           self.present(secondVc, animated: true, completion: nil)
+                    //        self.navigationController?.pushViewController(secondVc, animated: true)
                          }
                      }catch{
                         print("\(error.localizedDescription)")
-                        //self.hideActivity()
-                        self.dismiss(animated: true, completion: nil)
+                        self.hideActivity()
+                   
                      }
                  }
              }.resume()
@@ -283,18 +269,6 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
              }.resume()
     }
 
-
-    func alertView(){
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
 
     open func takeScreenshot(_ shouldSave: Bool = true) -> UIImage? {
             var screenshotImage :UIImage?

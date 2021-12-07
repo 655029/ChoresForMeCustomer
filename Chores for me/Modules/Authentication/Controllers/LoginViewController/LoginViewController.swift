@@ -117,6 +117,7 @@ class LoginViewController: BaseViewController {
 //            }
 
             else {
+                UserDefaults.standard.removeObject(forKey: "DialCode")
                 self.userLogin()
 
             }
@@ -214,21 +215,24 @@ extension LoginViewController: UITextFieldDelegate {
                     if responseMessage == 200 {
                         self.hideActivity()
                         self.tokenForPresentedLogoutVc = ["token": headersvalue]
-                        UserStoreSingleton.shared.isLoggedIn = true
                         UserStoreSingleton.shared.Token = headersvalue
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "myToken"), object: nil, userInfo: self.tokenForPresentedLogoutVc as [AnyHashable : Any])
                         self.tokenFromSegue = headersvalue
+                        self.callingGetUserProfile()
+                        UserStoreSingleton.shared.isLoggedIn = true
                         LogoutViewController.tokenForPresentedLogout = headersvalue
                         UserStoreSingleton.shared.email = self.emailTextField.text
                         UserStoreSingleton.shared.phoneNumer = phoneNumber
                         UserStoreSingleton.shared.userToken = gitData.data?.token
-                        self.callingGetUserProfile()
-                        if CLLocationManager.locationServicesEnabled() {
-                            RootRouter().loadMainHomeStructure()
+                        
+
+                        if gitData.data?.user_verified  == 0 {
+                            self.navigate(.twosetpVerification)
                         }
                         else {
-                            self.navigate(.allowLocation)
+                            RootRouter().loadMainHomeStructure()
                         }
+
                     }
                     else{
                         self.showMessage(gitData.message ?? "")
@@ -316,7 +320,7 @@ extension LoginViewController: UITextFieldDelegate {
                         UserStoreSingleton.shared.isLoggedIn = true
                         UserStoreSingleton.shared.Token = headersvalue
                         UserStoreSingleton.shared.email = self.emailTextField.text
-                        UserStoreSingleton.shared.phoneNumer = phoneNumber
+                        //UserStoreSingleton.shared.phoneNumer = phoneNumber
                         UserStoreSingleton.shared.userToken = gitData.data?.token
                         self.showMessage(gitData.message ?? "")
                         RootRouter().loadMainHomeStructure()

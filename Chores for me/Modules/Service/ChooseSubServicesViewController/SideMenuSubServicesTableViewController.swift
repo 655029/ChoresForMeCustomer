@@ -189,7 +189,39 @@ class SideMenuSubServicesTableViewController: UITableViewController {
         categoryId = UserStoreSingleton.shared.categoryId
         if categoryId == 4 {
             print("hi")
-        }
+                let cell = tableView.cellForRow(at: indexPath) as! ChooseSubServicesTableViewCell
+                cell.selectionDeselectionButton.isSelected.toggle()
+                let indexPath = tableView.indexPathsForSelectedRows?.first
+                let data = tableView.cellForRow(at: indexPath!) as? ChooseSubServicesTableViewCell
+                let subcategoryId = arrayData[indexPath!.row].subcategoryId
+                let subcategoryName = arrayData[indexPath!.row].subcategoryName
+                let subcategoryImage = arrayData[indexPath!.row].subcategoryImage
+                let dic = NSMutableDictionary()
+                dic.setValue(String(subcategoryId!), forKey: "id")
+                dic.setValue(subcategoryName, forKey: "name")
+                dic.setValue(subcategoryImage, forKey: "image")
+    //            SideMenuSubServicesTableViewController.subcategoryList.add(dic)
+                if SideMenuSubServicesTableViewController.subcategoryList.contains(dic) {
+                    let indexPathForSubcategory = SideMenuSubServicesTableViewController.subcategoryList.index(of: dic)
+                    SideMenuSubServicesTableViewController.subcategoryList.removeObject(at: indexPathForSubcategory)
+                }
+                else {
+                    SideMenuSubServicesTableViewController.subcategoryList.add(dic)
+                }
+                let bh = data?.nameLable.text ?? ""
+                let image = data?.serviceImage.image
+                if SideMenuSubServicesTableViewController.selectedServiesArray.contains(bh) {
+                    let indexPathOfSelectedData = SideMenuSubServicesTableViewController.selectedServiesArray.firstIndex(of: bh)
+                    SideMenuSubServicesTableViewController.selectedServiesArray.remove(at: indexPathOfSelectedData!)
+
+                }
+                else {
+                    SideMenuSubServicesTableViewController.selectedServiesArray.append(bh)
+                   SideMenuSubServicesTableViewController.selectedServiesImagesArray.append(image!)
+              }
+
+            }
+
         else {
             let cell = tableView.cellForRow(at: indexPath) as! ChooseSubServicesTableViewCell
             cell.selectionDeselectionButton.isSelected.toggle()
@@ -202,7 +234,7 @@ class SideMenuSubServicesTableViewController: UITableViewController {
             dic.setValue(String(subcategoryId!), forKey: "id")
             dic.setValue(subcategoryName, forKey: "name")
             dic.setValue(subcategoryImage, forKey: "image")
-            SideMenuSubServicesTableViewController.subcategoryList.add(dic)
+//            SideMenuSubServicesTableViewController.subcategoryList.add(dic)
             if SideMenuSubServicesTableViewController.subcategoryList.contains(dic) {
                 let indexPathForSubcategory = SideMenuSubServicesTableViewController.subcategoryList.index(of: dic)
                 SideMenuSubServicesTableViewController.subcategoryList.removeObject(at: indexPathForSubcategory)

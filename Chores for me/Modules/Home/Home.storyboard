@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdv-tl-qjh" customClass="DesignableButton" customModule="Designable">
-                                        <rect key="frame" x="8" y="16" width="162" height="24"/>
+                                        <rect key="frame" x="8" y="16" width="143" height="24"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="17"/>
                                         <state key="normal" title="Current Location" image="location.mark"/>
                                     </button>
@@ -129,7 +129,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J73-B1-LlN" customClass="DesignableButton" customModule="Designable">
-                                        <rect key="frame" x="8" y="16" width="162" height="24"/>
+                                        <rect key="frame" x="8" y="16" width="143" height="24"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="17"/>
                                         <state key="normal" title="Current Location" image="location.mark"/>
                                     </button>
@@ -174,10 +174,10 @@
     </scenes>
     <designables>
         <designable name="Gdv-tl-qjh">
-            <size key="intrinsicContentSize" width="162" height="24"/>
+            <size key="intrinsicContentSize" width="143" height="24"/>
         </designable>
         <designable name="J73-B1-LlN">
-            <size key="intrinsicContentSize" width="162" height="24"/>
+            <size key="intrinsicContentSize" width="143" height="24"/>
         </designable>
     </designables>
     <resources>

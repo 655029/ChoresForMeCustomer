@@ -69,9 +69,6 @@ class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
        // DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             self.navigationItem.title = "Hello \(UserStoreSingleton.shared.name ?? "") "
       //  }
-        self.getcreatedjob = []
-        getcreatedjob.removeAll()
-        tableView.reloadData()
         navigationItem.title = "Hello \(UserStoreSingleton.shared.name ?? "") "
         navigationController?.navigationItem.hidesBackButton = true
         self.navigationItem.setHidesBackButton(true, animated: false)
@@ -79,6 +76,31 @@ class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
 
         self.callingGetUserProfile()
         tabBarController?.tabBar.isHidden = false
+
+
+       if (UserStoreSingleton.shared.fromnotification)
+       {
+        //NotificationCenter.default.post(name: Notification.Name("confirmAlert"), object: nil)
+
+//        let secondVc = storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController") as! ConfirmAlertViewController
+//
+//                 let strJobId  = userInfo[AnyHashable("jobId")]
+//                 let jobId = Int(strJobId as? String ?? "0")
+
+                 UserStoreSingleton.shared.jobId = jobId
+
+//        self.present(secondVc, animated: true, completion: nil)
+
+        UserStoreSingleton.shared.fromnotification = false
+     //            navigationController.modalPresentationStyle = .overFullScreen
+     //            navigationController.modalPresentationStyle = .overCurrentContext
+     //            window?.rootViewController?.present(navigationController, animated: true, completion: nil)
+       }
+       else{
+
+       }
+
+
     }
     
     
@@ -360,7 +382,7 @@ extension HomeViewController: UITableViewDataSource {
         }
         cell.userName.text = getcreatedjob[indexPath.row].providerDetails?.first_name
         cell.userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        let userImageUrl = URL(string: getcreatedjob[indexPath.row].image ?? "")
+        let userImageUrl = URL(string: getcreatedjob[indexPath.row].providerDetails?.image ?? "")
      
         cell.userImage.sd_setImage(with: userImageUrl, placeholderImage: UIImage(named: "upload profile picture"))
         //sd_setImage(with: userImageUrl, placeholderImage:UIImage(contentsOfFile:"upload profile picture"))

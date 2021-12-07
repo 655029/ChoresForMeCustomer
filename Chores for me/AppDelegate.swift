@@ -20,28 +20,40 @@ import FirebaseMessaging
 let googleApiKey = "AIzaSyASJNkT8UuVEyVFIaayYMDHnh0rO-thTMk"
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, DissmissConfirmAlertViewController {
+
+    func didTappedProceedButton(controller: ConfirmAlertViewController) {
+        //      let rootViewController = self.window!.rootViewController as! UINavigationController
+        let mainStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "CheckOutViewController") as! CheckOutViewController
+        window?.rootViewController?.present(profileViewController, animated: true, completion: nil)
+    }
+
 
     var window: UIWindow?
     lazy private var router = RootRouter()
     lazy private var deeplinkHandler = DeeplinkHandler()
     lazy private var notificationsHandler = NotificationsHandler()
-    lazy private var checkTime = CheckTimeViewController()
+    lazy private var checkTime = BaseViewController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.isStatusBarHidden = false
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
-        Thread.sleep(forTimeInterval: 2.0)
+        Thread.sleep(forTimeInterval: 1.0)
         notificationsHandler.configure()
         Router.default.setupAppNavigation(appNavigation: AppNavigation())
         checkTime.CheckTimeFunc()
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        } else {
+            // Fallback on earlier versions
+        }
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.disabledToolbarClasses.append(ChooseYourCityViewController.self)
-//        setRoot2()
+
         GMSServices.provideAPIKey(googleApiKey)
         STPAPIClient.shared.publishableKey = "pk_test_51JjwCIFfJpDd1neCmXZhVhPcf1134OL4GgSP3i8Kixg15WQ32cwXQJsQzj1rOxfq2sfNF1R7lfiHaRK49iFuZKAv00PzrVPDfX"
-        
         FirebaseApp.configure()
         GIDSignIn.sharedInstance()?.clientID = "204112636650-p3f1o8op0ed79dsurlvicnljt7itqkdc.apps.googleusercontent.com"
         ApplicationDelegate.shared.application(application,didFinishLaunchingWithOptions: launchOptions)
@@ -57,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UITabBar.appearance().standardAppearance = tabBarAppearance
 
             if #available(iOS 15.0, *) {
-              // UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+                // UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
                 UITabBar.appearance().standardAppearance = tabBarAppearance
             }
         }
@@ -66,28 +78,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func registerLocal(application:UIApplication) {
-            let center = UNUserNotificationCenter.current()
-            center.delegate = self
-            center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-                if granted {
-                    print("Permission Granted!")
-                    Messaging.messaging().token { token, error in
-                      if let error = error {
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("Permission Granted!")
+                Messaging.messaging().token { token, error in
+                    if let error = error {
                         print("Error fetching FCM registration token: \(error)")
-                      } else if let token = token {
+                    } else if let token = token {
                         print("FCM registration token: \(token)")
                         UserStoreSingleton.shared.fcmToken = token
-                      }
                     }
-                    DispatchQueue.main.async {
-                        application.registerForRemoteNotifications()
-                    }
-
-                } else {
-                    print("Permission Dennied")
                 }
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+
+            } else {
+                print("Permission Dennied")
             }
         }
+    }
 
 
     func setRootController(){
@@ -97,22 +109,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.overrideUserInterfaceStyle = .light
         } else {}
         if let window = self.window{
-                    let isLogin = UserStoreSingleton.shared.isLoggedIn
-                    let authToken = UserStoreSingleton.shared.Token
+            let isLogin = UserStoreSingleton.shared.isLoggedIn
+            let authToken = UserStoreSingleton.shared.Token
             if(isLogin ?? false){
-//                        let viewController = BaseNavigationController(rootViewController: Storyboard.Splash.viewController(for: HomeViewController.self))
-                        //   SideMenu.shared.setupSideMneu()
-                        RootRouter().loadMainHomeStructure()
-//                        viewController.view.layoutIfNeeded()
-//                        window.rootViewController = viewController
-                    }else{
-                        let viewController = BaseNavigationController(rootViewController: Storyboard.Authentication.viewController(for: LoginViewController.self))
-                        //   SideMenu.shared.setupSideMneu()
-                        viewController.view.layoutIfNeeded()
-                        window.rootViewController = viewController
-                        print("Token","Null")
+                RootRouter().loadMainHomeStructure()
+            }else{
+                let viewController = BaseNavigationController(rootViewController: Storyboard.Authentication.viewController(for: LoginViewController.self))
+                viewController.view.layoutIfNeeded()
+                window.rootViewController = viewController
+                print("Token","Null")
 
-                    }
+            }
 
             UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
             }, completion: nil)
@@ -124,38 +131,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         // To enable full universal link functionality add and configure the associated domain capability
-        // https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html
+
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
             deeplinkHandler.handleDeeplink(with: url)
         }
         return true
     }
+
+    private func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
+        let rootViewController = self.window!.rootViewController as! UINavigationController
+        let mainStoryboard = UIStoryboard(name: "Booking", bundle: nil)
+        let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "CheckOutViewController") as! CheckOutViewController
+        rootViewController.pushViewController(profileViewController, animated: true)
+        return true
+
+    }
+
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         var flag: Bool = false
-       if  ApplicationDelegate.shared.application(
-                    app,
-                    open: url,
-                    sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                    annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-       ) {
-      flag = ApplicationDelegate.shared.application(
-                     app,
-                     open: url,
-                     sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                     annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-        )
+        if  ApplicationDelegate.shared.application(
+            app,
+            open: url,
+            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+        ) {
+            flag = ApplicationDelegate.shared.application(
+                app,
+                open: url,
+                sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+            )
 
-        
-       }else {
-        flag = GIDSignIn.sharedInstance().handle(url)
-       }
+
+        }else {
+            flag = GIDSignIn.sharedInstance().handle(url)
+        }
         return flag
     }
 }
 
 extension AppDelegate:MessagingDelegate{
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-      print("Firebase registration token: \(String(describing: fcmToken))")
+        print("Firebase registration token: \(String(describing: fcmToken))")
 
     }
 
@@ -166,7 +183,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
-
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -174,18 +190,17 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = notification.request.content.userInfo
         print(userInfo)
         let notificationType = userInfo[AnyHashable("notificationtype")] as? String
-        if notificationType == "complete" {
-            let storyboard = UIStoryboard(name: "Booking", bundle: nil)
-            let navigationController = UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController"))
-//            let navigationController = storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController") as! ConfirmAlertViewController
 
+        if notificationType == "complete" {
 
             let strJobId  = userInfo[AnyHashable("jobId")]
             let jobId = Int(strJobId as? String ?? "0")
-
             UserStoreSingleton.shared.jobId = jobId
+            let storyboard = UIStoryboard(name: "Booking", bundle: nil)
+            let secondVc = storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController") as! ConfirmAlertViewController
+            let navigationController = UINavigationController(rootViewController: secondVc)
+            secondVc.delegate = self
             navigationController.modalPresentationStyle = .overFullScreen
-            navigationController.modalPresentationStyle = .overCurrentContext
             window?.rootViewController?.present(navigationController, animated: true, completion: nil)
         }
 
@@ -195,7 +210,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             navigationController.modalPresentationStyle = .fullScreen
             navigationController.modalPresentationStyle = .overCurrentContext
             window?.rootViewController?.present(navigationController, animated: true, completion: nil)
-       }
+        }
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -205,9 +220,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let notificationType = userInfo[AnyHashable("notificationtype")] as? String
         if notificationType == "complete" {
             let storyboard = UIStoryboard(name: "Booking", bundle: nil)
-            let navigationController = UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController"))
-//            let navigationController = storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController") as! ConfirmAlertViewController
-
+            let secondVc = storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController") as! ConfirmAlertViewController
+            let navigationController = UINavigationController(rootViewController: secondVc)
+            //storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController")
+            secondVc.delegate = self
             let strJobId  = userInfo[AnyHashable("jobId")]
             let jobId = Int(strJobId as? String ?? "0")
 
@@ -237,5 +253,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
 }
+
+
+
 
 

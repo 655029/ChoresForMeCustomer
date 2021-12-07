@@ -12,7 +12,7 @@ class UserStoreSingleton: NSObject{
 
     var userlat: Double?
     var userLong: Double?
-
+    var fromnotification : Bool = false
 
     var categoryId: Int? {
         get{
