@@ -40,6 +40,7 @@ enum Navigation: Navigatable {
     case CancelReasonPage
     case Rating
     case paymentList
+    case cancelPayment
 }
 
 struct AppNavigation: AppNavigatable {
@@ -91,6 +92,8 @@ struct AppNavigation: AppNavigatable {
                 return Storyboard.Profile.viewController(for: NotificationsViewController.self)
             case .paymentList:
                 return Storyboard.Profile.viewController(for: PaymentListViewController.self)
+            case .cancelPayment:
+                return Storyboard.Profile.viewController(for: CancelPaymentViewController.self)
             case .logout:
                 return Storyboard.Profile.viewController(for: LogoutViewController.self)
             case .choresID:

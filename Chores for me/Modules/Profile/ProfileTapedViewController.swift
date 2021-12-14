@@ -240,12 +240,12 @@ class ProfileTapedViewController: UIViewController, UICollectionViewDataSource, 
                     let json = try JSONDecoder().decode(RegisterModel.self, from: data)
                     print(json)
                     DispatchQueue.main.async {
-                        let responseMessage = json.status;
+                        let responseMessage = json.status
                         if responseMessage == 200 {
                             RootRouter().loadMainHomeStructure()
                         }
                         else{
-                            
+                          //  self.navigate(.paymentMode)
                         }
                     }
                 } catch {

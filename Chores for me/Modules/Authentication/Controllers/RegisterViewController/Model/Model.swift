@@ -20,3 +20,29 @@ struct  RegisterModel : Codable {
 }
 struct Regdata : Codable {
 }
+
+struct CancelJobByCustomer : Codable {
+    let status : Int?
+    let data : CancelData?
+    let message : String?
+
+    enum CodingKeys: String, CodingKey {
+
+        case status = "status"
+        case data = "data"
+        case message = "message"
+    }
+}
+
+struct CancelData : Codable {
+    let minutes : Int?
+    let isChargeable : Bool?
+
+    enum CodingKeys: String, CodingKey {
+
+        case minutes = "minutes"
+        case isChargeable = "isChargeable"
+    }
+}
+
+

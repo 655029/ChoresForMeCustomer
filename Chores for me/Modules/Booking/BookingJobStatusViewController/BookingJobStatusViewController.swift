@@ -114,36 +114,23 @@ class BookingJobStatusViewController: BaseViewController {
 
         let imageUrlService = URL(string: dicData.image ?? "")
         img_ServiceImage.sd_setImage(with: imageUrlService, placeholderImage:UIImage(contentsOfFile:"user.profile.icon.png"))
-
+        self.callingGetUserDetailsAPI()
         let rating = dicData.providerDetails?.rating ?? 0.0
         if selectedStatus == 0 {
             btn_Call.isHidden = true
-//            view_StartComplete.isHidden = true
-//            view_CancelConfirm.isHidden = false
         }
-
         if selectedStatus == 1 {
-//            btn_CancelRequest.isHidden = false
-//            view_StartComplete.isHidden = false
-//            view_CancelConfirm.isHidden = true
             cancelButton.isHidden = false
         }
-        
         if selectedStatus == 2 {
-//            view_StartComplete.isHidden = false
-//            view_CancelConfirm.isHidden = true
         }
         if selectedStatus == 3 || selectedStatus == 4 {
-//            view_StartComplete.isHidden = true
-//            view_CancelConfirm.isHidden = true
             btn_Call.isHidden = true
         }
-
-    }
+      }
 
     override func viewWillAppear(_ animated: Bool) {
         self.callingGetUserDetailsAPI()
-        CheckTimeFunc()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -152,9 +139,7 @@ class BookingJobStatusViewController: BaseViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
-
     }
-    
 
     // MARK: - User Interaction
     @IBAction func tapCancellRequestButton(_ sender: Any) {
@@ -162,7 +147,7 @@ class BookingJobStatusViewController: BaseViewController {
     }
 
     @IBAction func cancelJobButtonAction(_ sender: UIButton) {
-        self.callingGetUserDetailsAPI()
+
         self.callingCancelJobByCustomerAPI()
 
     }
@@ -217,8 +202,7 @@ class BookingJobStatusViewController: BaseViewController {
 
             }
                 task.resume()
-
-    }
+         }
 
 
 
@@ -235,9 +219,6 @@ class BookingJobStatusViewController: BaseViewController {
                 cell.jobProgressImageView.image = UIImage.init(named: "checked")
                 cell.jobProgressImageView.tintColor = UIColor.systemGreen
             }
-
-
-
             if isGreenRight {
                 cell.rightBarView.backgroundColor = UIColor.systemGreen
             }
@@ -248,14 +229,13 @@ class BookingJobStatusViewController: BaseViewController {
         else {
             cell.jobProgressImageView.tintColor = UIColor.systemGray
         }
-
-    }
+   }
 
 
     private func callingCancelJobByCustomerAPI() {
-        let Url = String(format: "http://3.18.59.239:3000/api/v1//cancel-Job-By-Customer")
+        let Url = String(format: "http://3.18.59.239:3000/api/v1/cancel-Job-By-Customer")
         guard let serviceUrl = URL(string: Url) else { return }
-
+        canceljobId = dicData.jobId
         let parameterDictionary =  ["jobId": dicData.jobId ?? "","UserId": dicData.userId ?? "","providerId": dicData.providerId ?? 0] as [String: Any]
 
         var request = URLRequest(url: serviceUrl)
@@ -273,15 +253,14 @@ class BookingJobStatusViewController: BaseViewController {
             }
             if let data = data {
                 do {
-                    let json = try JSONDecoder().decode(RegisterModel.self, from: data)
+                    let json = try JSONDecoder().decode(CancelJobByCustomer.self, from: data)
                     print(json)
                     DispatchQueue.main.async {
-                        let responseMessage = json.status;
-                        if responseMessage == 200 {
+                        let responseMessage = json.data?.minutes
+                        if json.data?.minutes ?? 0 < 5 {
                             RootRouter().loadMainHomeStructure()
-                        }
-                        else{
-
+                        }else{
+                            self.navigate(.cancelPayment)
                         }
                     }
                 } catch {

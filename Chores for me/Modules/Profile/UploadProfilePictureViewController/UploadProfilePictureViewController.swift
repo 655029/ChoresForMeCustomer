@@ -101,7 +101,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         }
         navigationController?.navigationBar.tintColor = .orange
         let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"//"dd-MM-yyyy HH:mm:ss"
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = "dd EEEE"
         for item in dateArray {
@@ -313,20 +313,11 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
 
         else {
             let cell3 = topCollectionViewForSelectedServices.dequeueReusableCell(withReuseIdentifier: "SelectedCollectionViewCell", for: indexPath) as! SelectedCollectionViewCell
-
-//                cell3.populateUI(SelectedData(image: arrayOfSelectedServices[indexPath.row].image, name: arrayOfSelectedServices[indexPath.row].name))
-           // cell3.selectedCategoryImage.image = UIImage(named: arrayOfSelectedImages[indexPath.row])
-//            let url = URL(string: arrayOfSelectedImages[indexPath.row])
             cell3.selectedCategoryImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//            cell3.selectedCategoryImage.sd_setImage(with: url, placeholderImage: UIImage(named: "Lawn Mowing"))
             cell3.selectedCategoryImage.image = arrayOfSelectedImages[indexPath.row]
             cell3.selecetdCategoryName.text = filterArrayOfSelctedServicesName[indexPath.row]
             if filterArrayOfSelctedServicesName.isEmpty == true  {
                 cell3.selecetdCategoryName.text = arrayOfSelectedName[indexPath.row]
-//                let url = URL(string: "https://choresforme.s3.us-east-2.amazonaws.com/catImage_1627454717214.pn")
-            //    let url = URL(string: "" )
-               // cell3.selectedCategoryImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            //    cell3.selectedCategoryImage.sd_setImage(with: url, placeholderImage: UIImage(named: "Lawn Mowing"))
            }
 
             return cell3
@@ -482,8 +473,6 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                     let responseMeassge = gitData.status
                     if responseMeassge == 200 {
                         self.navigationController?.navigationBar.tintColor = UIColor.white
-                      //  UINavigationBar.appearance().tintColor = .systemBlue
-                    //    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.systemBlue]
                         self.showMessage(gitData.message ?? "")
                         UserStoreSingleton.shared.jobId = gitData.jobId
                         self.navigate(.providerList)
@@ -503,27 +492,17 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     //MARK: - Calling Upload Image API
     func uploadImage(paramName: String, fileName: String, image: UIImage) {
         let url = URL(string: "http://3.18.59.239:3000/api/v1/upload")
-
-        // generate boundary string using a unique per-app string
         let boundary = UUID().uuidString
-
         let session = URLSession.shared
-
-        // Set the URLRequest to POST and to the specified URL
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "POST"
-
-        // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
-        // And the boundary is also set here
         urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-
         var data = Data()
         // Add the image data to the raw http request data
         data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
         data.append("Content-Disposition: form-data; name=\"\(paramName)\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
         data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
         data.append(image.pngData()!)
-
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
 
         // Send a POST request to the URL, with the data we created earlier
@@ -532,8 +511,6 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                 let jsonData = try? JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
                 if let json = jsonData as? [String: Any] {
                     if let imageData = json["data"] {
-                      //  print(imageData)
-                    //    UserStoreSingleton.shared.profileImage = imageData as! String
                         self.workImg = imageData as? String
                         print(self.workImg)
 
@@ -545,7 +522,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     
     func setDate(date: Date) -> String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"//"dd-MM-yyyy"
         return dateFormatter.string(from: date)
     }
 

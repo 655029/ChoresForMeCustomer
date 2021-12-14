@@ -303,6 +303,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.hireButton.isHidden = false
             cell.deleteButton.isHidden = false
             cell.editButton.isHidden = false
+            cell.buttonStack.isHidden = false
             cell.hireButton.tag = indexPath.row
             cell.deleteButton.tag = indexPath.row
             cell.editButton.tag = indexPath.row
@@ -322,6 +323,7 @@ extension HomeViewController: UITableViewDataSource {
             cell.userName.isHidden = true
             cell.ratingStarView.isHidden = true
             cell.deleteButton.isHidden = false
+            cell.buttonStack.isHidden = false
             cell.editButton.isHidden = false
             cell.deleteButton.addTarget(self, action: #selector(didTappedDeleteButton(_:)), for: .touchUpInside)
             cell.editButton.addTarget(self, action: #selector(didTappedEditButton(_:)), for: .touchUpInside)
@@ -361,7 +363,12 @@ extension HomeViewController: UITableViewDataSource {
         cell.selectedPrice.text = "$\(getcreatedjob[indexPath.row].price ?? "")"
         let dateTime = getcreatedjob[indexPath.row].booking_date
         let date = String(dateTime?.dropLast(14) ?? "")
-        cell.createdDateLabel.text = date
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        let showDate = inputFormatter.date(from: date)
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        let resultString = inputFormatter.string(from: showDate!)
+        cell.createdDateLabel.text = resultString
         let datenDay = getcreatedjob[indexPath.row].day
         let dateDay = datenDay?.filter{!$0.isWhitespace}
         let result4 = String(dateDay?.dropFirst(2) ?? "")

@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DissmissConfirmAlertViewC
     lazy private var checkTime = BaseViewController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         UIApplication.shared.isStatusBarHidden = false
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         Thread.sleep(forTimeInterval: 1.0)
@@ -70,12 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DissmissConfirmAlertViewC
 
             if #available(iOS 15.0, *) {
                 // UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+                let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
+                tabBarAppearance.configureWithDefaultBackground()
+                tabBarAppearance.backgroundColor = AppColor.primaryBackgroundColor
                 UITabBar.appearance().standardAppearance = tabBarAppearance
             }
         }
         return true
     }
-
 
     func registerLocal(application:UIApplication) {
         let center = UNUserNotificationCenter.current()
@@ -118,8 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DissmissConfirmAlertViewC
                 viewController.view.layoutIfNeeded()
                 window.rootViewController = viewController
                 print("Token","Null")
-
-            }
+               }
 
             UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
             }, completion: nil)
@@ -130,8 +130,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DissmissConfirmAlertViewC
 
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        // To enable full universal link functionality add and configure the associated domain capability
-
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
             deeplinkHandler.handleDeeplink(with: url)
         }
@@ -161,9 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DissmissConfirmAlertViewC
                 sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
                 annotation: options[UIApplication.OpenURLOptionsKey.annotation]
             )
-
-
-        }else {
+             }else {
             flag = GIDSignIn.sharedInstance().handle(url)
         }
         return flag
@@ -173,14 +169,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DissmissConfirmAlertViewC
 extension AppDelegate:MessagingDelegate{
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase registration token: \(String(describing: fcmToken))")
-
     }
-
 }
+
 //@available(iOS 13.0, *)
 extension AppDelegate: UNUserNotificationCenterDelegate {
-
-
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
     }
@@ -222,7 +215,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             let storyboard = UIStoryboard(name: "Booking", bundle: nil)
             let secondVc = storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController") as! ConfirmAlertViewController
             let navigationController = UINavigationController(rootViewController: secondVc)
-            //storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController")
             secondVc.delegate = self
             let strJobId  = userInfo[AnyHashable("jobId")]
             let jobId = Int(strJobId as? String ?? "0")
@@ -244,13 +236,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // To enable full remote notifications functionality you should first register the device with your api service
         //https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/
         //notificationsHandler.handleRemoteNotification(with: userInfo)
-
-        print(userInfo)
-
-    }
+         print(userInfo)
+      }
 
 }
 

@@ -49,6 +49,7 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
         paymentTextField.postalCodeEntryEnabled = false
         imageData.append(Images.init(imageName: "card"))
         navigationController?.navigationItem.title = "Payment mode"
@@ -183,11 +184,11 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
              let session = URLSession.shared
              session.dataTask(with: request) { (data, response, error) in
                  if let Apiresponse = response {
-                     debugPrint(Apiresponse)
                  }
                  if let data = data {
                      do {
                          let json =  try JSONDecoder().decode(savePaymentModel.self, from: data)
+                        print(json)
                          DispatchQueue.main.async {
                             self.hideActivity()
                             let storyboard = UIStoryboard(name: "Booking", bundle: nil)

@@ -100,7 +100,7 @@ class UpdateJobViewController: ServiceBaseViewController,UICollectionViewDelegat
         }
         navigationController?.navigationBar.tintColor = .orange
         let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatterGet.dateFormat = "dd-MM-yyyy HH:mm:ss"
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = "dd EEEE"
         for item in dateArray {
@@ -589,7 +589,7 @@ class UpdateJobViewController: ServiceBaseViewController,UICollectionViewDelegat
 
     func setDate(date: Date) -> String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "dd-MM-yyyy"
         return dateFormatter.string(from: date)
     }
 

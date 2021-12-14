@@ -21,7 +21,7 @@ class NotificationTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
        payButton.isHidden = true
-        ratingAndCheckReasonButton.isHidden = true
+       ratingAndCheckReasonButton.isHidden = true
     }
 
 }
