@@ -55,8 +55,8 @@ class ProviderListViewController: BaseViewController, UITableViewDelegate, UITab
         providerListNearByYouButton.addSpaceBetweenImageAndTitle(spacing: 10.0)
         self.applyFinishingTouchesToUIElements()
         self.setUpDataSource()
-        backButton.imageEdgeInsets = UIEdgeInsets(top: 13, left: 8, bottom: 4, right: 8)
-        UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(onBackPressed(_:)))
+     //   backButton.imageEdgeInsets = UIEdgeInsets(top: 13, left: 8, bottom: 4, right: 8)
+      //  UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(onBackPressed(_:)))
         self.callingProviderListAPI()
 //        if let viewController = navigationController?.viewControllers.first(where: {$0 is HomeViewController}) {
 //              navigationController?.popToViewController(viewController, animated: false)
@@ -65,13 +65,13 @@ class ProviderListViewController: BaseViewController, UITableViewDelegate, UITab
 //        navigationController?.popToRootViewController(animated: true)
 //        view.addSubview(backButton)
 //        view.bringSubviewToFront(backButton)
-        UIApplication.shared.keyWindow?.addSubview(backButton)
+      //  UIApplication.shared.keyWindow?.addSubview(backButton)
       //  backButton.backgroundColor = UIColor.green
-        backButton.topAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.topAnchor, constant: 40).isActive = true
-//        backButton.centerYAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.centerYAnchor, constant: -200).isActive = true
-        backButton.leadingAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.leadingAnchor, constant: 12).isActive = true
-        backButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+//        backButton.topAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.topAnchor, constant: 40).isActive = true
+////        backButton.centerYAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.centerYAnchor, constant: -200).isActive = true
+//        backButton.leadingAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.leadingAnchor, constant: 12).isActive = true
+//        backButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+//        backButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
 
     }
 
@@ -79,13 +79,16 @@ class ProviderListViewController: BaseViewController, UITableViewDelegate, UITab
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.tintColor = .white
         tabBarController?.tabBar.isHidden = true
-        backButton.isHidden = false
+    //    backButton.isHidden = false
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        backButton.isHidden = true
+     //   backButton.isHidden = true
     }
 
+    @IBAction func backButton(_ sender: Any) {
+        RootRouter().loadMainHomeStructure()
+    }
     @objc func onBackPressed(_ senter: UIBarButtonItem) {
         RootRouter().loadMainHomeStructure()
     }

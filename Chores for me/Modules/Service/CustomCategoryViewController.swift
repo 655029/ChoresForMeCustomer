@@ -31,7 +31,9 @@ class CustomCategoryViewController: BaseViewController, UIImagePickerControllerD
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        CheckTimeFunc()
+        tabBarController?.tabBar.isHidden = true
+        CustomCategoryViewController.selectedServiesArray.removeAll()
+     //   CheckTimeFunc()
     }
 
 
@@ -53,7 +55,7 @@ class CustomCategoryViewController: BaseViewController, UIImagePickerControllerD
                 break
             }
             self.present(alert, animated: true, completion: nil)
-        
+
     }
 
     @IBAction func customButtomAction(_ sender: UIButton) {
@@ -113,6 +115,12 @@ class CustomCategoryViewController: BaseViewController, UIImagePickerControllerD
         guard let serviceUrl = URL(string: Url) else { return }
     let parameterDictionary =  ["categoryId": "4","subcategoryName": categoryName.text ?? "","subcategoryImage": imageResponse ?? ""] as [String: Any]
     CustomCategoryViewController.selectedServiesArray.append(categoryName.text!)
+
+       let dic = NSMutableDictionary()
+//       dic.setValue(String(subcategoryId!), forKey: "id")
+       dic.setValue(categoryName.text, forKey: "name")
+       dic.setValue("subcategoryImage", forKey: "image")
+
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
@@ -132,6 +140,8 @@ class CustomCategoryViewController: BaseViewController, UIImagePickerControllerD
                     let responseMeassge = gitData.status
                     if responseMeassge == 200 {
                         self.showMessage(gitData.message ?? "")
+                        dic.setValue(String(gitData.subcategoryId!), forKey: "id")
+                        SideMenuSubServicesTableViewController.subcategoryList.add(dic)
                         self.navigate(.uploadProfilePicture)
                     }
                     else {
@@ -189,4 +199,5 @@ class CustomCategoryViewController: BaseViewController, UIImagePickerControllerD
     }
 
 }
+
 

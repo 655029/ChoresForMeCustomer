@@ -363,12 +363,12 @@ extension HomeViewController: UITableViewDataSource {
         cell.selectedPrice.text = "$\(getcreatedjob[indexPath.row].price ?? "")"
         let dateTime = getcreatedjob[indexPath.row].booking_date
         let date = String(dateTime?.dropLast(14) ?? "")
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        let showDate = inputFormatter.date(from: date)
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        let resultString = inputFormatter.string(from: showDate!)
-        cell.createdDateLabel.text = resultString
+//        let inputFormatter = DateFormatter()
+//        inputFormatter.dateFormat = "dd-MM-yyyy"
+//        let showDate = inputFormatter.date(from: date)
+//        inputFormatter.dateFormat = "dd-MM-yyyy"
+//        let resultString = inputFormatter.string(from: showDate!)
+        cell.createdDateLabel.text = getDate(date: getcreatedjob[indexPath.row].booking_date ?? "")
         let datenDay = getcreatedjob[indexPath.row].day
         let dateDay = datenDay?.filter{!$0.isWhitespace}
         let result4 = String(dateDay?.dropFirst(2) ?? "")
@@ -460,6 +460,16 @@ extension HomeViewController: UITableViewDataSource {
       //  comeFrom = "EditPost"
         selectJob_id = getcreatedjob[sender.tag].jobId
         navigate(.updateJob)
+    }
+
+    func getDate(date: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        //    dateFormatter.timeZone = TimeZone.current
+        //    dateFormatter.locale = Locale.current
+        let dateValue = dateFormatter.date(from: date)!
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        return dateFormatter.string(from: dateValue)
     }
 
     //MARK: - TableViewDelegate Methods

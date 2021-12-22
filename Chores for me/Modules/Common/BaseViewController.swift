@@ -31,10 +31,14 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        CheckTimeFunc()
+//        if #available(iOS 13.0, *) {
+//            CheckTimeFunc()
+//        } else {
+//            // Fallback on earlier versions
+//            CheckTimeFunc()
+//        }
         hideKeyboardWhenTappedAround()
     }
-
 
     // MARK: - Layout
     
@@ -78,17 +82,27 @@ extension Array where Element: Hashable {
 }
 
 extension UIViewController {
-    func CheckTimeFunc(){
-        let componets = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
-        let currentHour = componets.hour
-        if currentHour! < 7 || currentHour! > 21 {
-            print ("show popup")
-            self.TimePopupAlert()
-        } else {
-            print ("do nothing")
+//    func CheckTimeFunc(){
+////        let componets = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
+////        let currentHour = componets.hour
+//        let date = Date()
+//        let calendar = Calendar.current
+//        let timee = TimeZone.current.identifier
+//        print(timee)
+//        let currentHour = calendar.component(.hour, from: date)
+//        print("test currentHour\(String(currentHour ?? 0))")
+//
+//  //      let currentMint = components.minute ?? 0
+//   //     print("test currentMint\(String(currentMint ?? 0))")
+//        print("test Time\(String(describing: currentHour))")
+//        if currentHour < 7 || currentHour > 21 {
+//            print ("show popup")
+//            self.TimePopupAlert()
+//        } else {
+//            print ("do nothing")
+//        }
+//    }
 
-        }
-    }
     @objc func TimePopupAlert(){
         let alertController = UIAlertController (title: "Chores for Me", message: "You can use this app only 7am to 10pm", preferredStyle: .alert)
 
@@ -98,11 +112,9 @@ extension UIViewController {
         //alertController.addAction(firstAction)
 
         let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-
         alertWindow.rootViewController = UIViewController()
-       alertWindow.windowLevel = UIWindow.Level.alert + 1;
+        alertWindow.windowLevel = UIWindow.Level.alert + 1;
         alertWindow.makeKeyAndVisible()
-
         alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
 
     }

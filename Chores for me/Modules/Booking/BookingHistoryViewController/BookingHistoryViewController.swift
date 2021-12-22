@@ -54,6 +54,7 @@ class BookingHistoryViewController: HomeBaseViewController {
     // MARK: - Additional Helpers
 
     func callingJobsHistoryApi() {
+        showActivity()
         let parameters = ["signupType":"0"]
              let url = URL(string: "http://3.18.59.239:3000/api/v1/jobs-history")
              var request = URLRequest(url: url!)
@@ -73,6 +74,7 @@ class BookingHistoryViewController: HomeBaseViewController {
                  if let data = data {
                      do {
                          let json =  try JSONDecoder().decode(JobsHistoryModel.self, from: data)
+                        self.hideActivity()
                          DispatchQueue.main.async {
                              if json.data?.count == 0 {
                                  self.showMessage(json.message ?? "")
@@ -95,7 +97,7 @@ class BookingHistoryViewController: HomeBaseViewController {
                          }
                      }catch{
                         print("\(error.localizedDescription)")
-
+                        self.hideActivity()
                      }
                  }
              }.resume()
@@ -126,6 +128,17 @@ class BookingHistoryViewController: HomeBaseViewController {
 
             task.resume()
     }
+
+    func getDate(date: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        //    dateFormatter.timeZone = TimeZone.current
+        //    dateFormatter.locale = Locale.current
+        let dateValue = dateFormatter.date(from: date)!
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        return dateFormatter.string(from: dateValue)
+    }
+
     
 }
 
@@ -172,26 +185,28 @@ extension BookingHistoryViewController: UITableViewDataSource {
         let imageUrl = URL(string: "\(bookingHistoryResponseData[indexPath.row].providerDetails?.image ?? "")")
         let providerImageUrl = URL(string: bookingHistoryResponseData[indexPath.row].image ?? "")
         cell.categoryImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        cell.categoryImage.sd_setImage(with: providerImageUrl, placeholderImage:UIImage(contentsOfFile:"outdoor_home_service.png"))
+        cell.categoryImage.sd_setImage(with: providerImageUrl, placeholderImage:UIImage(contentsOfFile:"Lawn Mowing"))
         cell.profileImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.profileImage.sd_setImage(with: imageUrl, placeholderImage:UIImage(contentsOfFile:"outdoor_home_service.png"))
         cell.categoryname.text = bookingHistoryResponseData[indexPath.row].categoryName
         cell.locationName.text = bookingHistoryResponseData[indexPath.row].location
 
         var selectedDay = bookingHistoryResponseData[indexPath.row].day
-
+        let dateDay = selectedDay?.filter{!$0.isWhitespace}
+        let result4 = String(dateDay?.dropFirst(2) ?? "")
+        cell.selectedDay.text = result4
 //        let index = (selectedDay!.range(of: "\n ")?.upperBound)
 //        let afterEqualsTo = String(selectedDay!.suffix(from: index!))
         selectedDay = selectedDay!.replacingOccurrences(of: "\n", with: "", options: NSString.CompareOptions.literal, range: nil)
 
        // let dayWithOutDate = String((selectedDay?.dropFirst(3))!)
-        cell.selectedDay.text = bookingHistoryResponseData[indexPath.row].day
+
         cell.selectedDate.text = bookingHistoryResponseData[indexPath.row].time
         cell.selectedPrice.text = bookingHistoryResponseData[indexPath.row].price
         cell.starRating.rating = bookingHistoryResponseData[indexPath.row].providerDetails?.rating ?? 0
-        let dateTime = bookingHistoryResponseData[indexPath.row].booking_date
-        let date = String(dateTime?.dropLast(14) ?? "")
-        cell.dateCreatedAt.text = date
+        let dateTime = getDate(date: bookingHistoryResponseData[indexPath.row].booking_date ?? "")
+       // let date = String(dateTime?.dropLast(14) ?? "")
+        cell.dateCreatedAt.text = dateTime
         cell.userName.text = bookingHistoryResponseData[indexPath.row].providerDetails?.first_name
         let arr = bookingHistoryResponseData[indexPath.row].subcategoryId
         cell.arrSubCatgeory = arr ?? []

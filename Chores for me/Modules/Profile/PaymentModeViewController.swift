@@ -338,7 +338,7 @@ class PaymentModeViewController: BaseViewController, STPPaymentCardTextFieldDele
         tabBarController?.tabBar.isHidden = true
         continueButton.layer.cornerRadius = 10.0
         self.callingJobDetailsAPI()
-        CheckTimeFunc()
+     //   CheckTimeFunc()
 
     }
 

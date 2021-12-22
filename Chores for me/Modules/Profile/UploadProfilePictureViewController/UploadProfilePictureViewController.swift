@@ -491,6 +491,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     
     //MARK: - Calling Upload Image API
     func uploadImage(paramName: String, fileName: String, image: UIImage) {
+        showActivity()
         let url = URL(string: "http://3.18.59.239:3000/api/v1/upload")
         let boundary = UUID().uuidString
         let session = URLSession.shared
@@ -504,13 +505,14 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
         data.append(image.pngData()!)
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
-
+        self.hideActivity()
         // Send a POST request to the URL, with the data we created earlier
         session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
             if error == nil {
                 let jsonData = try? JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
                 if let json = jsonData as? [String: Any] {
                     if let imageData = json["data"] {
+                        self.hideActivity()
                         self.workImg = imageData as? String
                         print(self.workImg)
 

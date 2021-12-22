@@ -107,7 +107,13 @@ class BookingJobStatusViewController: BaseViewController {
         subcategoryId = dicData.subcategoryId ?? [JobsSubcategoryId]()
         lbl_ServiceAddres.text = dicData.location
         lbl_ServiceName.text = dicData.categoryName
-        lbl_ServiceDay.text = dicData.day
+
+
+        let datenDay = dicData.day
+        let dateDay = datenDay?.filter{!$0.isWhitespace}
+        let result4 = String(dateDay?.dropFirst(2) ?? "")
+        lbl_ServiceDay.text = result4
+
         lbl_ServiceAmmount.text = dicData.price
         let date = getDate(date: dicData.booking_date!)
         lbl_DateTime.text = dicData.time! + " : " + date!
@@ -392,7 +398,7 @@ extension BookingJobStatusViewController: UICollectionViewDelegateFlowLayout {
         //    dateFormatter.timeZone = TimeZone.current
         //    dateFormatter.locale = Locale.current
         let dateValue = dateFormatter.date(from: date)!
-        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.dateFormat = "dd/MM/yyyy"
         return dateFormatter.string(from: dateValue)
     }
 }

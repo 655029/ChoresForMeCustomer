@@ -140,7 +140,7 @@ class SideMenuSubServicesTableViewController: UITableViewController {
         else {
             self.hideNavigationButton()
         }
-        CheckTimeFunc()
+    //    CheckTimeFunc()
 
     }
 

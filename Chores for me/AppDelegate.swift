@@ -42,12 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DissmissConfirmAlertViewC
         Thread.sleep(forTimeInterval: 1.0)
         notificationsHandler.configure()
         Router.default.setupAppNavigation(appNavigation: AppNavigation())
-        checkTime.CheckTimeFunc()
-        if #available(iOS 13.0, *) {
-            window?.overrideUserInterfaceStyle = .light
-        } else {
-            // Fallback on earlier versions
-        }
+//        if #available(iOS 13.0, *) {
+//            window?.overrideUserInterfaceStyle = .light
+//            checkTime.CheckTimeFunc()
+//        } else {
+//            // Fallback on earlier versions
+//            checkTime.CheckTimeFunc()
+//        }
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.disabledToolbarClasses.append(ChooseYourCityViewController.self)
 
@@ -142,7 +143,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DissmissConfirmAlertViewC
         let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "CheckOutViewController") as! CheckOutViewController
         rootViewController.pushViewController(profileViewController, animated: true)
         return true
-
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -240,8 +240,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         //notificationsHandler.handleRemoteNotification(with: userInfo)
          print(userInfo)
       }
-
-}
+    }
 
 
 

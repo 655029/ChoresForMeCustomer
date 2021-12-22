@@ -94,6 +94,7 @@
 		F45408B126271C3200A38DA3 /* Location.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F45408B026271C3200A38DA3 /* Location.storyboard */; };
 		F456EFB72716E9BA00F0E15B /* SideMenuSubServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F456EFB62716E9BA00F0E15B /* SideMenuSubServicesTableViewController.swift */; };
 		F45E4EA62762267800EF4F68 /* CancelPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E4EA52762267700EF4F68 /* CancelPaymentViewController.swift */; };
+		F45E99EC2771D58A00F4CE49 /* AlertClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E99EB2771D58A00F4CE49 /* AlertClass.swift */; };
 		F45F54E326E62ABF00EBF85D /* ProviderListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45F54E226E62ABE00EBF85D /* ProviderListModel.swift */; };
 		F46D61F126A05D440040B24E /* ProviderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46D61F026A05D440040B24E /* ProviderListViewController.swift */; };
 		F46D61F526A05E700040B24E /* ProviderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46D61F326A05E700040B24E /* ProviderListTableViewCell.swift */; };
@@ -273,6 +274,7 @@
 		F45408B026271C3200A38DA3 /* Location.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Location.storyboard; sourceTree = "<group>"; };
 		F456EFB62716E9BA00F0E15B /* SideMenuSubServicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuSubServicesTableViewController.swift; sourceTree = "<group>"; };
 		F45E4EA52762267700EF4F68 /* CancelPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelPaymentViewController.swift; sourceTree = "<group>"; };
+		F45E99EB2771D58A00F4CE49 /* AlertClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertClass.swift; sourceTree = "<group>"; };
 		F45F54E226E62ABE00EBF85D /* ProviderListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderListModel.swift; sourceTree = "<group>"; };
 		F46D61F026A05D440040B24E /* ProviderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderListViewController.swift; sourceTree = "<group>"; };
 		F46D61F326A05E700040B24E /* ProviderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderListTableViewCell.swift; sourceTree = "<group>"; };
@@ -1150,6 +1152,7 @@
 			isa = PBXGroup;
 			children = (
 				F4EAE9962758FF5C0095B20F /* CheckTIme.swift */,
+				F45E99EB2771D58A00F4CE49 /* AlertClass.swift */,
 			);
 			path = CheckTime;
 			sourceTree = "<group>";
@@ -1439,6 +1442,7 @@
 				F413ACF5262C2948007F64E3 /* ServiceBaseViewController.swift in Sources */,
 				F43402BE26D3CCB200F18D61 /* Constants.swift in Sources */,
 				F450A45F2702FFE200FF614B /* NotificationModel.swift in Sources */,
+				F45E99EC2771D58A00F4CE49 /* AlertClass.swift in Sources */,
 				F41F027F26CA3E34008528D0 /* CheckBoxButton.swift in Sources */,
 				F413ACEC262C11CF007F64E3 /* AppTextField.swift in Sources */,
 				57203BD1273A71B900B47027 /* selctedServicesCollectionViewCell.swift in Sources */,
