@@ -11,10 +11,16 @@ protocol DissmissConfirmAlertViewController: class {
     func didTappedProceedButton(controller: ConfirmAlertViewController)
 }
 
+protocol fromNotification {
+    func dissmissNotification(jobId: Int)
+}
+
 class ConfirmAlertViewController: UIViewController {
 
 
     var jobId: Int?
+    var delegateJobId : fromNotification?
+
     var delegate: DissmissConfirmAlertViewController?
 
     override func viewDidLoad() {
@@ -67,13 +73,16 @@ class ConfirmAlertViewController: UIViewController {
     }
 
     @IBAction func confirmButton(_ sender: UIButton) {
-//        dismiss(animated: true, completion: nil)
-//        delegate?.didTappedProceedButton(controller: self)
+        dismiss(animated: true, completion: nil)
+        delegate?.didTappedProceedButton(controller: self)
+        
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         let secondVc = storyboard.instantiateViewController(withIdentifier: "CheckOutViewController") as! CheckOutViewController
         //        self.tabBarController?.tabBar.selectedItem = 1
         secondVc.jobid = jobId
-        navigationController?.pushViewController(secondVc, animated: true)
+        dismiss(animated: false, completion: nil)
+        self.delegateJobId?.dissmissNotification(jobId: self.jobId ?? 0)
+//        navigationController?.pushViewController(secondVc, animated: true)
 
         //        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
         //            self.dismiss(animated: true, completion: nil)

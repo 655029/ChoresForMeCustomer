@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -920,6 +920,7 @@
                         <outlet property="locationLandmarkAddressTextFeild" destination="ZQf-gx-k6i" id="sH5-cn-CRx"/>
                         <outlet property="mainTopView" destination="byO-GG-Ouk" id="Sm2-KI-rCp"/>
                         <outlet property="monthYearLabel" destination="8MX-8J-x9D" id="THC-Uq-5hy"/>
+                        <outlet property="postButton" destination="1IU-N1-opx" id="Aj4-9e-nfe"/>
                         <outlet property="priceTextFeild" destination="jAb-rK-xme" id="vkB-wc-DW8"/>
                         <outlet property="secondView" destination="JTR-9y-iNh" id="nu9-QV-ff0"/>
                         <outlet property="selectImage" destination="53D-Aw-TKM" id="mL6-XO-oio"/>
@@ -1131,13 +1132,13 @@ Outdoor Home Worker</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to logout?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJj-x7-p71">
-                                        <rect key="frame" x="53.5" y="60" width="247.5" height="21"/>
+                                        <rect key="frame" x="66.5" y="60" width="221.5" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
                                         <color key="textColor" name="AppSecondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPU-ek-ifR">
-                                        <rect key="frame" x="197" y="101" width="60" height="36"/>
+                                        <rect key="frame" x="197" y="97.5" width="60" height="36"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="17"/>
                                         <state key="normal" title="Logout">
                                             <color key="titleColor" name="AppSecondaryLabelColor"/>
@@ -1147,7 +1148,7 @@ Outdoor Home Worker</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JQB-Jh-vLA">
-                                        <rect key="frame" x="75.5" y="101" width="62" height="36"/>
+                                        <rect key="frame" x="75.5" y="97.5" width="62" height="36"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="17"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1398,7 +1399,7 @@ Outdoor Home Worker</string>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="96" id="HdI-Yf-LZ7" customClass="PaymentListTableViewCell" customModule="Chores_for_me" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="96"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="96"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HdI-Yf-LZ7" id="EoT-v4-ESU">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
@@ -1499,14 +1500,14 @@ Outdoor Home Worker</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Worker List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ziv-qY-sXA">
-                                        <rect key="frame" x="73" y="58" width="107" height="24"/>
+                                        <rect key="frame" x="80" y="75.5" width="107" height="24"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" name="AppPrimaryLabelColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O7W-tK-tEE">
-                                        <rect key="frame" x="0.0" y="131" width="414" height="765"/>
+                                        <rect key="frame" x="0.0" y="158.5" width="414" height="737.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataSource" destination="24O-WJ-fJz" id="E1t-H5-mye"/>
@@ -1514,35 +1515,36 @@ Outdoor Home Worker</string>
                                         </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8D-n5-23J" customClass="DesignableButton" customModule="Designable">
-                                        <rect key="frame" x="30" y="97" width="356" height="24"/>
+                                        <rect key="frame" x="30" y="124.5" width="356" height="24"/>
                                         <state key="normal" title="  List of Worker near by you" image="location.mark"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQs-Cc-a5O">
-                                        <rect key="frame" x="15" y="50" width="50" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFn-Fg-hD9">
+                                        <rect key="frame" x="5" y="50" width="70" height="75"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="9JM-fg-8Fl"/>
-                                            <constraint firstAttribute="height" constant="40" id="WeC-ba-Qwh"/>
+                                            <constraint firstAttribute="height" constant="75" id="0da-Qo-WUC"/>
+                                            <constraint firstAttribute="width" constant="70" id="xBe-4n-pGG"/>
                                         </constraints>
                                         <color key="tintColor" red="0.9161816572" green="0.96280451649999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="chevron.backward" catalog="system"/>
+                                        <state key="normal" image="left-arrow"/>
                                         <connections>
-                                            <action selector="backButton:" destination="24O-WJ-fJz" eventType="touchUpInside" id="CdW-K2-6Q6"/>
+                                            <action selector="backButton:" destination="24O-WJ-fJz" eventType="touchUpInside" id="7gf-S2-8p7"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="AppSecondaryBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="ziv-qY-sXA" firstAttribute="centerY" secondItem="YQs-Cc-a5O" secondAttribute="centerY" id="BtW-zP-620"/>
-                                    <constraint firstItem="YQs-Cc-a5O" firstAttribute="leading" secondItem="6h4-h3-fGs" secondAttribute="leading" constant="15" id="FLy-qw-tfc"/>
+                                    <constraint firstItem="ziv-qY-sXA" firstAttribute="centerY" secondItem="ZFn-Fg-hD9" secondAttribute="centerY" id="Bt3-4T-p1K"/>
+                                    <constraint firstItem="ziv-qY-sXA" firstAttribute="leading" secondItem="ZFn-Fg-hD9" secondAttribute="trailing" constant="5" id="E6l-cU-1OD"/>
                                     <constraint firstItem="O7W-tK-tEE" firstAttribute="leading" secondItem="6h4-h3-fGs" secondAttribute="leading" id="Fd7-Vv-GPg"/>
                                     <constraint firstAttribute="bottom" secondItem="O7W-tK-tEE" secondAttribute="bottom" id="LM0-bk-H3m"/>
                                     <constraint firstItem="C8D-n5-23J" firstAttribute="leading" secondItem="6h4-h3-fGs" secondAttribute="leading" constant="30" id="NKP-R4-hRX"/>
                                     <constraint firstAttribute="trailing" secondItem="C8D-n5-23J" secondAttribute="trailing" constant="28" id="UtC-4F-gof"/>
                                     <constraint firstAttribute="trailing" secondItem="O7W-tK-tEE" secondAttribute="trailing" id="XYI-0e-dht"/>
+                                    <constraint firstItem="ZFn-Fg-hD9" firstAttribute="top" secondItem="6h4-h3-fGs" secondAttribute="top" constant="50" id="XzM-J8-VTG"/>
                                     <constraint firstItem="O7W-tK-tEE" firstAttribute="top" secondItem="C8D-n5-23J" secondAttribute="bottom" constant="10" id="nv2-Mk-cZI"/>
-                                    <constraint firstItem="C8D-n5-23J" firstAttribute="top" secondItem="ziv-qY-sXA" secondAttribute="bottom" constant="15" id="t0a-AL-9C3"/>
-                                    <constraint firstItem="YQs-Cc-a5O" firstAttribute="top" secondItem="6h4-h3-fGs" secondAttribute="top" constant="50" id="vP3-wY-wwB"/>
-                                    <constraint firstItem="ziv-qY-sXA" firstAttribute="leading" secondItem="YQs-Cc-a5O" secondAttribute="trailing" constant="8" id="vo7-yv-3pl"/>
+                                    <constraint firstItem="ZFn-Fg-hD9" firstAttribute="leading" secondItem="6h4-h3-fGs" secondAttribute="leading" constant="5" id="sm2-FY-wFq"/>
+                                    <constraint firstItem="C8D-n5-23J" firstAttribute="top" secondItem="ziv-qY-sXA" secondAttribute="bottom" constant="25" id="t0a-AL-9C3"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1580,7 +1582,7 @@ Outdoor Home Worker</string>
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="san-t6-p0X">
-                                                <rect key="frame" x="0.0" y="-44" width="414" height="896"/>
+                                                <rect key="frame" x="0.0" y="-44" width="414" height="873"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="brooke-cagle-KriecpTIWgY-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="4ML-Nu-WaK">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
@@ -1779,18 +1781,18 @@ Outdoor Home Worker</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ybp-pd-0lc">
-                                                        <rect key="frame" x="20" y="563" width="170" height="40"/>
+                                                        <rect key="frame" x="20" y="563" width="175" height="40"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JK3-rW-BCV" customClass="DesignableButton" customModule="Designable">
-                                                                <rect key="frame" x="0.0" y="0.0" width="170" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="175" height="40"/>
                                                                 <color key="backgroundColor" name="AppPrimaryLabelColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="170" id="pix-aA-lHr"/>
+                                                                    <constraint firstAttribute="width" constant="175" id="pix-aA-lHr"/>
                                                                     <constraint firstAttribute="height" constant="40" id="zY3-RJ-uHn"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                <state key="normal" title="9:00">
+                                                                <state key="normal" title="09:00 pm to 06:00">
                                                                     <color key="titleColor" name="AppInputTextColor"/>
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
@@ -1805,7 +1807,7 @@ Outdoor Home Worker</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gmK-cb-wzF">
-                                                        <rect key="frame" x="0.0" y="826" width="414" height="50"/>
+                                                        <rect key="frame" x="0.0" y="803" width="414" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67p-oC-5Dk" customClass="DesignableButton" customModule="Designable">
                                                                 <rect key="frame" x="0.0" y="0.0" width="207" height="50"/>
@@ -1881,6 +1883,7 @@ Outdoor Home Worker</string>
                                                     <constraint firstAttribute="trailing" secondItem="bp9-Xw-eCY" secondAttribute="trailing" constant="20" id="Dqk-9o-l0l"/>
                                                     <constraint firstItem="er7-A5-2Wl" firstAttribute="leading" secondItem="san-t6-p0X" secondAttribute="leading" constant="20" symbolic="YES" id="Gtf-d6-V2e"/>
                                                     <constraint firstAttribute="trailing" secondItem="4ML-Nu-WaK" secondAttribute="trailing" id="IYm-Tt-BxO"/>
+                                                    <constraint firstItem="gmK-cb-wzF" firstAttribute="top" secondItem="Ybp-pd-0lc" secondAttribute="bottom" constant="200" id="MvT-iP-M7Z"/>
                                                     <constraint firstAttribute="trailing" secondItem="er7-A5-2Wl" secondAttribute="trailing" constant="20" id="QrZ-zW-suH"/>
                                                     <constraint firstItem="mEu-pL-U4O" firstAttribute="leading" secondItem="cU5-Tv-kCq" secondAttribute="leading" id="RTP-SW-gWh"/>
                                                     <constraint firstItem="mW0-yy-mVM" firstAttribute="leading" secondItem="b8A-cM-eKL" secondAttribute="leading" id="Ri2-gk-0Jk"/>
@@ -3443,9 +3446,6 @@ Outdoor Home Worker</string>
         <designable name="2Ow-1f-s3n">
             <size key="intrinsicContentSize" width="79" height="48"/>
         </designable>
-        <designable name="5TK-bS-3Hb">
-            <size key="intrinsicContentSize" width="102" height="19"/>
-        </designable>
         <designable name="67p-oC-5Dk">
             <size key="intrinsicContentSize" width="75" height="27"/>
         </designable>
@@ -3468,7 +3468,7 @@ Outdoor Home Worker</string>
             <size key="intrinsicContentSize" width="95" height="48"/>
         </designable>
         <designable name="JK3-rW-BCV">
-            <size key="intrinsicContentSize" width="34" height="30"/>
+            <size key="intrinsicContentSize" width="136" height="30"/>
         </designable>
         <designable name="Nc9-QT-huS">
             <size key="intrinsicContentSize" width="148" height="48"/>
@@ -3494,11 +3494,8 @@ Outdoor Home Worker</string>
         <designable name="eo9-D5-0aj">
             <size key="intrinsicContentSize" width="30" height="22"/>
         </designable>
-        <designable name="iEh-0e-1vP">
-            <size key="intrinsicContentSize" width="102" height="19"/>
-        </designable>
         <designable name="rFr-SK-XuB">
-            <size key="intrinsicContentSize" width="145" height="30"/>
+            <size key="intrinsicContentSize" width="115" height="30"/>
         </designable>
         <designable name="z1b-GK-rPx">
             <size key="intrinsicContentSize" width="60" height="60"/>
@@ -3522,8 +3519,8 @@ Outdoor Home Worker</string>
         <image name="approved" width="116" height="93"/>
         <image name="brooke-cagle-KriecpTIWgY-unsplash" width="3601" height="5401"/>
         <image name="camera.icon" width="20" height="17"/>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="gallery icon" width="30" height="30"/>
+        <image name="left-arrow" width="25" height="25"/>
         <image name="location.mark" width="15" height="24"/>
         <image name="new_booking_request" width="108" height="108"/>
         <image name="png8" width="20" height="20"/>

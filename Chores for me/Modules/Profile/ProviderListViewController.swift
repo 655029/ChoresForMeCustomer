@@ -23,20 +23,6 @@ class ProviderListViewController: BaseViewController, UITableViewDelegate, UITab
     //MARK: - Properties
     private var productList: [Provider] = []
     var arrayData:[ProviderListModel] = []
-    lazy var backButton : UIButton = {
-        let  backButton = UIButton()
-        backButton.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(named: "BACK")?.withRenderingMode(.alwaysTemplate)
-        backButton
-            .setImage(image, for: .normal)
-        backButton.imageView?.contentMode = .scaleAspectFit
-        backButton.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        backButton.tintColor = .white
-        backButton.addTarget(self, action: #selector(onBackButtonPressed(_:)), for: .touchUpInside)
-        backButton.frame.size.width = 17
-        backButton.frame.size.height = 17
-        return backButton
-    }()
 
 
     //MARK: - Interface Builder Outlets
@@ -52,50 +38,22 @@ class ProviderListViewController: BaseViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         navigationController?.navigationBar.tintColor = .white
         self.navigationItem.setHidesBackButton(true, animated: true)
-        providerListNearByYouButton.addSpaceBetweenImageAndTitle(spacing: 10.0)
+     //   providerListNearByYouButton.addSpaceBetweenImageAndTitle(spacing: 10.0)
         self.applyFinishingTouchesToUIElements()
         self.setUpDataSource()
-     //   backButton.imageEdgeInsets = UIEdgeInsets(top: 13, left: 8, bottom: 4, right: 8)
-      //  UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(onBackPressed(_:)))
         self.callingProviderListAPI()
-//        if let viewController = navigationController?.viewControllers.first(where: {$0 is HomeViewController}) {
-//              navigationController?.popToViewController(viewController, animated: false)
-//        }
-
-//        navigationController?.popToRootViewController(animated: true)
-//        view.addSubview(backButton)
-//        view.bringSubviewToFront(backButton)
-      //  UIApplication.shared.keyWindow?.addSubview(backButton)
-      //  backButton.backgroundColor = UIColor.green
-//        backButton.topAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.topAnchor, constant: 40).isActive = true
-////        backButton.centerYAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.centerYAnchor, constant: -200).isActive = true
-//        backButton.leadingAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.leadingAnchor, constant: 12).isActive = true
-//        backButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
-//        backButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
-
-    }
+     }
 
 
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.tintColor = .white
         tabBarController?.tabBar.isHidden = true
-    //    backButton.isHidden = false
     }
 
     override func viewWillDisappear(_ animated: Bool) {
      //   backButton.isHidden = true
     }
 
-    @IBAction func backButton(_ sender: Any) {
-        RootRouter().loadMainHomeStructure()
-    }
-    @objc func onBackPressed(_ senter: UIBarButtonItem) {
-        RootRouter().loadMainHomeStructure()
-    }
-
-    @objc func onBackButtonPressed(_ sender: UIButton) {
-        RootRouter().loadMainHomeStructure()
-    }
 
 
     //MARK: - UITableViewDataSource Methods
@@ -137,10 +95,10 @@ class ProviderListViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
 
-
-    @IBAction func didTappedBackButton(_ sender: UIButton) {
+    @IBAction func backButton(_ sender: UIButton) {
         RootRouter().loadMainHomeStructure()
     }
+
 
     //MARK: - Helpers
     private func applyFinishingTouchesToUIElements() {

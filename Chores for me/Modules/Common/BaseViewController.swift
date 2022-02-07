@@ -31,12 +31,12 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if #available(iOS 13.0, *) {
-//            CheckTimeFunc()
-//        } else {
-//            // Fallback on earlier versions
-//            CheckTimeFunc()
-//        }
+        if #available(iOS 13.0, *) {
+            CheckTimeFunc()
+        } else {
+            // Fallback on earlier versions
+            CheckTimeFunc()
+        }
         hideKeyboardWhenTappedAround()
     }
 
@@ -65,6 +65,7 @@ class BaseViewController: UIViewController {
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
     }
 
+    
 }
 
 extension Array where Element: Hashable {
@@ -82,26 +83,26 @@ extension Array where Element: Hashable {
 }
 
 extension UIViewController {
-//    func CheckTimeFunc(){
-////        let componets = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
-////        let currentHour = componets.hour
-//        let date = Date()
-//        let calendar = Calendar.current
-//        let timee = TimeZone.current.identifier
-//        print(timee)
-//        let currentHour = calendar.component(.hour, from: date)
-//        print("test currentHour\(String(currentHour ?? 0))")
-//
-//  //      let currentMint = components.minute ?? 0
-//   //     print("test currentMint\(String(currentMint ?? 0))")
-//        print("test Time\(String(describing: currentHour))")
-//        if currentHour < 7 || currentHour > 21 {
-//            print ("show popup")
-//            self.TimePopupAlert()
-//        } else {
-//            print ("do nothing")
-//        }
-//    }
+    func CheckTimeFunc(){
+//        let componets = Calendar.current.dateComponents([.hour, .minute, .second], from: Date())
+//        let currentHour = componets.hour
+        let date = Date()
+        let calendar = Calendar.current
+        let timee = TimeZone.current.identifier
+        print(timee)
+        let currentHour = calendar.component(.hour, from: date)
+        print("test currentHour\(String(currentHour ?? 0))")
+
+  //      let currentMint = components.minute ?? 0
+   //     print("test currentMint\(String(currentMint ?? 0))")
+        print("test Time\(String(describing: currentHour))")
+        if currentHour < 7 || currentHour > 21 {
+            print ("show popup")
+            self.TimePopupAlert()
+        } else {
+            print ("do nothing")
+        }
+    }
 
     @objc func TimePopupAlert(){
         let alertController = UIAlertController (title: "Chores for Me", message: "You can use this app only 7am to 10pm", preferredStyle: .alert)

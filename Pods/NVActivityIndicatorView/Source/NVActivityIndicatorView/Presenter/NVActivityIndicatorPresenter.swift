@@ -318,20 +318,17 @@ public final class NVActivityIndicatorPresenter {
     }
 
     fileprivate func hide(_ fadeOutAnimation: FadeOutAnimation?) {
-        DispatchQueue.main.async {
-            for window in UIApplication.shared.windows {
-                for item in window.subviews
-                where item.restorationIdentifier == self.restorationIdentifier {
-                        if let fadeOutAnimation = fadeOutAnimation {
-                            fadeOutAnimation(item) {
-                                item.removeFromSuperview()
-                            }
-                        } else {
+        for window in UIApplication.shared.windows {
+            for item in window.subviews
+                where item.restorationIdentifier == restorationIdentifier {
+                    if let fadeOutAnimation = fadeOutAnimation {
+                        fadeOutAnimation(item) {
                             item.removeFromSuperview()
                         }
-                }
+                    } else {
+                        item.removeFromSuperview()
+                    }
             }
-
         }
-            }
+    }
 }

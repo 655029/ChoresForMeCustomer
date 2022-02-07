@@ -1,37 +1,28 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
-//
-// You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-// copy, modify, and distribute this software in source code or binary form for use
-// in connection with the web services and APIs provided by Facebook.
-//
-// As with any software that integrates with the Facebook platform, your use of
-// this software is subject to the Facebook Developer Principles and Policies
-// [http://developers.facebook.com/policy/]. This copyright notice shall be
-// included in all copies or substantial portions of the software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+/*
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 #if !TARGET_OS_TV
 
 #import <CoreGraphics/CGGeometry.h>
-#import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
+
+#import <FBSDKCoreKit/FBSDKWebDialogDelegate.h>
+
 @protocol FBSDKWindowFinding;
 
 NS_ASSUME_NONNULL_BEGIN
-
-@protocol FBSDKWebDialogDelegate;
 
 /**
  Internal Type exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
 NS_SWIFT_NAME(WebDialog)
 @interface FBSDKWebDialog : NSObject
@@ -40,7 +31,7 @@ NS_SWIFT_NAME(WebDialog)
  Internal Type exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
 @property (nonatomic) BOOL shouldDeferVisibility;
 
@@ -48,9 +39,9 @@ NS_SWIFT_NAME(WebDialog)
  Internal Type exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
-@property (nonatomic, strong) id<FBSDKWindowFinding> windowFinder;
+@property (nullable, nonatomic, strong) id<FBSDKWindowFinding> windowFinder;
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
@@ -59,7 +50,7 @@ NS_SWIFT_NAME(WebDialog)
  Internal Type exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
 + (instancetype)dialogWithName:(NSString *)name
                       delegate:(id<FBSDKWebDialogDelegate>)delegate;
@@ -68,58 +59,16 @@ NS_SWIFT_NAME(WebDialog)
  Internal Type exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
-+ (instancetype)showWithName:(NSString *)name
-                  parameters:(NSDictionary<NSString *, id> *)parameters
-                    delegate:(id<FBSDKWebDialogDelegate>)delegate;
-
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
-
- @warning UNSAFE - DO NOT USE
- */
-+ (instancetype)createAndShow:(NSString *)name
-                   parameters:(NSDictionary<NSString *, id> *)parameters
-                        frame:(CGRect)frame
-                     delegate:(id<FBSDKWebDialogDelegate>)delegate
-                 windowFinder:(id<FBSDKWindowFinding>)windowFinder;
-
-@end
-
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
-
- @warning UNSAFE - DO NOT USE
- */
-NS_SWIFT_NAME(WebDialogDelegate)
-@protocol FBSDKWebDialogDelegate
-
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
-
- @warning UNSAFE - DO NOT USE
- */
-- (void)webDialog:(FBSDKWebDialog *)webDialog didCompleteWithResults:(NSDictionary<NSString *, id> *)results;
-
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
-
- @warning UNSAFE - DO NOT USE
- */
-- (void)webDialog:(FBSDKWebDialog *)webDialog didFailWithError:(NSError *)error;
-
-/**
- Internal Type exposed to facilitate transition to Swift.
- API Subject to change or removal without warning. Do not use.
-
- @warning UNSAFE - DO NOT USE
- */
-- (void)webDialogDidCancel:(FBSDKWebDialog *)webDialog;
+// UNCRUSTIFY_FORMAT_OFF
++ (instancetype)createAndShowWithName:(NSString *)name
+                           parameters:(nullable NSDictionary<NSString *, id> *)parameters
+                                frame:(CGRect)frame
+                             delegate:(id<FBSDKWebDialogDelegate>)delegate
+                         windowFinder:(nullable id<FBSDKWindowFinding>)windowFinder
+NS_SWIFT_NAME(createAndShow(name:parameters:frame:delegate:windowFinder:));
+// UNCRUSTIFY_FORMAT_ON
 
 @end
 

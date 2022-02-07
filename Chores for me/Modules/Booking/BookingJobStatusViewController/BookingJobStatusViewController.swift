@@ -192,10 +192,11 @@ class BookingJobStatusViewController: BaseViewController {
                 let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 do {
                     let json =  try JSONDecoder().decode(JobDetailsModel.self, from: data ?? Data())
-                    debugPrint(json)
-                      print(JobDetailsModel.self)
+                   
                     DispatchQueue.main.async {
                         print(json)
+                        debugPrint(json)
+                          print(JobDetailsModel.self)
                             if let myData = json.data {
                                 print(myData)
                                 self.myJobDetails = json.data
@@ -257,7 +258,7 @@ class BookingJobStatusViewController: BaseViewController {
             if let response = response {
                 print(response)
             }
-            if let data = data {
+            if let data = data {  
                 do {
                     let json = try JSONDecoder().decode(CancelJobByCustomer.self, from: data)
                     print(json)
@@ -266,7 +267,19 @@ class BookingJobStatusViewController: BaseViewController {
                         if json.data?.minutes ?? 0 < 5 {
                             RootRouter().loadMainHomeStructure()
                         }else{
-                            self.navigate(.cancelPayment)
+                            let dialogMessage = UIAlertController(title: "Chores for me", message: "Are you sure? you want to Cancel this job", preferredStyle: .alert)
+                            let delete = UIAlertAction(title: "Yes", style: .destructive, handler: { (action) -> Void in
+                                print("Delete button tapped")
+                                self.navigate(.cancelPayment)
+                          })
+
+                            let cancel = UIAlertAction(title: "No", style: .cancel) { (action) -> Void in
+                                print("Cancel button tapped")
+                            }
+
+                            dialogMessage.addAction(delete)
+                            dialogMessage.addAction(cancel)
+                            self.present(dialogMessage, animated: true, completion: nil)
                         }
                     }
                 } catch {

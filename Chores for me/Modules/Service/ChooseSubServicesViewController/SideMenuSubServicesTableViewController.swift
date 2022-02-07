@@ -126,11 +126,10 @@ class SideMenuSubServicesTableViewController: UITableViewController {
         SideMenuSubServicesTableViewController.selectedServiesArray.removeAll()
         SideMenuSubServicesTableViewController.selectedServiesImagesArray.removeAll()
         SideMenuSubServicesTableViewController.subcategoryList.removeAllObjects()
-//        navigationController?.navigationBar.barTintColor = UIColor(red: 255, green: 255, blue: 255, transparency: 100.0)
-        navigationController?.navigationBar.barTintColor = AppColor.AppTertiaryBackgroundColor
-        UINavigationBar.appearance().tintColor = .white
+
+        navigationController?.navigationBar.backgroundColor = .black
         tableView.alwaysBounceVertical = false
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         if  SideMenuSubServicesTableViewController.firstCategoryId == 4 {
             navigationItem.title = "Create Custom Job"
             let rightBarButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "custom jobs add"), style: .plain, target: self, action: #selector(didTappedRightBarButton(_:)))

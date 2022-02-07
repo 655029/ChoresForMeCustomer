@@ -15,10 +15,18 @@ struct AllServices {
     var myName: String
 }
 
-class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
+class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate, DissmissConfirmAlertViewController {
+    func didTappedProceedButton(controller: ConfirmAlertViewController) {
+        let mainStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "CheckOutViewController") as! CheckOutViewController
+//        window?.rootViewController?.present(profileViewController, animated: true, completion: nil)
+//        present(profileViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(profileViewController, animated: true)
+    }
     
     
-    // MARK: - Outlets Arzooooo
+    
+    // MARK: - Interface Outlets
     @IBOutlet weak var currentLocationButton: DesignableButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noJobImageVIew: UIImageView!
@@ -57,8 +65,38 @@ class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
         else {
             print("Location not enabled")
         }
+        NotificationCenter.default.addObserver(self, selector:#selector(viewWillAppear(_:)), name: NSNotification.Name(rawValue: "Forground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector : #selector(handleNotification(n:)), name : Notification.Name("notificationData"), object : nil)
         
     }
+    
+    
+    
+    @objc func handleNotification(n : NSNotification) {
+        print(n)
+        let dicData = n.object as! [String: String]
+        let notificationType = dicData["notificationType"]!
+        if notificationType == "complete" {
+            let storyboard = UIStoryboard(name: "Booking", bundle: nil)
+            let secondVc = storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController") as! ConfirmAlertViewController
+//            let navigationController = UINavigationController(rootViewController: secondVc)
+            let navigationController = UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "ConfirmAlertViewController"))
+            secondVc.delegate = self
+            navigationController.modalPresentationStyle = .overFullScreen
+            navigationController.modalPresentationStyle = .overCurrentContext
+            self.present(secondVc, animated: false, completion: nil)
+        }
+        
+        else if notificationType == "accept" {
+            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+            let navigationController = UINavigationController(rootViewController: storyboard.instantiateViewController(withIdentifier: "ConfirmationViewController"))
+            navigationController.modalPresentationStyle = .fullScreen
+            navigationController.modalPresentationStyle = .overCurrentContext
+//            window?.rootViewController?.present(navigationController, animated: true, completion: nil)
+            present(navigationController, animated: true, completion: nil)
+        }
+    }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         locationManager.stopUpdatingLocation()
@@ -165,9 +203,9 @@ class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
             
             do {
                 let json =  try JSONDecoder().decode(JobsHistoryModel.self, from: data ?? Data())
-                debugPrint(json)
+                    // debugPrint(json)
                 DispatchQueue.main.async {
-                    print(JobsHistoryModel.self)
+                   // print(JobsHistoryModel.self)
                     print(json)
                     self.hideActivity()
                     if json.data?.count == 0 {
@@ -209,11 +247,11 @@ class HomeViewController: HomeBaseViewController, CLLocationManagerDelegate {
         request.addValue("\(UserStoreSingleton.shared.Token ?? "")", forHTTPHeaderField:"Authorization")
         request.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            self.hideActivity()
             do {
                 let json =  try JSONDecoder().decode(SetUpProfile.self, from: data ?? Data())
-                debugPrint(json)
+             //   debugPrint(json)
                 DispatchQueue.main.async {
+                    self.hideActivity()
                     UserStoreSingleton.shared.name = json.data?.first_name
                     UserStoreSingleton.shared.userID = json.data?.userId
                     UserStoreSingleton.shared.profileImage = json.data?.image
@@ -356,18 +394,18 @@ extension HomeViewController: UITableViewDataSource {
         }
         let url = URL(string: getcreatedjob[indexPath.row].image ?? "")
         cell.categoryImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        cell.categoryImage.sd_setImage(with: url, placeholderImage: UIImage(named: "Lawn Mowing"))
+        if url == nil {
+            cell.categoryImage.sd_setImage(with: url, placeholderImage: UIImage(named: "Lawn Mowing"))
+        }else{
+            cell.categoryImage.sd_setImage(with: url, placeholderImage: UIImage(named: "Lawn Mowing"))
+        }
+
         cell.categoryname.text = getcreatedjob[indexPath.row].categoryName
         cell.locationName.text = getcreatedjob[indexPath.row].location
         cell.copyIcon.tag = indexPath.row
         cell.selectedPrice.text = "$\(getcreatedjob[indexPath.row].price ?? "")"
         let dateTime = getcreatedjob[indexPath.row].booking_date
         let date = String(dateTime?.dropLast(14) ?? "")
-//        let inputFormatter = DateFormatter()
-//        inputFormatter.dateFormat = "dd-MM-yyyy"
-//        let showDate = inputFormatter.date(from: date)
-//        inputFormatter.dateFormat = "dd-MM-yyyy"
-//        let resultString = inputFormatter.string(from: showDate!)
         cell.createdDateLabel.text = getDate(date: getcreatedjob[indexPath.row].booking_date ?? "")
         let datenDay = getcreatedjob[indexPath.row].day
         let dateDay = datenDay?.filter{!$0.isWhitespace}
@@ -479,5 +517,17 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+}
+
+
+extension HomeViewController : fromNotification {
+    func dissmissNotification(jobId: Int) {
+        print("------Working-----")
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let secondVc = storyboard.instantiateViewController(withIdentifier: "CheckOutViewController") as! CheckOutViewController
+        //        self.tabBarController?.tabBar.selectedItem = 1
+        secondVc.jobid = jobId
+        navigationController?.pushViewController(secondVc, animated: true)
     }
 }

@@ -150,10 +150,9 @@ class LoginViewController: BaseViewController {
     }
 
     @IBAction func googleLoginButton(_ sender: DesignableButton) {
+        GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.signIn()
 
-
-        
     }
 
 //    @IBAction func facebookLoginButtonAction(_ sender: )
@@ -314,7 +313,6 @@ extension LoginViewController: UITextFieldDelegate {
                     self.hideActivity()
                     let phoneNumber = gitData.data?.phone
                     let headersvalue = gitData.data?.token
-
                     let responseMessage = gitData.status
                     if responseMessage == 200 {
                         UserStoreSingleton.shared.isLoggedIn = true

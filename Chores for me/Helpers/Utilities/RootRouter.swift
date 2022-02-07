@@ -13,7 +13,9 @@ class RootRouter {
      If no animation type is specified, there is no animation */
     func setRootViewController(controller: UIViewController, animatedWithOptions: UIView.AnimationOptions?) {
         guard let window = UIApplication.shared.windows.first(where: {$0.isKeyWindow}) else {
-            fatalError("No window in app")
+            print("No window in app")
+            return
+            //fatalError("No window in app")
         }
         if let animationOptions = animatedWithOptions, window.rootViewController != nil {
             window.rootViewController = controller
@@ -23,7 +25,6 @@ class RootRouter {
             window.rootViewController = controller
         }
     }
-    
 
     func loadMainAppStructure() {
         // Customize your app structure here

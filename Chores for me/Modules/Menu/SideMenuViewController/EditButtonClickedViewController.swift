@@ -256,13 +256,8 @@ class EditButtonClickedViewController: UIViewController, UIImagePickerController
         let boundary = UUID().uuidString
 
         let session = URLSession.shared
-
-        // Set the URLRequest to POST and to the specified URL
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "POST"
-
-        // Set Content-Type Header to multipart/form-data, this is equivalent to submitting form data with file upload in a web browser
-        // And the boundary is also set here
         urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
         var data = Data()
@@ -270,6 +265,7 @@ class EditButtonClickedViewController: UIViewController, UIImagePickerController
         data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
         data.append("Content-Disposition: form-data; name=\"\(paramName)\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
         data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+        let jpegData = image.jpegData(compressionQuality: 1.0)
         data.append(image.pngData()!)
 
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)

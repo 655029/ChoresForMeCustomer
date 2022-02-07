@@ -1,20 +1,10 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
-//
-// You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-// copy, modify, and distribute this software in source code or binary form for use
-// in connection with the web services and APIs provided by Facebook.
-//
-// As with any software that integrates with the Facebook platform, your use of
-// this software is subject to the Facebook Developer Principles and Policies
-// [http://developers.facebook.com/policy/]. This copyright notice shall be
-// included in all copies or substantial portions of the software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+/*
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -72,13 +62,11 @@ NS_SWIFT_NAME(AccessTokenChangeNewKey);
 FOUNDATION_EXPORT NSString *const FBSDKAccessTokenDidExpireKey
 NS_SWIFT_NAME(AccessTokenDidExpireKey);
 
-
 /**
   Represents an immutable access token for using Facebook services.
  */
 NS_SWIFT_NAME(AccessToken)
-@interface FBSDKAccessToken : NSObject<NSCopying, NSObject, NSSecureCoding>
-
+@interface FBSDKAccessToken : NSObject <NSCopying, NSObject, NSSecureCoding>
 
 /**
   The "global" access token that represents the currently logged in user.
@@ -86,79 +74,79 @@ NS_SWIFT_NAME(AccessToken)
  The `currentAccessToken` is a convenient representation of the token of the
  current user and is used by other SDK components (like `FBSDKLoginManager`).
  */
-@property (class, nonatomic, copy, nullable) FBSDKAccessToken *currentAccessToken;
+@property (class, nullable, nonatomic, copy) FBSDKAccessToken *currentAccessToken;
 
 /**
  Returns YES if currentAccessToken is not nil AND currentAccessToken is not expired
 
  */
-@property (class, nonatomic, assign, readonly, getter=isCurrentAccessTokenActive) BOOL currentAccessTokenIsActive;
+@property (class, nonatomic, readonly, getter = isCurrentAccessTokenActive, assign) BOOL currentAccessTokenIsActive;
 
 /**
  Internal Type exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
-@property (nullable, class, nonatomic, copy) id<FBSDKTokenCaching> tokenCache;
+@property (class, nullable, nonatomic, copy) id<FBSDKTokenCaching> tokenCache;
 
 /**
   Returns the app ID.
  */
-@property (nonatomic, copy, readonly) NSString *appID;
+@property (nonatomic, readonly, copy) NSString *appID;
 
 /**
  Returns the expiration date for data access
  */
-@property (nonatomic, copy, readonly) NSDate *dataAccessExpirationDate;
+@property (nonatomic, readonly, copy) NSDate *dataAccessExpirationDate;
 
 /**
   Returns the known declined permissions.
  */
-@property (nonatomic, copy, readonly) NSSet<NSString *> *declinedPermissions
-NS_REFINED_FOR_SWIFT;
+@property (nonatomic, readonly, copy) NSSet<NSString *> *declinedPermissions
+  NS_REFINED_FOR_SWIFT;
 
 /**
  Returns the known declined permissions.
  */
-@property (nonatomic, copy, readonly) NSSet<NSString *> *expiredPermissions
-NS_REFINED_FOR_SWIFT;
+@property (nonatomic, readonly, copy) NSSet<NSString *> *expiredPermissions
+  NS_REFINED_FOR_SWIFT;
 
 /**
   Returns the expiration date.
  */
-@property (nonatomic, copy, readonly) NSDate *expirationDate;
+@property (nonatomic, readonly, copy) NSDate *expirationDate;
 
 /**
   Returns the known granted permissions.
  */
-@property (nonatomic, copy, readonly) NSSet<NSString *> *permissions
-NS_REFINED_FOR_SWIFT;
+@property (nonatomic, readonly, copy) NSSet<NSString *> *permissions
+  NS_REFINED_FOR_SWIFT;
 
 /**
   Returns the date the token was last refreshed.
 */
-@property (nonatomic, copy, readonly) NSDate *refreshDate;
+@property (nonatomic, readonly, copy) NSDate *refreshDate;
 
 /**
   Returns the opaque token string.
  */
-@property (nonatomic, copy, readonly) NSString *tokenString;
+@property (nonatomic, readonly, copy) NSString *tokenString;
 
 /**
   Returns the user ID.
  */
-@property (nonatomic, copy, readonly) NSString *userID;
+@property (nonatomic, readonly, copy) NSString *userID;
 
 /**
  Returns whether the access token is expired by checking its expirationDate property
  */
-@property (readonly, assign, nonatomic, getter=isExpired) BOOL expired;
+@property (nonatomic, readonly, getter = isExpired, assign) BOOL expired;
 
 /**
  Returns whether user data access is still active for the given access token
  */
-@property (readonly, assign, nonatomic, getter=isDataAccessExpired) BOOL dataAccessExpired;
+@property (nonatomic, readonly, getter = isDataAccessExpired, assign) BOOL dataAccessExpired;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -192,14 +180,16 @@ NS_REFINED_FOR_SWIFT;
                      expirationDate:(nullable NSDate *)expirationDate
                         refreshDate:(nullable NSDate *)refreshDate
            dataAccessExpirationDate:(nullable NSDate *)dataAccessExpirationDate
-NS_DESIGNATED_INITIALIZER;
+  NS_DESIGNATED_INITIALIZER;
 
 /**
   Convenience getter to determine if a permission has been granted
  @param permission  The permission to check.
  */
+// UNCRUSTIFY_FORMAT_OFF
 - (BOOL)hasGranted:(NSString *)permission
 NS_SWIFT_NAME(hasGranted(permission:));
+// UNCRUSTIFY_FORMAT_ON
 
 /**
   Compares the receiver to another FBSDKAccessToken

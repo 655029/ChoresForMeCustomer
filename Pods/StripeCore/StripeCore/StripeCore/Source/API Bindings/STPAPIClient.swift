@@ -19,7 +19,6 @@ public class STPAPIClient {
     /// eg in STPPaymentHandler, STPPaymentContext, STPCustomerContext, etc.
     public static let shared: STPAPIClient = {
         let client = STPAPIClient()
-        STPAnalyticsClient.sharedClient.publishableKeyProvider = client
         return client
     }()
 
@@ -38,6 +37,16 @@ public class STPAPIClient {
         }
     }
     var _publishableKey: String?
+    
+    /// A publishable key that only contains publishable keys and not secret keys
+    /// If a secret key is found, returns "[REDACTED_LIVE_KEY]"
+    var sanitizedPublishableKey: String? {
+        guard let publishableKey = publishableKey else {
+            return nil
+        }
+
+        return publishableKey.isSecretKey ? "[REDACTED_LIVE_KEY]" : publishableKey
+    }
 
     // Stored STPPaymentConfiguration: Type checking handled in STPAPIClient+Payments.swift
     @_spi(STP) public var _stored_configuration: NSObject?
@@ -62,7 +71,7 @@ public class STPAPIClient {
     @_spi(STP) public var sourcePollers: [String: NSObject]?
     @_spi(STP) public var sourcePollersQueue: DispatchQueue?
     /// A set of beta headers to add to Stripe API requests e.g. `Set(["alipay_beta=v1"])`
-    var betas: Set<String> = []
+    @_spi(STP) public var betas: Set<String> = []
     
     /// Returns `true` if `publishableKey` is actually a user key, `false` otherwise.
     @_spi(STP) public var publishableKeyIsUserKey: Bool {
@@ -83,11 +92,15 @@ public class STPAPIClient {
         self.publishableKey = publishableKey
     }
 
-    @_spi(STP) public func configuredRequest(for url: URL, additionalHeaders: [String: String] = [:])
-        -> NSMutableURLRequest
+    @_spi(STP) public func configuredRequest(
+        for url: URL,
+        using ephemeralKeySecret: String? = nil,
+        additionalHeaders: [String: String] = [:]
+    )
+        -> URLRequest
     {
-        let request = NSMutableURLRequest(url: url)
-        var headers = defaultHeaders()
+        var request = URLRequest(url: url)
+        var headers = defaultHeaders(ephemeralKeySecret: ephemeralKeySecret)
         for (k, v) in additionalHeaders { headers[k] = v }  // additionalHeaders can overwrite defaultHeaders
         headers.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)
@@ -96,7 +109,7 @@ public class STPAPIClient {
     }
 
     /// Headers common to all API requests for a given API Client.
-    func defaultHeaders() -> [String: String] {
+    func defaultHeaders(ephemeralKeySecret: String?) -> [String: String] {
         var defaultHeaders: [String: String] = [:]
         defaultHeaders["X-Stripe-User-Agent"] = STPAPIClient.stripeUserAgentDetails(with: appInfo)
         var stripeVersion = APIVersion
@@ -105,7 +118,7 @@ public class STPAPIClient {
         }
         defaultHeaders["Stripe-Version"] = stripeVersion
         defaultHeaders["Stripe-Account"] = stripeAccount
-        for (k, v) in authorizationHeader() { defaultHeaders[k] = v }
+        for (k, v) in authorizationHeader(using: ephemeralKeySecret) { defaultHeaders[k] = v }
         return defaultHeaders
     }
 
@@ -113,6 +126,9 @@ public class STPAPIClient {
 
     static var didShowTestmodeKeyWarning = false
     class func validateKey(_ publishableKey: String?) {
+        guard NSClassFromString("XCTest") == nil else {
+            return // no asserts in unit tests
+        }
         guard let publishableKey = publishableKey, !publishableKey.isEmpty else {
             assertionFailure(
                 "You must use a valid publishable key. For more info, see https://stripe.com/docs/keys"
@@ -171,8 +187,7 @@ public class STPAPIClient {
             details["model"] = model
         }
 
-        let vendorIdentifier = UIDevice.current.identifierForVendor?.uuidString
-        if let vendorIdentifier = vendorIdentifier {
+        if let vendorIdentifier = UIDevice.current.identifierForVendor?.uuidString {
             details["vendor_identifier"] = vendorIdentifier
         }
         if let appInfo = appInfo {
@@ -190,19 +205,12 @@ public class STPAPIClient {
     }
     
     @_spi(STP) public func authorizationHeader(using ephemeralKeySecret: String? = nil) -> [String: String] {
-        var authorizationBearer = publishableKey ?? ""
-        if let ephemeralKeySecret = ephemeralKeySecret {
-            authorizationBearer = ephemeralKeySecret
-        }
-        var headers: [String: String] = [
-            "Authorization": "Bearer " + authorizationBearer
-        ]
+        let authorizationBearer = ephemeralKeySecret ?? publishableKey ?? ""
+        var headers = ["Authorization": "Bearer " + authorizationBearer]
+        
         if publishableKeyIsUserKey {
-            if ProcessInfo.processInfo.environment["Stripe-Livemode"] == "false" {
-                headers["Stripe-Livemode"] = "false"
-            } else {
-                headers["Stripe-Livemode"] = "true"
-            }
+            let liveMode = ProcessInfo.processInfo.environment["Stripe-Livemode"] != "false"
+            headers["Stripe-Livemode"] = liveMode ? "true" : "false"
         }
         return headers
     }
@@ -213,11 +221,210 @@ public class STPAPIClient {
     }
     return publishableKey.lowercased().hasPrefix("pk_test")
   }
-
 }
-
-/// :nodoc:
-@_spi(STP) extension STPAPIClient: PublishableKeyProvider { }
 
 private let APIVersion = "2020-08-27"
 private let APIBaseURL = "https://api.stripe.com/v1"
+
+// MARK: Modern bindings
+extension STPAPIClient {
+    /// Make a GET request using the passed parameters.
+    @_spi(STP) public func get<T: StripeDecodable>(
+        resource: String,
+        parameters: [String: Any],
+        ephemeralKeySecret: String? = nil,
+        completion: @escaping (Result<T, Error>
+        ) -> Void) {
+        request(
+            method: .get,
+            parameters: parameters,
+            ephemeralKeySecret: ephemeralKeySecret,
+            resource: resource,
+            completion: completion
+        )
+    }
+
+    /**
+     Make a GET request using the passed parameters.
+     - Returns: a promise that is fullfilled when the request is complete.
+     */
+    @_spi(STP) public func get<T: StripeDecodable>(
+        resource: String,
+        parameters: [String: Any],
+        ephemeralKeySecret: String? = nil
+    ) -> Promise<T> {
+        return request(
+            method: .get,
+            parameters: parameters,
+            ephemeralKeySecret: ephemeralKeySecret,
+            resource: resource
+        )
+    }
+    
+    /// Make a POST request using the passed parameters.
+    @_spi(STP) public func post<T: StripeDecodable>(
+        resource: String,
+        parameters: [String: Any],
+        ephemeralKeySecret: String? = nil,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
+        request(
+            method: .post,
+            parameters: parameters,
+            ephemeralKeySecret: ephemeralKeySecret,
+            resource: resource,
+            completion: completion
+        )
+    }
+
+    /**
+     Make a POST request using the passed parameters.
+     - Returns: a promise that is fullfilled when the request is complete.
+     */
+    @_spi(STP) public func post<T: StripeDecodable>(
+        resource: String,
+        parameters: [String: Any],
+        ephemeralKeySecret: String? = nil
+    ) -> Promise<T> {
+        return request(method: .post, parameters: parameters, ephemeralKeySecret: ephemeralKeySecret, resource: resource)
+    }
+
+    func request<T: StripeDecodable>(
+        method: HTTPMethod,
+        parameters: [String: Any],
+        ephemeralKeySecret: String?,
+        resource: String
+    ) -> Promise<T> {
+        let promise = Promise<T>()
+        self.request(
+            method: method,
+            parameters: parameters,
+            ephemeralKeySecret: ephemeralKeySecret,
+            resource: resource
+        ) { result in
+            promise.fullfill(with: result)
+        }
+        return promise
+    }
+
+    func request<T: StripeDecodable>(
+        method: HTTPMethod,
+        parameters: [String: Any],
+        ephemeralKeySecret: String?,
+        resource: String,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
+        var urlComponents = URLComponents(url: apiURL.appendingPathComponent(resource), resolvingAgainstBaseURL: true)!
+        var request = configuredRequest(for: urlComponents.url!)
+        switch method {
+        case .get:
+            let query = URLEncoder.queryString(from: parameters)
+            urlComponents.query = query
+            request.url = urlComponents.url!
+        case .post:
+            let formData = URLEncoder.queryString(from: parameters).data(using: .utf8)
+            request.httpBody = formData
+            request.setValue(
+                String(format: "%lu", UInt(formData?.count ?? 0)), forHTTPHeaderField: "Content-Length")
+            request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        }
+        
+        request.httpMethod = method.rawValue
+        for (k, v) in authorizationHeader(using: ephemeralKeySecret) { request.setValue(v, forHTTPHeaderField: k) }
+
+        self.sendRequest(request: request, completion: completion)
+    }
+
+    /**
+     Make a POST request using the passed StripeEncodable object.
+     - Returns: a promise that is fullfilled when the request is complete.
+     */
+    @_spi(STP) public func post<I: StripeEncodable, O: StripeDecodable>(
+        resource: String,
+        object: I,
+        ephemeralKeySecret: String? = nil
+    ) -> Promise<O> {
+        let promise = Promise<O>()
+        self.post(resource: resource, object: object, ephemeralKeySecret: ephemeralKeySecret) { result in
+            promise.fullfill(with: result)
+        }
+        return promise
+    }
+
+    /// Make a POST request using the passed StripeEncodable object.
+    @_spi(STP) public func post<I: StripeEncodable, O: StripeDecodable>(
+        resource: String,
+        object: I,
+        ephemeralKeySecret: String? = nil,
+        completion: @escaping (Result<O, Error>) -> Void
+    ) {
+        let urlComponents = URLComponents(url: apiURL.appendingPathComponent(resource), resolvingAgainstBaseURL: true)!
+        do {
+            let jsonDictionary = try object.encodeJSONDictionary()
+            let formData = URLEncoder.queryString(from: jsonDictionary).data(using: .utf8)
+            var request = configuredRequest(
+                for: urlComponents.url!,
+                using: ephemeralKeySecret,
+                additionalHeaders: [
+                    "Content-Length" : String(format: "%lu", UInt(formData?.count ?? 0)),
+                    "Content-Type" : "application/x-www-form-urlencoded"
+                ]
+            )
+            request.httpBody = formData
+            request.httpMethod = HTTPMethod.post.rawValue
+            
+            self.sendRequest(request: request, completion: completion)
+        } catch {
+            // JSONEncoder can only throw two possible exceptions:
+            // `invalidFloatingPointValue`, which will never be thrown because of
+            // our encoder's NonConformingFloatEncodingStrategy.
+            // The other is `invalidValue` if the top-level object doesn't encode any values.
+            // This should ~never happen, and if it does the object will be empty,
+            // so it should be safe to return the un-redacted underlying error.
+            DispatchQueue.main.async {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func sendRequest<T: StripeDecodable>(
+        request: URLRequest,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
+        urlSession.stp_performDataTask(with: request, completionHandler: { (data, _, error) in
+            DispatchQueue.main.async {
+                completion(STPAPIClient.decodeResponse(data: data, error: error))
+            }
+        })
+    }
+
+    @_spi(STP) public static func decodeResponse<T: StripeDecodable>(
+        data: Data?,
+        error: Error?
+    ) -> Result<T, Error> {
+        if let error = error {
+            return .failure(error)
+        }
+        guard let data = data else {
+            return .failure(NSError.stp_genericFailedToParseResponseError())
+        }
+        do {
+            let decodedObject: T = try JSONDecoder.decode(jsonData: data)
+            return .success(decodedObject)
+        } catch {
+            // Try decoding the error from the service if one is available
+            if let decodedErrorResponse: StripeAPIErrorResponse = try? JSONDecoder.decode(jsonData: data),
+               let apiError = decodedErrorResponse.error {
+                return .failure(StripeError.apiError(apiError))
+            } else {
+                // Return decoding error directly
+                return .failure(error)
+            }
+        }
+    }
+    
+    enum HTTPMethod: String {
+        case get = "GET"
+        case post = "POST"
+    }
+}

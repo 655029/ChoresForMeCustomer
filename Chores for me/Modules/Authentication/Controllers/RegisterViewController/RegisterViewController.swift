@@ -33,7 +33,9 @@ class RegisterViewController: BaseViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var googleLoginButton: DesignableButton!
     @IBOutlet weak var facebookLoginButton: DesignableButton!
-
+    @IBOutlet weak var viewPasswordBtn: UIButton!
+    @IBOutlet weak var viewConfirmPasswordBtn: UIButton!
+    
 
     // MARK: - Properties
     static var socailKey: String?
@@ -43,6 +45,8 @@ class RegisterViewController: BaseViewController, UIImagePickerControllerDelegat
     let picker = ADCountryPicker()
     var photoURL : URL!
     var imageResponse: String?
+    var viewPasswordIcon: Bool = true
+    var viewConfirmPasswordIcon: Bool = true
 
 
     // MARK: - View Lifecycle
@@ -61,7 +65,6 @@ class RegisterViewController: BaseViewController, UIImagePickerControllerDelegat
         picker.pickerTitle = "Select a Country"
         picker.defaultCountryCode = "US"
         picker.forceDefaultCountryCode = true
-//        callingSIgnUpAPI()
         self.googleSignIn()
         facebookLoginButton.addTarget(self, action: #selector(didtappedFacebookButton(_:)), for: .touchUpInside)
         picker.font = UIFont(name: "Helvetica Neue", size: 18)
@@ -194,6 +197,28 @@ class RegisterViewController: BaseViewController, UIImagePickerControllerDelegat
     @IBAction func googleLoginButton(_ sender: DesignableButton) {
         GIDSignIn.sharedInstance()?.signIn()
        // callingSIgnUpAPI()
+    }
+    
+    @IBAction func didTappedShowPasswordBtn(sender: UIButton) {
+        viewPasswordBtn.isSelected.toggle()
+        if(viewPasswordIcon == true) {
+                    passwordTextField.isSecureTextEntry = false
+                } else {
+                    passwordTextField.isSecureTextEntry = true
+                }
+
+        viewPasswordIcon = !viewPasswordIcon
+    }
+    
+    @IBAction func didTappedShowConfirmPasswordBtn(sender: UIButton) {
+        viewConfirmPasswordBtn.isSelected.toggle()
+        if(viewConfirmPasswordIcon == true) {
+                    confirmPasswordTextfeild.isSecureTextEntry = false
+                } else {
+                    confirmPasswordTextfeild.isSecureTextEntry = true
+                }
+
+        viewConfirmPasswordIcon = !viewConfirmPasswordIcon
     }
 
     //MARK: - AdPickerCountryCode TextFeild

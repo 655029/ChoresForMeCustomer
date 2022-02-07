@@ -184,6 +184,7 @@ extension BookingHistoryViewController: UITableViewDataSource {
         }
         let imageUrl = URL(string: "\(bookingHistoryResponseData[indexPath.row].providerDetails?.image ?? "")")
         let providerImageUrl = URL(string: bookingHistoryResponseData[indexPath.row].image ?? "")
+        print(providerImageUrl)
         cell.categoryImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.categoryImage.sd_setImage(with: providerImageUrl, placeholderImage:UIImage(contentsOfFile:"Lawn Mowing"))
         cell.profileImage.sd_imageIndicator = SDWebImageActivityIndicator.gray

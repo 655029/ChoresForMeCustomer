@@ -1,20 +1,10 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
-//
-// You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-// copy, modify, and distribute this software in source code or binary form for use
-// in connection with the web services and APIs provided by Facebook.
-//
-// As with any software that integrates with the Facebook platform, your use of
-// this software is subject to the Facebook Developer Principles and Policies
-// [http://developers.facebook.com/policy/]. This copyright notice shall be
-// included in all copies or substantial portions of the software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+/*
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -116,19 +106,19 @@ NS_SWIFT_NAME(GraphRequestErrorParsedJSONResponseKey);
 /**
  Success Block
  */
-typedef void (^FBSDKCodeBlock)(void)
+typedef void (^ FBSDKCodeBlock)(void)
 NS_SWIFT_NAME(CodeBlock);
 
 /**
  Error Block
  */
-typedef void (^FBSDKErrorBlock)(NSError *_Nullable error)
+typedef void (^ FBSDKErrorBlock)(NSError *_Nullable error)
 NS_SWIFT_NAME(ErrorBlock);
 
 /**
  Success Block
  */
-typedef void (^FBSDKSuccessBlock)(BOOL success, NSError *_Nullable error)
+typedef void (^ FBSDKSuccessBlock)(BOOL success, NSError *_Nullable error)
 NS_SWIFT_NAME(SuccessBlock);
 
 /*
@@ -136,16 +126,16 @@ NS_SWIFT_NAME(SuccessBlock);
  */
 
 #ifndef NS_ERROR_ENUM
-#define NS_ERROR_ENUM(_domain, _name) \
-enum _name: NSInteger _name; \
-enum __attribute__((ns_error_domain(_domain))) _name: NSInteger
+ #define NS_ERROR_ENUM(_domain, _name) \
+  enum _name : NSInteger _name; \
+  enum __attribute__((ns_error_domain(_domain))) _name: NSInteger
 #endif
 
 /**
  FBSDKCoreError
  Error codes for FBSDKErrorDomain.
  */
-typedef NS_ERROR_ENUM(FBSDKErrorDomain, FBSDKCoreError)
+typedef NS_ERROR_ENUM (FBSDKErrorDomain, FBSDKCoreError)
 {
   /**
    Reserved.
@@ -238,33 +228,13 @@ typedef NS_ERROR_ENUM(FBSDKErrorDomain, FBSDKCoreError)
  FBSDKGraphRequestError
  Describes the category of Facebook error. See `FBSDKGraphRequestErrorKey`.
  */
-typedef NS_ENUM(NSUInteger, FBSDKGraphRequestError)
-{
+typedef NS_ENUM(NSUInteger, FBSDKGraphRequestError) {
   /** The default error category that is not known to be recoverable. Check `FBSDKLocalizedErrorDescriptionKey` for a user facing message. */
   FBSDKGraphRequestErrorOther = 0,
   /** Indicates the error is temporary (such as server throttling). While a recoveryAttempter will be provided with the error instance, the attempt is guaranteed to succeed so you can simply retry the operation if you do not want to present an alert.  */
   FBSDKGraphRequestErrorTransient = 1,
   /** Indicates the error can be recovered (such as requiring a login). A recoveryAttempter will be provided with the error instance that can take UI action. */
-  FBSDKGraphRequestErrorRecoverable = 2
+  FBSDKGraphRequestErrorRecoverable = 2,
 } NS_SWIFT_NAME(GraphRequestError);
-
-/**
- a formal protocol very similar to the informal protocol NSErrorRecoveryAttempting
- */
-NS_SWIFT_UNAVAILABLE("")
-@protocol FBSDKErrorRecoveryAttempting<NSObject>
-
-/**
- attempt the recovery
- @param error the error
- @param recoveryOptionIndex the selected option index
- @param completionHandler the handler called upon completion of error recovery
-
- Given that an error alert has been presented document-modally to the user, and the user has chosen one of the error's recovery options, attempt recovery from the error, and call the completion handler. The option index is an index into the error's array of localized recovery options. The value passed for didRecover must be YES if error recovery was completely successful, NO otherwise.
- */
-- (void)attemptRecoveryFromError:(NSError *)error
-                     optionIndex:(NSUInteger)recoveryOptionIndex
-               completionHandler:(void (^)(BOOL didRecover))completionHandler;
-@end
 
 NS_ASSUME_NONNULL_END

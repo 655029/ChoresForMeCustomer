@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google LLC. All rights reserved.
+ * Copyright 2016 Google Inc. All rights reserved.
  *
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -18,7 +18,7 @@
 @interface Samples : NSObject
 + (NSArray *)loadSections;
 + (NSArray *)loadDemos;
-+ (NSDictionary *)newDemo:(Class)viewControllerClass
++ (NSDictionary *)newDemo:(Class) class
                 withTitle:(NSString *)title
            andDescription:(NSString *)description;
 @end

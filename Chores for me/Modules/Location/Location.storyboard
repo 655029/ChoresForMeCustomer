@@ -137,10 +137,10 @@
             </objects>
             <point key="canvasLocation" x="-423.1884057971015" y="132.58928571428572"/>
         </scene>
-        <!--Choose Location From Map View Controller-->
+        <!--View Controller-->
         <scene sceneID="w1o-sO-8HO">
             <objects>
-                <viewController storyboardIdentifier="ChooseLocationFromMapViewController" id="NgU-Xl-t3B" customClass="ChooseLocationFromMapViewController" customModule="Chores_for_me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NgU-Xl-t3B" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4QR-Yj-jyD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -178,7 +178,7 @@
                                             <constraint firstAttribute="height" constant="60" id="yaQ-FX-gPi"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sDP-Lg-dGJ" customClass="GMSMapView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sDP-Lg-dGJ">
                                         <rect key="frame" x="0.0" y="60" width="414" height="792"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <connections>

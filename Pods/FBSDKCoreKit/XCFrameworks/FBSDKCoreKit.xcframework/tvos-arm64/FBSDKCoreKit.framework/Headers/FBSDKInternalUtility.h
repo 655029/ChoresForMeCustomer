@@ -1,36 +1,42 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
-//
-// You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-// copy, modify, and distribute this software in source code or binary form for use
-// in connection with the web services and APIs provided by Facebook.
-//
-// As with any software that integrates with the Facebook platform, your use of
-// this software is subject to the Facebook Developer Principles and Policies
-// [http://developers.facebook.com/policy/]. This copyright notice shall be
-// included in all copies or substantial portions of the software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+/*
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import <FBSDKCoreKit/FBSDKAppAvailabilityChecker.h>
+#import <FBSDKCoreKit/FBSDKAppURLSchemeProviding.h>
 #import <FBSDKCoreKit/FBSDKInternalUtilityProtocol.h>
+
+#if !TARGET_OS_TV
+ #import <FBSDKCoreKit/FBSDKURLHosting.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
-#define FBSDK_CANOPENURL_FACEBOOK @"fbauth2"
-#define FBSDK_CANOPENURL_FBAPI @"fbapi"
-#define FBSDK_CANOPENURL_MESSENGER @"fb-messenger-share-api"
-#define FBSDK_CANOPENURL_MSQRD_PLAYER @"msqrdplayer"
-#define FBSDK_CANOPENURL_SHARE_EXTENSION @"fbshareextension"
+FOUNDATION_EXPORT NSString *const FBSDK_CANOPENURL_FACEBOOK
+  DEPRECATED_MSG_ATTRIBUTE("`FBSDK_CANOPENURL_FACEBOOK` is deprecated and will be removed in the next major release; please use `URLScheme.facebookAPI` instead");
+FOUNDATION_EXPORT NSString *const FBSDK_CANOPENURL_FBAPI
+  DEPRECATED_MSG_ATTRIBUTE("`FBSDK_CANOPENURL_FBAPI` is deprecated and will be removed in the next major release; please use `URLScheme.facebookAPI` instead");
+FOUNDATION_EXPORT NSString *const FBSDK_CANOPENURL_MESSENGER
+  DEPRECATED_MSG_ATTRIBUTE("`FBSDK_CANOPENURL_MESSENGER` is deprecated and will be removed in the next major release; please use `URLScheme.messengerApp` instead");
+FOUNDATION_EXPORT NSString *const FBSDK_CANOPENURL_MSQRD_PLAYER
+  DEPRECATED_MSG_ATTRIBUTE("`FBSDK_CANOPENURL_MSQRD_PLAYER` is deprecated and will be removed in the next major release");
+FOUNDATION_EXPORT NSString *const FBSDK_CANOPENURL_SHARE_EXTENSION
+  DEPRECATED_MSG_ATTRIBUTE("`FBSDK_CANOPENURL_SHARE_EXTENSION` is deprecated and will be removed in the next major release; please use `URLScheme.facebookAPI`");
 
 NS_SWIFT_NAME(InternalUtility)
-@interface FBSDKInternalUtility : NSObject <FBSDKInternalUtility>
+@interface FBSDKInternalUtility : NSObject
+#if !TARGET_OS_TV
+  <FBSDKAppAvailabilityChecker, FBSDKAppURLSchemeProviding, FBSDKInternalUtility, FBSDKURLHosting>
+#else
+  <FBSDKAppAvailabilityChecker, FBSDKAppURLSchemeProviding, FBSDKInternalUtility>
+#endif
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -43,7 +49,7 @@ NS_SWIFT_NAME(InternalUtility)
  We assume a convention of a bundle named FBSDKStrings.bundle, otherwise we
  return the main bundle.
  */
-@property (nonatomic, strong, readonly) NSBundle *bundleForStrings;
+@property (nonatomic, readonly, strong) NSBundle *bundleForStrings;
 
 /**
   Constructs an URL for the current app.
@@ -102,9 +108,9 @@ NS_SWIFT_NAME(InternalUtility)
  @param declinedPermissions the set to add declined permissions to.
  */
 - (void)extractPermissionsFromResponse:(NSDictionary<NSString *, id> *)responseObject
-                    grantedPermissions:(NSMutableSet *)grantedPermissions
-                   declinedPermissions:(NSMutableSet *)declinedPermissions
-                    expiredPermissions:(NSMutableSet *)expiredPermissions;
+                    grantedPermissions:(NSMutableSet<NSString *> *)grantedPermissions
+                   declinedPermissions:(NSMutableSet<NSString *> *)declinedPermissions
+                    expiredPermissions:(NSMutableSet<NSString *> *)expiredPermissions;
 
 /**
   validates that the app ID is non-nil, throws an NSException if nil.
@@ -139,7 +145,7 @@ NS_SWIFT_NAME(InternalUtility)
 
 #pragma mark - FB Apps Installed
 
-@property (nonatomic, assign, readonly) BOOL isMessengerAppInstalled;
+@property (nonatomic, readonly, assign) BOOL isMessengerAppInstalled;
 
 - (BOOL)isRegisteredCanOpenURLScheme:(NSString *)urlScheme;
 

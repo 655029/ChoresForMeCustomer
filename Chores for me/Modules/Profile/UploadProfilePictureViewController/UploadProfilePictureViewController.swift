@@ -10,6 +10,8 @@ import Alamofire
 import NVActivityIndicatorView
 import Toast_Swift
 import SDWebImage
+import GoogleMaps
+import GooglePlaces
 
 struct SelectedData {
     let image: String
@@ -39,6 +41,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     @IBOutlet weak  var topLable: UILabel!
     @IBOutlet weak var monthYearLabel: UILabel!
     @IBOutlet weak var priceTextFeild: UITextField!
+    @IBOutlet weak private var postButton: UIButton!
 
 
     // MARK: - Properties
@@ -121,11 +124,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.tintColor = UIColor.white
-      //  locationLandmarkAddressTextFeild.text = ""
-
-
-//        UINavigationBar.appearance().tintColor = .systemBlue
-//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.systemBlue]
+        postButton.isEnabled = true
     }
 
 
@@ -140,7 +139,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     func textViewDidEndEditing(_ textView: UITextView) {
         if descriptionTextView.text.isEmpty {
             descriptionTextView.text = "Add Description"
-            descriptionTextView.textColor = UIColor.black
+            descriptionTextView.textColor = UIColor.lightGray
         }
     }
 
@@ -172,23 +171,22 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
             break
         }
         self.present(alert, animated: true, completion: nil)
-
-    }
+      }
 
 
     //MARK: - ImagePicker Delegate Methods
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var selectedImage = info[UIImagePickerController.InfoKey(rawValue: UIImagePickerController.InfoKey.originalImage.rawValue)] as? UIImage
-        selectedImage = self.imageOrientation(selectedImage!)
+        selectedImage = self.imageOrientation(selectedImage!) // sometime yha crash hota hai
         selectImage.image = selectedImage
-        uploadImage(paramName: "photo", fileName: "png", image: selectedImage!)
+
         self.dismiss(animated: true, completion: nil)
+        self.uploadImage(paramName: "photo", fileName: "png", image: selectedImage!)
     }
 
     @IBAction func didTappedLocationLandmarkTextFeild(_ sender: UITapGestureRecognizer) {
         navigate(.chooseLocationOnMap)
     }
-
 
     // MARK: - Additional Helpers
     private func applyFinishingTouchesToUIElements() {
@@ -308,7 +306,6 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                 cell2.mainView.backgroundColor = .white
             }
             return cell2
-
         }
 
         else {
@@ -319,7 +316,6 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
             if filterArrayOfSelctedServicesName.isEmpty == true  {
                 cell3.selecetdCategoryName.text = arrayOfSelectedName[indexPath.row]
            }
-
             return cell3
         }
 
@@ -355,10 +351,8 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     }
 
     @IBAction func postButton(_ sender: UIButton) {
-
             let imageSystem =  UIImage(named: "gallery icon")
             let value = Int(priceTextFeild.text ?? "0")
-
 
             if selectImage.image?.pngData() == imageSystem?.pngData() {
                 openAlert(title: "Alert", message: "Please Select Photo", alertStyle: .alert, actionTitles: ["Okay"], actionsStyles: [.default], actions: [{ _ in
@@ -399,9 +393,11 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                 }])
             }
 
-            else {
-                self.callingCreateJobAPI()
-            }
+        else {
+            postButton.isEnabled = false
+            self.callingCreateJobAPI()
+        }
+        
         }
 
 
@@ -419,8 +415,7 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                 let data = collectionView.cellForItem(at: indexPath!) as? DateandTimeCollectionViewCell
                 let bh = data?.label.text
                 selectedDate = bh
-                
-            }
+                }
 
         }
 
@@ -491,7 +486,6 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
     
     //MARK: - Calling Upload Image API
     func uploadImage(paramName: String, fileName: String, image: UIImage) {
-        showActivity()
         let url = URL(string: "http://3.18.59.239:3000/api/v1/upload")
         let boundary = UUID().uuidString
         let session = URLSession.shared
@@ -503,8 +497,11 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
         data.append("Content-Disposition: form-data; name=\"\(paramName)\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
         data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-        data.append(image.pngData()!)
+        let jpegData = image.jpegData(compressionQuality: 1.0)
+       // let pngData = image.pngData()
+        data.append(image.jpegData(compressionQuality: 0.3)!)
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        
         self.hideActivity()
         // Send a POST request to the URL, with the data we created earlier
         session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
@@ -515,8 +512,9 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
                         self.hideActivity()
                         self.workImg = imageData as? String
                         print(self.workImg)
-
-                    }
+                        UserDefaults.standard.set(self.workImg, forKey: "workImg")
+                        print(UserDefaults.standard.set(self.workImg, forKey: "workImg"))
+            }
                 }
             }
         }).resume()
@@ -528,6 +526,11 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
         return dateFormatter.string(from: date)
     }
 
+    func getLatLongAddtess(){
+        
+    }
+
+    
     func imageOrientation(_ src:UIImage)->UIImage {
         if src.imageOrientation == UIImage.Orientation.up {
             return src
@@ -583,10 +586,39 @@ class UploadProfilePictureViewController: ServiceBaseViewController, UICollectio
 }
 
 
+extension UIImage {
+    func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: canvas, format: format).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
+    }
 
+    func compress(to kb: Int, allowedMargin: CGFloat = 0.2) -> Data {
+        let bytes = kb * 1024
+        var compression: CGFloat = 1.0
+        let step: CGFloat = 0.05
+        var holderImage = self
+        var complete = false
+        while(!complete) {
+            if let data = holderImage.jpegData(compressionQuality: 1.0) {
+                let ratio = data.count / bytes
+                if data.count < Int(CGFloat(bytes) * (1 + allowedMargin)) {
+                    complete = true
+                    return data
+                } else {
+                    let multiplier:CGFloat = CGFloat((ratio / 5) + 1)
+                    compression -= (step * multiplier)
+                }
+            }
 
-
-
-
+            guard let newImage = holderImage.resized(withPercentage: compression) else { break }
+            holderImage = newImage
+        }
+        return Data()
+    }
+}
 
 

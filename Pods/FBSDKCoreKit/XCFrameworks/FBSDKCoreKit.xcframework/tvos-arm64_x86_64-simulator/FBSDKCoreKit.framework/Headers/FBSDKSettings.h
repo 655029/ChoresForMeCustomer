@@ -1,20 +1,10 @@
-// Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
-//
-// You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
-// copy, modify, and distribute this software in source code or binary form for use
-// in connection with the web services and APIs provided by Facebook.
-//
-// As with any software that integrates with the Facebook platform, your use of
-// this software is subject to the Facebook Developer Principles and Policies
-// [http://developers.facebook.com/policy/]. This copyright notice shall be
-// included in all copies or substantial portions of the software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+/*
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ * All rights reserved.
+ *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 #import <UIKit/UIKit.h>
 
@@ -82,7 +72,7 @@ NS_SWIFT_NAME(jpegCompressionQuality);
  If not explicitly set, the default is true
  */
 @property (class, nonatomic, getter = isAutoLogAppEventsEnabled) BOOL autoLogAppEventsEnabled
-DEPRECATED_MSG_ATTRIBUTE("`Settings.isAutoLogAppEventsEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isAutoLogAppEventsEnabled` instead");
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.isAutoLogAppEventsEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isAutoLogAppEventsEnabled` instead");
 
 /**
  Controls the auto logging of basic app events, such as activateApp and deactivateApp.
@@ -95,7 +85,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.isAutoLogAppEventsEnabled` is deprecated and
  If not explicitly set, the default is true
  */
 @property (class, nonatomic, getter = isCodelessDebugLogEnabled) BOOL codelessDebugLogEnabled
-DEPRECATED_MSG_ATTRIBUTE("`Settings.isCodelessDebugLogEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isCodelessDebugLogEnabled` instead");
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.isCodelessDebugLogEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isCodelessDebugLogEnabled` instead");
 
 /**
  Controls the fb_codeless_debug logging event
@@ -108,7 +98,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.isCodelessDebugLogEnabled` is deprecated and
  If not explicitly set, the default is true
  */
 @property (class, nonatomic, getter = isAdvertiserIDCollectionEnabled) BOOL advertiserIDCollectionEnabled
-DEPRECATED_MSG_ATTRIBUTE("`Settings.isAdvertiserIDCollectionEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isAdvertiserIDCollectionEnabled` instead");
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.isAdvertiserIDCollectionEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isAdvertiserIDCollectionEnabled` instead");
 
 /**
  Controls the access to IDFA
@@ -121,7 +111,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.isAdvertiserIDCollectionEnabled` is deprecat
  If not explicitly set, the default is true
  */
 @property (class, nonatomic, getter = isSKAdNetworkReportEnabled) BOOL SKAdNetworkReportEnabled
-DEPRECATED_MSG_ATTRIBUTE("`Settings.isSKAdNetworkReportEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isSKAdNetworkReportEnabled` instead");
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.isSKAdNetworkReportEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isSKAdNetworkReportEnabled` instead");
 
 /**
  Controls the SKAdNetwork report
@@ -135,7 +125,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.isSKAdNetworkReportEnabled` is deprecated an
  Defaults to NO. This value is stored on the device and persists across app launches.
  */
 @property (class, nonatomic, getter = shouldLimitEventAndDataUsage) BOOL limitEventAndDataUsage
-DEPRECATED_MSG_ATTRIBUTE("`Settings.shouldLimitEventAndDataUsage` is deprecated and will be removed in the next major release, please use `Settings.shared.isEventDataUsageLimited` instead");
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.shouldLimitEventAndDataUsage` is deprecated and will be removed in the next major release, please use `Settings.shared.isEventDataUsageLimited` instead");
 
 /**
  Whether data such as that generated through FBSDKAppEvents and sent to Facebook
@@ -150,7 +140,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.shouldLimitEventAndDataUsage` is deprecated 
  Defaults to NO. This value is stored on the device and persists across app launches.
  */
 @property (class, nonatomic, getter = shouldUseCachedValuesForExpensiveMetadata) BOOL shouldUseCachedValuesForExpensiveMetadata
-DEPRECATED_MSG_ATTRIBUTE("`Settings.shouldUseCachedValuesForExpensiveMetadata` is deprecated and will be removed in the next major release, please use `Settings.shared.shouldUseCachedValuesForExpensiveMetadata` instead");
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.shouldUseCachedValuesForExpensiveMetadata` is deprecated and will be removed in the next major release, please use `Settings.shared.shouldUseCachedValuesForExpensiveMetadata` instead");
 
 /**
  Whether in memory cached values should be used for expensive metadata fields, such as
@@ -163,7 +153,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.shouldUseCachedValuesForExpensiveMetadata` i
  A convenient way to toggle error recovery for all FBSDKGraphRequest instances created after this is set.
  */
 @property (class, nonatomic, getter = isGraphErrorRecoveryEnabled) BOOL graphErrorRecoveryEnabled
-DEPRECATED_MSG_ATTRIBUTE("`Settings.isGraphErrorRecoveryEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isGraphErrorRecoveryEnabled` instead");;
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.isGraphErrorRecoveryEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isGraphErrorRecoveryEnabled` instead");
 
 /**
  A convenient way to toggle error recovery for all FBSDKGraphRequest instances created after this is set.
@@ -232,7 +222,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.isGraphErrorRecoveryEnabled` is deprecated a
  If not explicitly set, the default will be read from the application's plist (FacebookDisplayName).
  */
 @property (class, nullable, nonatomic, copy) NSString *displayName
-DEPRECATED_MSG_ATTRIBUTE("`Settings.displayName` is deprecated and will be removed in the next major release, please use `Settings.shared.displayName` instead");
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.displayName` is deprecated and will be removed in the next major release, please use `Settings.shared.displayName` instead");
 
 /**
   The Facebook Display Name used by the SDK.
@@ -251,7 +241,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.displayName` is deprecated and will be remov
  If not explicitly set, the default will be read from the application's plist (FacebookDomainPart).
  */
 @property (class, nullable, nonatomic, copy) NSString *facebookDomainPart
-DEPRECATED_MSG_ATTRIBUTE("`Settings.facebookDomainPart` is deprecated and will be removed in the next major release, please use `Settings.shared.facebookDomainPart` instead");
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.facebookDomainPart` is deprecated and will be removed in the next major release, please use `Settings.shared.facebookDomainPart` instead");
 
 /**
  The Facebook domain part. This can be used to change the Facebook domain
@@ -273,7 +263,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.facebookDomainPart` is deprecated and will b
  The default is a set consisting of FBSDKLoggingBehaviorDeveloperErrors
  */
 @property (class, nonatomic, copy) NSSet<FBSDKLoggingBehavior> *loggingBehaviors
-DEPRECATED_MSG_ATTRIBUTE("`Settings.loggingBehaviors` is deprecated and will be removed in the next major release, please use `Settings.shared.loggingBehaviors` instead");
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.loggingBehaviors` is deprecated and will be removed in the next major release, please use `Settings.shared.loggingBehaviors` instead");
 
 /**
   The current Facebook SDK logging behavior. This should consist of strings
@@ -289,19 +279,29 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.loggingBehaviors` is deprecated and will be 
 @property (nonatomic, copy) NSSet<FBSDKLoggingBehavior> *loggingBehaviors;
 
 /**
-  Overrides the default Graph API version to use with `FBSDKGraphRequests`. This overrides `FBSDK_DEFAULT_GRAPH_API_VERSION`.
+  Overrides the default Graph API version to use with `FBSDKGraphRequests`.
 
  The string should be of the form `@"v2.7"`.
 
- Defaults to `FBSDK_DEFAULT_GRAPH_API_VERSION`.
+ Defaults to `defaultGraphAPIVersion`.
 */
-@property (class, null_resettable, nonatomic, copy) NSString *graphAPIVersion;
+@property (class, null_resettable, nonatomic, copy) NSString *graphAPIVersion
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.graphAPIVersion` is deprecated and will be removed in the next major release, please use the `Settings.shared.graphAPIVersion` property instead");
+
+/**
+  Overrides the default Graph API version to use with `FBSDKGraphRequests`.
+
+ The string should be of the form `@"v2.7"`.
+
+ Defaults to `defaultGraphAPIVersion`.
+*/
+@property (nonatomic, copy) NSString *graphAPIVersion;
 
 /**
  Internal property exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
 @property (nullable, nonatomic, copy) NSString *userAgentSuffix;
 
@@ -316,7 +316,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.loggingBehaviors` is deprecated and will be 
  If not explicitly set in iOS14 or above, the default is false in iOS14 or above.
  */
 + (BOOL)isAdvertiserTrackingEnabled
-DEPRECATED_MSG_ATTRIBUTE("`Settings.isAdvertiserTrackingEnabled()` is deprecated and will be removed in the next major release, please use the `Settings.shared.isAdvertiserTrackingEnabled` property instead");
+    DEPRECATED_MSG_ATTRIBUTE("`Settings.isAdvertiserTrackingEnabled()` is deprecated and will be removed in the next major release, please use the `Settings.shared.isAdvertiserTrackingEnabled` property instead");
 
 /**
 Set the advertiser_tracking_enabled flag. It only works in iOS14 and above.
@@ -325,14 +325,22 @@ Set the advertiser_tracking_enabled flag. It only works in iOS14 and above.
 @return Whether the the value is set successfully. It will always return NO in iOS 13 and below.
  */
 + (BOOL)setAdvertiserTrackingEnabled:(BOOL)advertiserTrackingEnabled
-DEPRECATED_MSG_ATTRIBUTE("`Settings.setAdvertiserTrackingEnabled(_:)` is deprecated and will be removed in the next major release, please use the `Settings.shared.isAdvertiserTrackingEnabled` property to set a value instead");
+    DEPRECATED_MSG_ATTRIBUTE("`Settings.setAdvertiserTrackingEnabled(_:)` is deprecated and will be removed in the next major release, please use the `Settings.shared.isAdvertiserTrackingEnabled` property to set a value instead");
 
 /**
 Set the data processing options.
 
 @param options list of options
 */
-+ (void)setDataProcessingOptions:(nullable NSArray<NSString *> *)options;
++ (void)setDataProcessingOptions:(nullable NSArray<NSString *> *)options
+    DEPRECATED_MSG_ATTRIBUTE("`Settings.setDataProcessingOptions(_:)` is deprecated and will be removed in the next major release, please use the `Settings.shared.setDataProcessingOptions(_:)` method to set the data processing options instead");
+
+/**
+Set the data processing options.
+
+@param options list of options
+*/
+- (void)setDataProcessingOptions:(nullable NSArray<NSString *> *)options;
 
 /**
 Set the data processing options.
@@ -343,6 +351,18 @@ Set the data processing options.
 */
 + (void)setDataProcessingOptions:(nullable NSArray<NSString *> *)options
                          country:(int)country
+                           state:(int)state
+    DEPRECATED_MSG_ATTRIBUTE("`Settings.setDataProcessingOptions(_:_:_:)` is deprecated and will be removed in the next major release, please use the `Settings.shared.setDataProcessingOptions(_:_:_:)` method to set the data processing options instead");
+
+/**
+Set the data processing options.
+
+@param options list of the options
+@param country code of the country
+@param state code of the state
+*/
+- (void)setDataProcessingOptions:(nullable NSArray<NSString *> *)options
+                         country:(int)country
                            state:(int)state;
 
 /**
@@ -351,7 +371,7 @@ Set the data processing options.
  @param loggingBehavior The LoggingBehavior to enable. This should be a string defined as a constant with FBSDKLoggingBehavior*.
  */
 + (void)enableLoggingBehavior:(FBSDKLoggingBehavior)loggingBehavior
-DEPRECATED_MSG_ATTRIBUTE("`Settings.enableLoggingBehavior()` is deprecated and will be removed in the next major release, please use `Settings.shared.enableLoggingBehavior()` instead");
+    DEPRECATED_MSG_ATTRIBUTE("`Settings.enableLoggingBehavior()` is deprecated and will be removed in the next major release, please use `Settings.shared.enableLoggingBehavior()` instead");
 
 /**
  Enable a particular Facebook SDK logging behavior.
@@ -366,7 +386,7 @@ DEPRECATED_MSG_ATTRIBUTE("`Settings.enableLoggingBehavior()` is deprecated and w
  @param loggingBehavior The LoggingBehavior to disable. This should be a string defined as a constant with FBSDKLoggingBehavior*.
  */
 + (void)disableLoggingBehavior:(FBSDKLoggingBehavior)loggingBehavior
-DEPRECATED_MSG_ATTRIBUTE("`Settings.disableLoggingBehavior()` is deprecated and will be removed in the next major release, please use `Settings.shared.disableLoggingBehavior()` instead");
+    DEPRECATED_MSG_ATTRIBUTE("`Settings.disableLoggingBehavior()` is deprecated and will be removed in the next major release, please use `Settings.shared.disableLoggingBehavior()` instead");
 
 /**
  Disable a particular Facebook SDK logging behavior.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google LLC. All rights reserved.
+ * Copyright 2016 Google Inc. All rights reserved.
  *
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -44,7 +44,6 @@
 #import "GoogleMapsDemos/Samples/PolygonsViewController.h"
 #import "GoogleMapsDemos/Samples/PolylinesViewController.h"
 #import "GoogleMapsDemos/Samples/SnapshotReadyViewController.h"
-#import "GoogleMapsDemos/Samples/StampedPolylinesViewController.h"
 #import "GoogleMapsDemos/Samples/StructuredGeocoderViewController.h"
 #import "GoogleMapsDemos/Samples/StyledMapViewController.h"
 #import "GoogleMapsDemos/Samples/TileLayerViewController.h"
@@ -58,15 +57,12 @@
 }
 
 + (NSArray *)loadDemos {
-  NSArray<NSDictionary<NSString *, id> *> *mapDemos =
+  NSArray *mapDemos =
   @[[self newDemo:[BasicMapViewController class]
         withTitle:@"Basic Map"
    andDescription:nil],
     [self newDemo:[MapTypesViewController class]
         withTitle:@"Map Types"
-   andDescription:nil],
-    [self newDemo:[StampedPolylinesViewController class]
-        withTitle:@"Stamped Polylines"
    andDescription:nil],
     [self newDemo:[StyledMapViewController class]
         withTitle:@"Styled Map"
@@ -178,11 +174,10 @@
   return @[mapDemos, panoramaDemos, overlayDemos, cameraDemos, servicesDemos];
 }
 
-+ (NSDictionary *)newDemo:(Class)viewControllerClass
++ (NSDictionary *)newDemo:(Class) class
                 withTitle:(NSString *)title
            andDescription:(NSString *)description {
-  return [[NSDictionary alloc] initWithObjectsAndKeys:viewControllerClass, @"controller",
+  return [[NSDictionary alloc] initWithObjectsAndKeys:class, @"controller",
           title, @"title", description, @"description", nil];
 }
-
 @end
